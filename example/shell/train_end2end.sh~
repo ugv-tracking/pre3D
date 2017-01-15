@@ -1,4 +1,4 @@
-python example/env/train_end2end.py \
+python env/train_end2end.py \
 --network vgg \
 --pretrained /data01/hustxly/model/faster_rcnn/kitti_ry_cls_input_up_2/ry_alpha_car_only_reg \
 --prefix /home/hustxly/Car/model/basic \
