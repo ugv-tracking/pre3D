@@ -7,14 +7,13 @@ import numpy as np
 from rcnn.config import config
 
 from rcnn.processing.bbox_transform import bbox_pred, clip_boxes
-from rcnn.processing.generate_anchor import generator_anchors
 from rcnn.core.minibatch import sample_rois
 
 DEBUG = False
 
 class Proposal3DBOX(mx.operator.CustomOp):
 
-	def __init__(self, num_classes, batch_images, batch_rois, fg_fraction):
+    def __init__(self, num_classes, batch_images, batch_rois, fg_fraction):
         super(Proposal3DBOX, self).__init__()
         self._num_classes = num_classes
         self._batch_images = batch_images
@@ -26,7 +25,7 @@ class Proposal3DBOX(mx.operator.CustomOp):
             self._fg_num = 0
             self._bg_num = 0
 
-	def forward(self, is_train, req, in_data, out_data, aux):
+    def forward(self, is_train, req, in_data, out_data, aux):
         assert self._batch_rois % self._batch_images == 0, \
             'BATCHIMAGES {} must devide BATCH_ROIS {}'.format(self._batch_images, self._batch_rois)
         rois_per_image = self._batch_rois / self._batch_images
@@ -67,7 +66,7 @@ class Proposal3DBOX(mx.operator.CustomOp):
 
         for ind, val in enumerate(output):
             self.assign(out_data[ind], req[ind], val)
-		
+        
     def backward(self, req, out_grad, in_data, out_data, in_grad, aux):
         self.assign(in_grad[0], req[0], 0)
         self.assign(in_grad[1], req[1], 0)
