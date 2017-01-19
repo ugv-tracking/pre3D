@@ -403,5 +403,5 @@ def get_vgg_train(num_classes=21, num_anchors=9):
 #    loss_total = loss_dim * alpha / 64 + loss_rot * w + loss_conf
 #    3dbox_loss = dim_loss * alpha / 64 + conf_loss
 
-    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, dim_loss, mx.symbol.BlockGrad(label)])
+    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label)])
     return group
