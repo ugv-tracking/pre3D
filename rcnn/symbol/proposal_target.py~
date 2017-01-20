@@ -88,7 +88,7 @@ class ProposalTargetProp(mx.operator.CustomOpProp):
     def list_arguments(self):
         return ['rois', 'gt_boxes', 'gt_dims', 'gt_angles', 'gt_confs', 'im_info']
     
-    def list_outputs(self):
+def list_outputs(self):
         return ['rois_output', 'label', 'bbox_target', 'bbox_weight', 'dim_label', 'angle_label', 'conf_label']
 
     def infer_shape(self, in_shape):

@@ -1,3 +1,4 @@
+
 import os
 
 def generate(list_path, src_path, save_path) :

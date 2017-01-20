@@ -17,6 +17,8 @@ config.TRAIN.BATCH_IMAGES = 2
 # e2e changes behavior of anchor loader and metric
 config.TRAIN.END2END = False
 
+config.TRAIN.BBOX_3D = True
+
 # R-CNN
 # rcnn rois batch size
 config.TRAIN.BATCH_ROIS = 128

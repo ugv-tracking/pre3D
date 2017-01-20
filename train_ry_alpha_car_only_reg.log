@@ -11619,3 +11619,378 @@ Traceback (most recent call last):
   File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/metric.py", line 87, in update
     cls = pred[np.arange(label.shape[0]), label]
 IndexError: index 128 is out of bounds for axis 0 with size 128
+  File "example/env/train_end2end.py", line 153
+    else
+       ^
+SyntaxError: invalid syntax
+  File "example/env/train_end2end.py", line 153
+    else
+       ^
+SyntaxError: invalid syntax
+Error in proposal_target.list_arguments: Traceback (most recent call last):
+  File "/home/hustxly/mxnet/python/mxnet/operator.py", line 656, in list_arguments_entry
+    ret = op_prop.list_arguments()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/proposal_target.py", line 88, in list_arguments
+    if config.TRAIN.BBOX_3D:
+NameError: global name 'config' is not defined
+
+[15:29:38] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [15:29:38] src/operator/./custom-inl.h:139: Check failed: info_->list_arguments(&args, info_->p_list_arguments) 
+
+Stack trace returned 24 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fe87bb3771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK5mxnet2op12CustomOpProp13ListArgumentsEv+0x16a) [0x7fe87c4ec13a]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0x6e9) [0x7fe87c4ecd49]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7fe87c457893]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7fe87c44d9ba]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7fe87d11a558]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7fe87c33bfe9]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fe925066adc]
+[bt] (8) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fe92506640c]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fe92527d5fe]
+[bt] (10) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fe92527ef9e]
+[bt] (11) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (12) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (13) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (17) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (18) python() [0x4a1634]
+[bt] (19) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (20) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (21) python(Py_Main+0xb5e) [0x44f904]
+[bt] (22) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fe9265f4f45]
+[bt] (23) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 221, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 32, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 184, in get_vgg_train
+    batch_rois=config.TRAIN.BATCH_ROIS, fg_fraction=config.TRAIN.FG_FRACTION)
+  File "/home/hustxly/mxnet/python/mxnet/_ctypes/symbol.py", line 181, in creator
+    ctypes.byref(sym_handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [15:29:38] src/operator/./custom-inl.h:139: Check failed: info_->list_arguments(&args, info_->p_list_arguments) 
+
+Stack trace returned 24 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fe87bb3771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK5mxnet2op12CustomOpProp13ListArgumentsEv+0x16a) [0x7fe87c4ec13a]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0x6e9) [0x7fe87c4ecd49]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7fe87c457893]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7fe87c44d9ba]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7fe87d11a558]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7fe87c33bfe9]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fe925066adc]
+[bt] (8) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fe92506640c]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fe92527d5fe]
+[bt] (10) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fe92527ef9e]
+[bt] (11) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (12) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (13) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (17) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (18) python() [0x4a1634]
+[bt] (19) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (20) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (21) python(Py_Main+0xb5e) [0x44f904]
+[bt] (22) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fe9265f4f45]
+[bt] (23) python() [0x578c4e]
+
+Error in proposal_target.list_arguments: Traceback (most recent call last):
+  File "/home/hustxly/mxnet/python/mxnet/operator.py", line 656, in list_arguments_entry
+    ret = op_prop.list_arguments()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/proposal_target.py", line 88, in list_arguments
+    if config.TRAIN.BBOX_3D:
+NameError: global name 'config' is not defined
+
+[15:29:47] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [15:29:47] src/operator/./custom-inl.h:139: Check failed: info_->list_arguments(&args, info_->p_list_arguments) 
+
+Stack trace returned 24 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f008fd7c71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK5mxnet2op12CustomOpProp13ListArgumentsEv+0x16a) [0x7f009073113a]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0x6e9) [0x7f0090731d49]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f009069c893]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f00906929ba]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f009135f558]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f0090580fe9]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f01312abadc]
+[bt] (8) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f01312ab40c]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f01314c25fe]
+[bt] (10) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f01314c3f9e]
+[bt] (11) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (12) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (13) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (17) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (18) python() [0x4a1634]
+[bt] (19) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (20) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (21) python(Py_Main+0xb5e) [0x44f904]
+[bt] (22) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f0132839f45]
+[bt] (23) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 221, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 32, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 184, in get_vgg_train
+    batch_rois=config.TRAIN.BATCH_ROIS, fg_fraction=config.TRAIN.FG_FRACTION)
+  File "/home/hustxly/mxnet/python/mxnet/_ctypes/symbol.py", line 181, in creator
+    ctypes.byref(sym_handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [15:29:47] src/operator/./custom-inl.h:139: Check failed: info_->list_arguments(&args, info_->p_list_arguments) 
+
+Stack trace returned 24 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f008fd7c71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK5mxnet2op12CustomOpProp13ListArgumentsEv+0x16a) [0x7f009073113a]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0x6e9) [0x7f0090731d49]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f009069c893]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f00906929ba]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f009135f558]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f0090580fe9]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f01312abadc]
+[bt] (8) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f01312ab40c]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f01314c25fe]
+[bt] (10) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f01314c3f9e]
+[bt] (11) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (12) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (13) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (17) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (18) python() [0x4a1634]
+[bt] (19) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (20) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (21) python(Py_Main+0xb5e) [0x44f904]
+[bt] (22) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f0132839f45]
+[bt] (23) python() [0x578c4e]
+
+[15:31:30] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [15:31:30] src/core/symbolic.cc:176: Check failed: index < nreturn (4 vs. 4) Symbol only accept nonnegative index
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f1800ed271c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK4nnvm6SymbolixEm+0x214) [0x7f18024b4204]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(NNSymbolGetOutput+0x4b) [0x7f180249361b]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f18aa401adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f18aa40140c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f18aa6185fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f18aa619f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python() [0x4dfe94]
+[bt] (10) python(PyObject_Call+0x36) [0x505f96]
+[bt] (11) python() [0x4cac9f]
+[bt] (12) python(PyEval_EvalFrameEx+0x16f4) [0x49a974]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f18ab98ff45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 221, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 32, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 190, in get_vgg_train
+    dim_label   = group[4]
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 267, in __getitem__
+    self.handle, mx_uint(index), ctypes.byref(handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [15:31:30] src/core/symbolic.cc:176: Check failed: index < nreturn (4 vs. 4) Symbol only accept nonnegative index
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f1800ed271c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK4nnvm6SymbolixEm+0x214) [0x7f18024b4204]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(NNSymbolGetOutput+0x4b) [0x7f180249361b]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f18aa401adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f18aa40140c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f18aa6185fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f18aa619f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python() [0x4dfe94]
+[bt] (10) python(PyObject_Call+0x36) [0x505f96]
+[bt] (11) python() [0x4cac9f]
+[bt] (12) python(PyEval_EvalFrameEx+0x16f4) [0x49a974]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f18ab98ff45]
+[bt] (22) python() [0x578c4e]
+
+[15:35:46] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [15:35:46] src/core/symbolic.cc:176: Check failed: index < nreturn (4 vs. 4) Symbol only accept nonnegative index
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f0d9374471c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK4nnvm6SymbolixEm+0x214) [0x7f0d94d26204]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(NNSymbolGetOutput+0x4b) [0x7f0d94d0561b]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f0e3cc73adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f0e3cc7340c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f0e3ce8a5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f0e3ce8bf9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python() [0x4dfe94]
+[bt] (10) python(PyObject_Call+0x36) [0x505f96]
+[bt] (11) python() [0x4cac9f]
+[bt] (12) python(PyEval_EvalFrameEx+0x16f4) [0x49a974]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f0e3e201f45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 221, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 32, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 190, in get_vgg_train
+    dim_label   = group[4]
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 267, in __getitem__
+    self.handle, mx_uint(index), ctypes.byref(handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [15:35:46] src/core/symbolic.cc:176: Check failed: index < nreturn (4 vs. 4) Symbol only accept nonnegative index
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f0d9374471c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK4nnvm6SymbolixEm+0x214) [0x7f0d94d26204]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(NNSymbolGetOutput+0x4b) [0x7f0d94d0561b]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f0e3cc73adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f0e3cc7340c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f0e3ce8a5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f0e3ce8bf9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python() [0x4dfe94]
+[bt] (10) python(PyObject_Call+0x36) [0x505f96]
+[bt] (11) python() [0x4cac9f]
+[bt] (12) python(PyEval_EvalFrameEx+0x16f4) [0x49a974]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f0e3e201f45]
+[bt] (22) python() [0x578c4e]
+
+[15:37:09] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [15:37:09] src/core/symbolic.cc:176: Check failed: index < nreturn (4 vs. 4) Symbol only accept nonnegative index
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fc2a55e571c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK4nnvm6SymbolixEm+0x214) [0x7fc2a6bc7204]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(NNSymbolGetOutput+0x4b) [0x7fc2a6ba661b]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fc34eb14adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fc34eb1440c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fc34ed2b5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fc34ed2cf9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python() [0x4dfe94]
+[bt] (10) python(PyObject_Call+0x36) [0x505f96]
+[bt] (11) python() [0x4cac9f]
+[bt] (12) python(PyEval_EvalFrameEx+0x16f4) [0x49a974]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fc3500a2f45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 222, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 33, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 190, in get_vgg_train
+    dim_label   = group[4]
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 267, in __getitem__
+    self.handle, mx_uint(index), ctypes.byref(handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [15:37:09] src/core/symbolic.cc:176: Check failed: index < nreturn (4 vs. 4) Symbol only accept nonnegative index
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fc2a55e571c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK4nnvm6SymbolixEm+0x214) [0x7fc2a6bc7204]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(NNSymbolGetOutput+0x4b) [0x7fc2a6ba661b]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fc34eb14adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fc34eb1440c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fc34ed2b5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fc34ed2cf9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python() [0x4dfe94]
+[bt] (10) python(PyObject_Call+0x36) [0x505f96]
+[bt] (11) python() [0x4cac9f]
+[bt] (12) python(PyEval_EvalFrameEx+0x16f4) [0x49a974]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fc3500a2f45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 222, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 33, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 266, in get_vgg_train
+    dim_loss, angle_loss, conf_loss, mx.symbol.BlockGrad(dims_label), mx.symbol.BlockGrad(angle_label), mx.symbol.BlockGrad(conf_label)])
+NameError: global name 'dims_label' is not defined
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 222, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 33, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 266, in get_vgg_train
+    dim_loss, angle_loss, conf_loss, mx.symbol.BlockGrad(dims_label), mx.symbol.BlockGrad(angle_label), mx.symbol.BlockGrad(conf_label)])
+NameError: global name 'dims_label' is not defined
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 222, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 33, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 266, in get_vgg_train
+    dim_loss, angle_loss, conf_loss, mx.symbol.BlockGrad(dims_label), mx.symbol.BlockGrad(angle_label), mx.symbol.BlockGrad(conf_label)])
+NameError: global name 'dims_label' is not defined
