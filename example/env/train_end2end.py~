@@ -75,6 +75,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     print 'aux shape'
     pprint.pprint(aux_shape_dict)
 
+    return
     # initialize params
     arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
     arg_params['fc6_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_bias'])
@@ -147,7 +148,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     bbox_metric = metric.RCNNL1LossMetric()
     eval_metrics = mx.metric.CompositeEvalMetric()
 
-    if not config.TRAIN.BBOX_OK: 
+    if config.TRAIN.BBOX_3D: 
         conf_metric = metric.RCNNConfLossMetric()
         dim_metric = metric.RCNNDimLossMetric()
         angle_metric = metric.RCNNAngleLossMetric()

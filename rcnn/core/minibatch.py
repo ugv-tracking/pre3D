@@ -295,6 +295,7 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
     bbox_targets, bbox_weights = \
         expand_bbox_regression_targets(bbox_target_data, num_classes)
 
+    ###############################################################################################
     # 3d bbox dimension, rotation, confidence
     dim_label   = np.zeros((len(rois), 3), dtype=np.float32)
     angle_label = np.zeros((len(rois), 1), dtype=np.float32)
@@ -305,13 +306,13 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
 
         for index in xrange(fg_rois_per_this_image):
             src_dim = gt_dims[gt_assignment_keep_indexes[index]]
-            dim_label[index, 0] = src_dim
+            dim_label[index, ] = src_dim
 
             src_angle = gt_angles[gt_assignment_keep_indexes[index]]
-            angle_label[index, 0] = src_angle
+            angle_label[index, ] = src_angle
 
             src_conf = gt_confs[gt_assignment_keep_indexes[index]]
-            conf_label[index, 0] = src_conf
+            conf_label[index, ] = src_conf
 
     if config.TRAIN.BBOX_3D:
         return rois, labels, bbox_targets, bbox_weights, dim_label, angle_label, conf_label
