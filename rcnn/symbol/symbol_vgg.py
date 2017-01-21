@@ -179,7 +179,7 @@ def get_vgg_train(num_classes=21, num_anchors=9):
     gt_confs_reshape  = mx.symbol.Reshape(data=gt_confs, shape=(-1, 1), name='gt_confs_reshape')
 
     group             = mx.symbol.Custom(rois=rois, gt_boxes=gt_boxes_reshape, gt_dims=gt_dims_reshape, gt_angles=gt_angles_reshape, gt_confs=gt_confs_reshape, im_info=im_info,\
-                            op_type='proposal_target',\
+                            op_type='proposal_target', name='proposal_tg', \
                             num_classes=num_classes, batch_images=config.TRAIN.BATCH_IMAGES, \
                             batch_rois=config.TRAIN.BATCH_ROIS, fg_fraction=config.TRAIN.FG_FRACTION)
 
@@ -259,7 +259,7 @@ def get_vgg_train(num_classes=21, num_anchors=9):
     bbox_loss = mx.symbol.Reshape(data=bbox_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, 4 * num_classes), name='bbox_loss_reshape')
     dim_loss = mx.symbol.Reshape(data=dim_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, 3), name='dim_loss_reshape')
     angle_loss = mx.symbol.Reshape(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2), name='angle_loss_reshape')
-    conf_loss = mx.symbol.Reshape(data=conf_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin), name='angle_loss_reshape')
+    conf_loss = mx.symbol.Reshape(data=conf_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin), name='conf_loss_reshape')
 
 
     group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), 
