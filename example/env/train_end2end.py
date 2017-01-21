@@ -21,17 +21,21 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
 
+    print 'set config'
     # setup config
     config.TRAIN.BATCH_IMAGES = 1
     config.TRAIN.BATCH_ROIS = 128
     config.TRAIN.END2END = True
+    config.TRAIN.BBOX_3D = True
     config.TRAIN.BBOX_NORMALIZATION_PRECOMPUTED = True
     config.TRAIN.BG_THRESH_LO = 0.0
 
+    print 'load symbol'
     # load symbol
     sym = eval('get_' + args.network + '_train')()
     feat_sym = sym.get_internals()['rpn_cls_score_output']
 
+    print 'set gppu'
     # setup multi-gpu
     batch_size = len(ctx)
     input_batch_size = config.TRAIN.BATCH_IMAGES * batch_size
@@ -71,12 +75,36 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     print 'aux shape'
     pprint.pprint(aux_shape_dict)
 
+
     # initialize params
-    #if not args.resume:
     arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
     arg_params['fc6_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_bias'])
     arg_params['fc7_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_weight'])
     arg_params['fc7_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_bias'])
+
+    # initial 3D BBOX estimation
+    if config.TRAIN.BBOX_3D: 
+        arg_params['fc6_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_dim_weight'])
+        arg_params['fc6_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_dim_bias'])
+        arg_params['fc6_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_angle_weight'])
+        arg_params['fc6_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_angle_bias'])
+        arg_params['fc6_conf_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_conf_weight'])
+        arg_params['fc6_conf_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_conf_bias'])
+
+        arg_params['fc7_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_dim_weight'])
+        arg_params['fc7_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_dim_bias'])
+        arg_params['fc7_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_angle_weight'])
+        arg_params['fc7_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_angle_bias'])
+        arg_params['fc7_conf_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_conf_weight'])
+        arg_params['fc7_conf_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_conf_bias'])
+
+        arg_params['fc8_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_dim_weight'])
+        arg_params['fc8_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_dim_bias'])
+        arg_params['fc8_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_angle_weight'])
+        arg_params['fc8_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_angle_bias'])
+        arg_params['fc8_conf_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_conf_weight'])
+        arg_params['fc8_conf_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_conf_bias'])
+
     arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
     arg_params['rpn_conv_3x3_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_conv_3x3_bias'])
     arg_params['rpn_cls_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_cls_score_weight'])
@@ -114,12 +142,24 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     rpn_eval_metric = metric.RPNAccMetric()
     rpn_cls_metric = metric.RPNLogLossMetric()
     rpn_bbox_metric = metric.RPNL1LossMetric()
+
     eval_metric = metric.RCNNAccMetric()
     cls_metric = metric.RCNNLogLossMetric()
     bbox_metric = metric.RCNNL1LossMetric()
     eval_metrics = mx.metric.CompositeEvalMetric()
-    for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric]:
-        eval_metrics.add(child_metric)
+
+    if config.TRAIN.BBOX_3D: 
+        conf_metric = metric.RCNNConfLossMetric()
+        dim_metric = metric.RCNNDimLossMetric()
+        angle_metric = metric.RCNNAngleLossMetric()
+
+        for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric, conf_metric, dim_metric, angle_metric]:
+            eval_metrics.add(child_metric)
+    else:
+        for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric]:
+            eval_metrics.add(child_metric)
+
+    
     # callback
     batch_end_callback = callback.Speedometer(train_data.batch_size, frequent=args.frequent)
     means = np.tile(np.array(config.TRAIN.BBOX_MEANS), imdb.num_classes)
@@ -181,6 +221,7 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
+    print 'enter main'
     ctx = [mx.gpu(int(i)) for i in args.gpus.split(',')]
     train_net(args, ctx, args.pretrained, args.epoch, args.prefix, args.begin_epoch, args.end_epoch,
               lr=args.lr, lr_step=args.lr_step)

@@ -68,6 +68,11 @@ def get_image(roidb):
         im_info = [im_tensor.shape[2], im_tensor.shape[3], im_scale]
         new_rec['boxes'] = roi_rec['boxes'].copy() * im_scale
         new_rec['im_info'] = im_info
+        if config.TRAIN.BBOX_3D:
+            new_rec['gt_dims']   = roi_rec['gt_dims']
+            new_rec['gt_angles'] = roi_rec['gt_angles']
+            new_rec['gt_confs']  = roi_rec['gt_confs']
+
         processed_roidb.append(new_rec)
     return processed_ims, processed_roidb
 
@@ -119,6 +124,7 @@ def get_rpn_batch(roidb):
     :param roidb: ['image', 'flipped'] + ['gt_boxes', 'boxes', 'gt_classes']
     :return: data, label
     """
+
     assert len(roidb) == 1, 'Single batch only'
     imgs, roidb = get_image(roidb)
     im_array = imgs[0]
@@ -133,9 +139,16 @@ def get_rpn_batch(roidb):
     else:
         gt_boxes = np.empty((0, 5), dtype=np.float32)
 
+    gt_dims = np.array([roidb[0]['gt_dims']], dtype=np.float32)
+    gt_angles = np.array([roidb[0]['gt_angles']], dtype=np.float32)
+    gt_confs = np.array([roidb[0]['gt_confs']], dtype=np.float32)
+
     data = {'data': im_array,
-            'im_info': im_info}
-    label = {'gt_boxes': gt_boxes}
+            'im_info': im_info,}
+    label = {'gt_boxes': gt_boxes,
+             'gt_dims': gt_dims,
+             'gt_angles': gt_angles,
+             'gt_confs': gt_confs}
 
     return data, label
 
@@ -218,7 +231,7 @@ def _compute_targets(ex_rois, gt_rois):
 
 
 def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
-                labels=None, overlaps=None, bbox_targets=None, gt_boxes=None):
+                labels=None, overlaps=None, bbox_targets=None, gt_boxes=None, gt_dims=None, gt_angles=None, gt_confs=None):
     """
     generate random sample of ROIs comprising foreground and background examples
     :param rois: all_rois [n, 4]; e2e: [n, 5] with batch_index
@@ -282,7 +295,29 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
     bbox_targets, bbox_weights = \
         expand_bbox_regression_targets(bbox_target_data, num_classes)
 
-    return rois, labels, bbox_targets, bbox_weights
+    ###############################################################################################
+    # 3d bbox dimension, rotation, confidence
+    dim_label   = np.zeros((len(rois), 3), dtype=np.float32)
+    angle_label = np.zeros((len(rois), 1), dtype=np.float32)
+    conf_label  = np.zeros((len(rois), 1), dtype=np.float32)
+    
+    if config.TRAIN.BBOX_3D:
+        gt_assignment_keep_indexes = gt_assignment[keep_indexes]
+
+        for index in xrange(fg_rois_per_this_image):
+            src_dim = gt_dims[gt_assignment_keep_indexes[index]]
+            dim_label[index, ] = src_dim
+
+            src_angle = gt_angles[gt_assignment_keep_indexes[index]]
+            angle_label[index, ] = src_angle
+
+            src_conf = gt_confs[gt_assignment_keep_indexes[index]]
+            conf_label[index, ] = src_conf
+
+    if config.TRAIN.BBOX_3D:
+        return rois, labels, bbox_targets, bbox_weights, dim_label, angle_label, conf_label
+    else:
+        return rois, labels, bbox_targets, bbox_weights
 
 
 def assign_anchor(feat_shape, gt_boxes, im_info, feat_stride=16,
