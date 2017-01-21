@@ -43,7 +43,7 @@ def generate(list_path, src_path, save_path) :
             print image_name
 
             if is_has_car == True:
-                save_file.write(image_name + '.png')
+                save_file.write(image_split[0] + '.png')
                 for class_id in xrange(len(box_list)):
                     class_obj = box_list[class_id]
                     save_file.write(':')

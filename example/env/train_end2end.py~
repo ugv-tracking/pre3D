@@ -147,7 +147,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     bbox_metric = metric.RCNNL1LossMetric()
     eval_metrics = mx.metric.CompositeEvalMetric()
 
-    if config.TRAIN.BBOX_3D: 
+    if not config.TRAIN.BBOX_OK: 
         conf_metric = metric.RCNNConfLossMetric()
         dim_metric = metric.RCNNDimLossMetric()
         angle_metric = metric.RCNNAngleLossMetric()
@@ -220,6 +220,7 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
+    print 'enter main'
     ctx = [mx.gpu(int(i)) for i in args.gpus.split(',')]
     train_net(args, ctx, args.pretrained, args.epoch, args.prefix, args.begin_epoch, args.end_epoch,
               lr=args.lr, lr_step=args.lr_step)

@@ -33,7 +33,7 @@ def generate(list_path, src_path, save_path) :
                     bbox[0] = label[-1]
 
                     # rotation_y, alpha, bbox, dims, location
-                    # get car only
+                    # get Car only
                     if class_id == 0 :
                            is_has_car = True
                            box_list[class_id].append(bbox)
@@ -43,7 +43,7 @@ def generate(list_path, src_path, save_path) :
             print image_name
 
             if is_has_car == True:
-                save_file.write(image_name + '.png')
+                save_file.write(image_name)
                 for class_id in xrange(len(box_list)):
                     class_obj = box_list[class_id]
                     save_file.write(':')

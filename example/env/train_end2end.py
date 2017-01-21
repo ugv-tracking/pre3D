@@ -147,7 +147,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     bbox_metric = metric.RCNNL1LossMetric()
     eval_metrics = mx.metric.CompositeEvalMetric()
 
-    if config.TRAIN.BBOX_3D: 
+    if config.TRAIN.BBOX_OK: 
         conf_metric = metric.RCNNConfLossMetric()
         dim_metric = metric.RCNNDimLossMetric()
         angle_metric = metric.RCNNAngleLossMetric()

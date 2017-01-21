@@ -11994,3 +11994,2052 @@ Traceback (most recent call last):
   File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 266, in get_vgg_train
     dim_loss, angle_loss, conf_loss, mx.symbol.BlockGrad(dims_label), mx.symbol.BlockGrad(angle_label), mx.symbol.BlockGrad(conf_label)])
 NameError: global name 'dims_label' is not defined
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 47, in train_net
+    imdb = eval(args.dataset)(args.image_set, args.root_path, args.dataset_path)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/dataset/kitti.py", line 29, in __init__
+    self.image_set_index = self.load_image_set_index()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/dataset/kitti.py", line 39, in load_image_set_index
+    assert os.path.exists(image_set_index_file), 'Path does not exist: {}'.format(image_set_index_file)
+AssertionError: Path does not exist: data/kitti/imglists/train_ry_alpha_car_only.lst
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 253, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 326, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 128, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+{'width': 1242, 'boxes': array([[ 647.61999512,  184.41999817,  695.29998779,  222.78999329],
+       [ 711.75      ,  180.25      ,  748.84997559,  208.71000671],
+       [ 417.28997803,  183.52999878,  478.65002441,  208.33000183],
+       [ 301.90997314,  185.50999451,  370.02001953,  212.36999512]], dtype=float32), 'flipped': True, 'max_classes': array([1, 1, 1, 1]), 'max_overlaps': array([ 1.,  1.,  1.,  1.], dtype=float32), 'image': 'data/kitti/images/004104.png', 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32), 'gt_classes': array([1, 1, 1, 1], dtype=int32), 'height': 375}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 253, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 326, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 73, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+{'width': 1242, 'boxes': array([[ 1038.27001953,   202.75      ,  1231.06005859,   316.29000854],
+       [  718.04998779,   183.69999695,   774.14001465,   222.69999695],
+       [  494.96002197,   165.41999817,   598.23999023,   210.11999512],
+       [  917.42004395,   184.63999939,   960.25      ,   214.88999939],
+       [  781.7199707 ,   176.52000427,   806.10998535,   198.50999451],
+       [  527.70001221,   190.5       ,   679.46002197,   278.92999268]], dtype=float32), 'flipped': True, 'max_classes': array([1, 1, 1, 1, 1, 1]), 'max_overlaps': array([ 1.,  1.,  1.,  1.,  1.,  1.], dtype=float32), 'image': 'data/kitti/images/001718.png', 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32), 'gt_classes': array([1, 1, 1, 1, 1, 1], dtype=int32), 'height': 375}
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 253, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 326, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 73, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+{'width': 1242, 'boxes': array([[ 640.20001221,  172.3999939 ,  661.9699707 ,  193.36000061],
+       [ 783.07000732,  178.52999878,  806.04998779,  193.02999878]], dtype=float32), 'flipped': True, 'max_classes': array([1, 1]), 'max_overlaps': array([ 1.,  1.], dtype=float32), 'image': 'data/kitti/images/005653.png', 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32), 'gt_classes': array([1, 1], dtype=int32), 'height': 375}
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 253, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 326, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+{'gt_classes': array([1, 1, 1, 1], dtype=int32), 'gt_angles': array([ 1.52999997,  1.69000006,  1.74000001,  1.75      ], dtype=float32), 'gt_dims': array([[ 1.52999997,  1.62      ,  3.76999998],
+       [ 1.75999999,  1.76999998,  4.40999985],
+       [ 1.48000002,  1.64999998,  4.4000001 ],
+       [ 1.41999996,  1.65999997,  3.6400001 ]], dtype=float32), 'max_classes': array([1, 1, 1, 1]), 'image': 'data/kitti/images/002586.png', 'height': 375, 'orientation_ry': array([ 1.52999997,  1.69000006,  1.74000001,  1.75      ], dtype=float32), 'width': 1242, 'boxes': array([[ 1086.52001953,   198.00999451,  1241.        ,   374.        ],
+       [  459.17999268,   170.33000183,   548.57000732,   230.77000427],
+       [  530.86999512,   176.91000366,   593.33001709,   214.44000244],
+       [  619.23999023,   175.27999878,   652.78997803,   198.19999695]], dtype=float32), 'gt_position': array([[  3.00999999,   1.62      ,   1.40999997],
+       [ -3.33999991,   1.71000004,  23.29000092],
+       [ -1.99000001,   1.65999997,  30.73999977],
+       [  1.70000005,   1.59000003,  46.84000015]], dtype=float32), 'gt_confs': array([[1],
+       [1],
+       [1],
+       [1]], dtype=int32), 'max_overlaps': array([ 1.,  1.,  1.,  1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([ 0.47      ,  1.83000004,  1.80999994,  1.72000003], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32)}
+{'gt_classes': array([1, 1, 1, 1], dtype=int32), 'gt_angles': array([ 1.52999997,  1.69000006,  1.74000001,  1.75      ], dtype=float32), 'gt_dims': array([[ 1.52999997,  1.62      ,  3.76999998],
+       [ 1.75999999,  1.76999998,  4.40999985],
+       [ 1.48000002,  1.64999998,  4.4000001 ],
+       [ 1.41999996,  1.65999997,  3.6400001 ]], dtype=float32), 'max_classes': array([1, 1, 1, 1]), 'image': 'data/kitti/images/002586.png', 'height': 375, 'orientation_ry': array([ 1.52999997,  1.69000006,  1.74000001,  1.75      ], dtype=float32), 'width': 1242, 'boxes': array([[ 1086.52001953,   198.00999451,  1241.        ,   374.        ],
+       [  459.17999268,   170.33000183,   548.57000732,   230.77000427],
+       [  530.86999512,   176.91000366,   593.33001709,   214.44000244],
+       [  619.23999023,   175.27999878,   652.78997803,   198.19999695]], dtype=float32), 'gt_position': array([[  3.00999999,   1.62      ,   1.40999997],
+       [ -3.33999991,   1.71000004,  23.29000092],
+       [ -1.99000001,   1.65999997,  30.73999977],
+       [  1.70000005,   1.59000003,  46.84000015]], dtype=float32), 'gt_confs': array([[1],
+       [1],
+       [1],
+       [1]], dtype=int32), 'max_overlaps': array([ 1.,  1.,  1.,  1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([ 0.47      ,  1.83000004,  1.80999994,  1.72000003], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32)}
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 4L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 4L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 4L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 4L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator angle: Shape inconsistent, Provided=(128,1), inferred shape=(128,)
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+{'width': 1242, 'boxes': array([[  32.26000977,  180.38000488,  441.7199707 ,  374.        ],
+       [ 720.72998047,  183.41000366,  874.77001953,  281.22000122],
+       [ 390.79998779,  188.1499939 ,  529.86999512,  283.91000366],
+       [ 706.21002197,  179.6000061 ,  796.59997559,  244.71000671],
+       [ 469.36999512,  184.30000305,  559.76000977,  249.19000244],
+       [ 680.88000488,  179.27999878,  727.59002686,  219.72999573],
+       [ 530.44000244,  180.6000061 ,  573.83001709,  213.25      ],
+       [ 563.88000488,  176.19000244,  587.91998291,  197.77000427]], dtype=float32), 'flipped': True, 'max_classes': array([1, 1, 1, 1, 1, 1, 1, 1]), 'max_overlaps': array([ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.], dtype=float32), 'image': 'data/kitti/images/003755.png', 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32), 'gt_classes': array([1, 1, 1, 1, 1, 1, 1, 1], dtype=int32), 'height': 375}
+{'width': 1242, 'boxes': array([[  32.26000977,  180.38000488,  441.7199707 ,  374.        ],
+       [ 720.72998047,  183.41000366,  874.77001953,  281.22000122],
+       [ 390.79998779,  188.1499939 ,  529.86999512,  283.91000366],
+       [ 706.21002197,  179.6000061 ,  796.59997559,  244.71000671],
+       [ 469.36999512,  184.30000305,  559.76000977,  249.19000244],
+       [ 680.88000488,  179.27999878,  727.59002686,  219.72999573],
+       [ 530.44000244,  180.6000061 ,  573.83001709,  213.25      ],
+       [ 563.88000488,  176.19000244,  587.91998291,  197.77000427]], dtype=float32), 'flipped': True, 'max_classes': array([1, 1, 1, 1, 1, 1, 1, 1]), 'max_overlaps': array([ 1.,  1.,  1.,  1.,  1.,  1.,  1.,  1.], dtype=float32), 'image': 'data/kitti/images/003755.png', 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32), 'gt_classes': array([1, 1, 1, 1, 1, 1, 1, 1], dtype=int32), 'height': 375}
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 253, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 327, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+{'gt_classes': array([1], dtype=int32), 'gt_angles': array([ 1.57000005], dtype=float32), 'gt_dims': array([[ 1.66999996,  1.87      ,  3.69000006]], dtype=float32), 'max_classes': array([1]), 'image': 'data/kitti/images/000001.png', 'height': 375, 'orientation_ry': array([ 1.57000005], dtype=float32), 'width': 1242, 'boxes': array([[ 387.63000488,  181.53999329,  423.80999756,  203.11999512]], dtype=float32), 'gt_position': array([[-16.53000069,   2.3900001 ,  58.49000168]], dtype=float32), 'gt_confs': array([[1]], dtype=int32), 'max_overlaps': array([ 1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([ 1.85000002], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.]], dtype=float32)}
+{'gt_classes': array([1], dtype=int32), 'gt_angles': array([-1.57000005], dtype=float32), 'gt_dims': array([[ 1.65999997,  1.73000002,  3.04999995]], dtype=float32), 'max_classes': array([1]), 'image': 'data/kitti/images/001854.png', 'height': 375, 'orientation_ry': array([-1.57000005], dtype=float32), 'width': 1242, 'boxes': array([[ 541.0300293 ,  174.86000061,  562.78997803,  193.61999512]], dtype=float32), 'gt_position': array([[ -5.30999994,   1.87      ,  66.15000153]], dtype=float32), 'gt_confs': array([[1]], dtype=int32), 'max_overlaps': array([ 1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([-1.49000001], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.]], dtype=float32)}
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 1L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 1L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 1L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 1L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator angle: Shape inconsistent, Provided=(128,1), inferred shape=(128,)
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+{'gt_classes': array([1], dtype=int32), 'gt_angles': array([ 1.57000005], dtype=float32), 'gt_dims': array([[ 1.66999996,  1.87      ,  3.69000006]], dtype=float32), 'max_classes': array([1]), 'image': 'data/kitti/images/000001.png', 'height': 375, 'orientation_ry': array([ 1.57000005], dtype=float32), 'width': 1242, 'boxes': array([[ 387.63000488,  181.53999329,  423.80999756,  203.11999512]], dtype=float32), 'gt_position': array([[-16.53000069,   2.3900001 ,  58.49000168]], dtype=float32), 'gt_confs': array([[1]], dtype=int32), 'max_overlaps': array([ 1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([ 1.85000002], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.]], dtype=float32)}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 3L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 3L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 3L, 1L)
+  data: (1L, 3L, 752L, 2482L)
+  gt_angles: (1L, 3L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator angle: Shape inconsistent, Provided=(128,1), inferred shape=(128,)
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+{'gt_classes': array([1], dtype=int32), 'gt_angles': array([ 1.57000005], dtype=float32), 'gt_dims': array([[ 1.66999996,  1.87      ,  3.69000006]], dtype=float32), 'max_classes': array([1]), 'image': 'data/kitti/images/000001.png', 'height': 375, 'orientation_ry': array([ 1.57000005], dtype=float32), 'width': 1242, 'boxes': array([[ 387.63000488,  181.53999329,  423.80999756,  203.11999512]], dtype=float32), 'gt_position': array([[-16.53000069,   2.3900001 ,  58.49000168]], dtype=float32), 'gt_confs': array([[1]], dtype=int32), 'max_overlaps': array([ 1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([ 1.85000002], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.]], dtype=float32)}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+{'gt_classes': array([1, 1, 1], dtype=int32), 'gt_angles': array([-1.59000003,  1.52999997,  1.54999995], dtype=float32), 'gt_dims': array([[ 1.64999998,  1.66999996,  3.6400001 ],
+       [ 1.42999995,  1.63      ,  4.30999994],
+       [ 1.44000006,  1.62      ,  4.01999998]], dtype=float32), 'max_classes': array([1, 1, 1]), 'image': 'data/kitti/images/000939.png', 'height': 375, 'orientation_ry': array([-1.59000003,  1.52999997,  1.54999995], dtype=float32), 'width': 1242, 'boxes': array([[ 588.47998047,  175.30999756,  615.2199707 ,  201.75      ],
+       [ 172.50999451,  194.49000549,  317.16000366,  263.48001099],
+       [ 414.16000366,  184.28999329,  460.20999146,  212.97000122]], dtype=float32), 'gt_position': array([[ -0.57999998,   1.83000004,  47.31999969],
+       [ -9.06000042,   2.02999997,  18.23999977],
+       [ -9.38000011,   2.08999991,  39.31000137]], dtype=float32), 'gt_confs': array([[1],
+       [1],
+       [1]], dtype=int32), 'max_overlaps': array([ 1.,  1.,  1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([-1.58000004,  1.98000002,  1.77999997], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32)}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 3L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 3L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 3L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 3L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator angle: Shape inconsistent, Provided=(128,1), inferred shape=(128,)
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+{'gt_classes': array([1], dtype=int32), 'gt_angles': array([ 1.57000005], dtype=float32), 'gt_dims': array([[ 1.66999996,  1.87      ,  3.69000006]], dtype=float32), 'max_classes': array([1]), 'image': 'data/kitti/images/000001.png', 'height': 375, 'orientation_ry': array([ 1.57000005], dtype=float32), 'width': 1242, 'boxes': array([[ 387.63000488,  181.53999329,  423.80999756,  203.11999512]], dtype=float32), 'gt_position': array([[-16.53000069,   2.3900001 ,  58.49000168]], dtype=float32), 'gt_confs': array([[1]], dtype=int32), 'max_overlaps': array([ 1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([ 1.85000002], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.]], dtype=float32)}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+{'width': 1242, 'boxes': array([[   0.        ,  204.44999695,  215.35998535,  374.        ],
+       [ 282.76000977,  179.24000549,  366.66998291,  239.02000427],
+       [ 691.84002686,  178.36000061,  877.23999023,  269.36999512]], dtype=float32), 'flipped': True, 'max_classes': array([1, 1, 1]), 'max_overlaps': array([ 1.,  1.,  1.], dtype=float32), 'image': 'data/kitti/images/006881.png', 'gt_overlaps': array([[ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.],
+       [ 0.,  1.,  0.,  0.]], dtype=float32), 'gt_classes': array([1, 1, 1], dtype=int32), 'height': 375}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 258, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 337, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+{'gt_classes': array([1], dtype=int32), 'gt_angles': array([ 1.57000005], dtype=float32), 'gt_dims': array([[ 1.66999996,  1.87      ,  3.69000006]], dtype=float32), 'max_classes': array([1]), 'image': 'data/kitti/images/000001.png', 'height': 375, 'orientation_ry': array([ 1.57000005], dtype=float32), 'width': 1242, 'boxes': array([[ 387.63000488,  181.53999329,  423.80999756,  203.11999512]], dtype=float32), 'gt_position': array([[-16.53000069,   2.3900001 ,  58.49000168]], dtype=float32), 'gt_confs': array([[1]], dtype=int32), 'max_overlaps': array([ 1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([ 1.85000002], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.]], dtype=float32)}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+{'gt_classes': array([1], dtype=int32), 'gt_angles': array([-1.52999997], dtype=float32), 'gt_dims': array([[ 1.90999997,  1.64999998,  4.4000001 ]], dtype=float32), 'max_classes': array([1]), 'image': 'data/kitti/images/000153.png', 'height': 370, 'orientation_ry': array([-1.52999997], dtype=float32), 'width': 1224, 'boxes': array([[ 669.59997559,  159.27999878,  704.34002686,  194.50999451]], dtype=float32), 'gt_position': array([[  4.69000006,   0.75      ,  40.86999893]], dtype=float32), 'gt_confs': array([[1]], dtype=int32), 'max_overlaps': array([ 1.], dtype=float32), 'flipped': False, 'orientation_alpha': array([-1.63999999], dtype=float32), 'gt_overlaps': array([[ 0.,  1.,  0.,  0.]], dtype=float32)}
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 1L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 1L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 1L, 1L)
+  data: (1L, 3L, 752L, 2488L)
+  gt_angles: (1L, 1L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator angle: Shape inconsistent, Provided=(128,1), inferred shape=(128,)
+enter main
+set config
+load symbol
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 35, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/symbol/symbol_vgg.py", line 261, in get_vgg_train
+    angle_loss = mx.symbol.Reshape(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2), name='angle_loss_reshape')
+UnboundLocalError: local variable 'angle_loss' referenced before assignment
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 5L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 5L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 5L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 5L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator conf: Shape inconsistent, Provided=(128,1), inferred shape=(128,)
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'blockgrad3_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+arg shape
+{'bbox_pred_bias': (84L,),
+ 'bbox_pred_weight': (84L, 4096L),
+ 'bbox_target': (1L, 36L, 47L, 155L),
+ 'bbox_weight': (1L, 36L, 47L, 155L),
+ 'cls_score_bias': (21L,),
+ 'cls_score_weight': (21L, 4096L),
+ 'conv1_1_bias': (64L,),
+ 'conv1_1_weight': (64L, 3L, 3L, 3L),
+ 'conv1_2_bias': (64L,),
+ 'conv1_2_weight': (64L, 64L, 3L, 3L),
+ 'conv2_1_bias': (128L,),
+ 'conv2_1_weight': (128L, 64L, 3L, 3L),
+ 'conv2_2_bias': (128L,),
+ 'conv2_2_weight': (128L, 128L, 3L, 3L),
+ 'conv3_1_bias': (256L,),
+ 'conv3_1_weight': (256L, 128L, 3L, 3L),
+ 'conv3_2_bias': (256L,),
+ 'conv3_2_weight': (256L, 256L, 3L, 3L),
+ 'conv3_3_bias': (256L,),
+ 'conv3_3_weight': (256L, 256L, 3L, 3L),
+ 'conv4_1_bias': (512L,),
+ 'conv4_1_weight': (512L, 256L, 3L, 3L),
+ 'conv4_2_bias': (512L,),
+ 'conv4_2_weight': (512L, 512L, 3L, 3L),
+ 'conv4_3_bias': (512L,),
+ 'conv4_3_weight': (512L, 512L, 3L, 3L),
+ 'conv5_1_bias': (512L,),
+ 'conv5_1_weight': (512L, 512L, 3L, 3L),
+ 'conv5_2_bias': (512L,),
+ 'conv5_2_weight': (512L, 512L, 3L, 3L),
+ 'conv5_3_bias': (512L,),
+ 'conv5_3_weight': (512L, 512L, 3L, 3L),
+ 'data': (1L, 3L, 752L, 2482L),
+ 'fc6_bias': (4096L,),
+ 'fc6_weight': (4096L, 25088L),
+ 'fc7_bias': (4096L,),
+ 'fc7_weight': (4096L, 4096L),
+ 'gt_angles': (1L, 8L),
+ 'gt_boxes': (1L, 8L, 5L),
+ 'gt_confs': (1L, 8L, 1L),
+ 'gt_dims': (1L, 8L, 3L),
+ 'im_info': (1L, 3L),
+ 'label': (1L, 65565L),
+ 'rpn_bbox_pred_bias': (36L,),
+ 'rpn_bbox_pred_weight': (36L, 512L, 1L, 1L),
+ 'rpn_cls_score_bias': (18L,),
+ 'rpn_cls_score_weight': (18L, 512L, 1L, 1L),
+ 'rpn_conv_3x3_bias': (512L,),
+ 'rpn_conv_3x3_weight': (512L, 512L, 3L, 3L)}
+aux shape
+{}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 86, in train_net
+    arg_params['fc6_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_dim_weight'])
+KeyError: 'fc6_dim_weight'
+  File "example/env/train_end2end.py", line 107
+    arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
+    ^
+IndentationError: unexpected indent
+  File "example/env/train_end2end.py", line 107
+    arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
+    ^
+IndentationError: unexpected indent
+  File "example/env/train_end2end.py", line 107
+    arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
+    ^
+IndentationError: unexpected indent
+  File "example/env/train_end2end.py", line 107
+    arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
+    ^
+IndentationError: unexpected indent
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'blockgrad3_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+arg shape
+{'bbox_pred_bias': (84L,),
+ 'bbox_pred_weight': (84L, 4096L),
+ 'bbox_target': (1L, 36L, 47L, 155L),
+ 'bbox_weight': (1L, 36L, 47L, 155L),
+ 'cls_score_bias': (21L,),
+ 'cls_score_weight': (21L, 4096L),
+ 'conv1_1_bias': (64L,),
+ 'conv1_1_weight': (64L, 3L, 3L, 3L),
+ 'conv1_2_bias': (64L,),
+ 'conv1_2_weight': (64L, 64L, 3L, 3L),
+ 'conv2_1_bias': (128L,),
+ 'conv2_1_weight': (128L, 64L, 3L, 3L),
+ 'conv2_2_bias': (128L,),
+ 'conv2_2_weight': (128L, 128L, 3L, 3L),
+ 'conv3_1_bias': (256L,),
+ 'conv3_1_weight': (256L, 128L, 3L, 3L),
+ 'conv3_2_bias': (256L,),
+ 'conv3_2_weight': (256L, 256L, 3L, 3L),
+ 'conv3_3_bias': (256L,),
+ 'conv3_3_weight': (256L, 256L, 3L, 3L),
+ 'conv4_1_bias': (512L,),
+ 'conv4_1_weight': (512L, 256L, 3L, 3L),
+ 'conv4_2_bias': (512L,),
+ 'conv4_2_weight': (512L, 512L, 3L, 3L),
+ 'conv4_3_bias': (512L,),
+ 'conv4_3_weight': (512L, 512L, 3L, 3L),
+ 'conv5_1_bias': (512L,),
+ 'conv5_1_weight': (512L, 512L, 3L, 3L),
+ 'conv5_2_bias': (512L,),
+ 'conv5_2_weight': (512L, 512L, 3L, 3L),
+ 'conv5_3_bias': (512L,),
+ 'conv5_3_weight': (512L, 512L, 3L, 3L),
+ 'data': (1L, 3L, 752L, 2491L),
+ 'fc6_bias': (4096L,),
+ 'fc6_weight': (4096L, 25088L),
+ 'fc7_bias': (4096L,),
+ 'fc7_weight': (4096L, 4096L),
+ 'gt_angles': (1L, 2L),
+ 'gt_boxes': (1L, 2L, 5L),
+ 'gt_confs': (1L, 2L, 1L),
+ 'gt_dims': (1L, 2L, 3L),
+ 'im_info': (1L, 3L),
+ 'label': (1L, 65565L),
+ 'rpn_bbox_pred_bias': (36L,),
+ 'rpn_bbox_pred_weight': (36L, 512L, 1L, 1L),
+ 'rpn_cls_score_bias': (18L,),
+ 'rpn_cls_score_weight': (18L, 512L, 1L, 1L),
+ 'rpn_conv_3x3_bias': (512L,),
+ 'rpn_conv_3x3_weight': (512L, 512L, 3L, 3L)}
+aux shape
+{}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 204, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 129, in train_net
+    conf_metric = metric.RCNNConfLossMetric()
+AttributeError: 'module' object has no attribute 'RCNNConfLossMetric'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 250, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 323, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'blockgrad3_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+arg shape
+{'bbox_pred_bias': (84L,),
+ 'bbox_pred_weight': (84L, 4096L),
+ 'bbox_target': (1L, 36L, 47L, 155L),
+ 'bbox_weight': (1L, 36L, 47L, 155L),
+ 'cls_score_bias': (21L,),
+ 'cls_score_weight': (21L, 4096L),
+ 'conv1_1_bias': (64L,),
+ 'conv1_1_weight': (64L, 3L, 3L, 3L),
+ 'conv1_2_bias': (64L,),
+ 'conv1_2_weight': (64L, 64L, 3L, 3L),
+ 'conv2_1_bias': (128L,),
+ 'conv2_1_weight': (128L, 64L, 3L, 3L),
+ 'conv2_2_bias': (128L,),
+ 'conv2_2_weight': (128L, 128L, 3L, 3L),
+ 'conv3_1_bias': (256L,),
+ 'conv3_1_weight': (256L, 128L, 3L, 3L),
+ 'conv3_2_bias': (256L,),
+ 'conv3_2_weight': (256L, 256L, 3L, 3L),
+ 'conv3_3_bias': (256L,),
+ 'conv3_3_weight': (256L, 256L, 3L, 3L),
+ 'conv4_1_bias': (512L,),
+ 'conv4_1_weight': (512L, 256L, 3L, 3L),
+ 'conv4_2_bias': (512L,),
+ 'conv4_2_weight': (512L, 512L, 3L, 3L),
+ 'conv4_3_bias': (512L,),
+ 'conv4_3_weight': (512L, 512L, 3L, 3L),
+ 'conv5_1_bias': (512L,),
+ 'conv5_1_weight': (512L, 512L, 3L, 3L),
+ 'conv5_2_bias': (512L,),
+ 'conv5_2_weight': (512L, 512L, 3L, 3L),
+ 'conv5_3_bias': (512L,),
+ 'conv5_3_weight': (512L, 512L, 3L, 3L),
+ 'data': (1L, 3L, 752L, 2491L),
+ 'fc6_bias': (4096L,),
+ 'fc6_weight': (4096L, 25088L),
+ 'fc7_bias': (4096L,),
+ 'fc7_weight': (4096L, 4096L),
+ 'gt_angles': (1L, 2L),
+ 'gt_boxes': (1L, 2L, 5L),
+ 'gt_confs': (1L, 2L, 1L),
+ 'gt_dims': (1L, 2L, 3L),
+ 'im_info': (1L, 3L),
+ 'label': (1L, 65565L),
+ 'rpn_bbox_pred_bias': (36L,),
+ 'rpn_bbox_pred_weight': (36L, 512L, 1L, 1L),
+ 'rpn_cls_score_bias': (18L,),
+ 'rpn_cls_score_weight': (18L, 512L, 1L, 1L),
+ 'rpn_conv_3x3_bias': (512L,),
+ 'rpn_conv_3x3_weight': (512L, 512L, 3L, 3L)}
+aux shape
+{}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 85, in train_net
+    if config.TRAIN.BBOX_OK: 
+AttributeError: 'EasyDict' object has no attribute 'BBOX_OK'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 250, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 323, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 250, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/loader.py", line 323, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/Car/Car_Orientation/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'blockgrad3_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+arg shape
+{'bbox_pred_bias': (84L,),
+ 'bbox_pred_weight': (84L, 4096L),
+ 'bbox_target': (1L, 36L, 47L, 155L),
+ 'bbox_weight': (1L, 36L, 47L, 155L),
+ 'cls_score_bias': (21L,),
+ 'cls_score_weight': (21L, 4096L),
+ 'conv1_1_bias': (64L,),
+ 'conv1_1_weight': (64L, 3L, 3L, 3L),
+ 'conv1_2_bias': (64L,),
+ 'conv1_2_weight': (64L, 64L, 3L, 3L),
+ 'conv2_1_bias': (128L,),
+ 'conv2_1_weight': (128L, 64L, 3L, 3L),
+ 'conv2_2_bias': (128L,),
+ 'conv2_2_weight': (128L, 128L, 3L, 3L),
+ 'conv3_1_bias': (256L,),
+ 'conv3_1_weight': (256L, 128L, 3L, 3L),
+ 'conv3_2_bias': (256L,),
+ 'conv3_2_weight': (256L, 256L, 3L, 3L),
+ 'conv3_3_bias': (256L,),
+ 'conv3_3_weight': (256L, 256L, 3L, 3L),
+ 'conv4_1_bias': (512L,),
+ 'conv4_1_weight': (512L, 256L, 3L, 3L),
+ 'conv4_2_bias': (512L,),
+ 'conv4_2_weight': (512L, 512L, 3L, 3L),
+ 'conv4_3_bias': (512L,),
+ 'conv4_3_weight': (512L, 512L, 3L, 3L),
+ 'conv5_1_bias': (512L,),
+ 'conv5_1_weight': (512L, 512L, 3L, 3L),
+ 'conv5_2_bias': (512L,),
+ 'conv5_2_weight': (512L, 512L, 3L, 3L),
+ 'conv5_3_bias': (512L,),
+ 'conv5_3_weight': (512L, 512L, 3L, 3L),
+ 'data': (1L, 3L, 752L, 2491L),
+ 'fc6_bias': (4096L,),
+ 'fc6_weight': (4096L, 25088L),
+ 'fc7_bias': (4096L,),
+ 'fc7_weight': (4096L, 4096L),
+ 'gt_angles': (1L, 4L),
+ 'gt_boxes': (1L, 4L, 5L),
+ 'gt_confs': (1L, 4L, 1L),
+ 'gt_dims': (1L, 4L, 3L),
+ 'im_info': (1L, 3L),
+ 'label': (1L, 65565L),
+ 'rpn_bbox_pred_bias': (36L,),
+ 'rpn_bbox_pred_weight': (36L, 512L, 1L, 1L),
+ 'rpn_cls_score_bias': (18L,),
+ 'rpn_cls_score_weight': (18L, 512L, 1L, 1L),
+ 'rpn_conv_3x3_bias': (512L,),
+ 'rpn_conv_3x3_weight': (512L, 512L, 3L, 3L)}
+aux shape
+{}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 86, in train_net
+    arg_params['fc6_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_dim_weight'])
+KeyError: 'fc6_dim_weight'
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 3424
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+752
+providing maximum shape [('data', (1, 3, 1000, 1000)), ('gt_boxes', (1, 100, 5))] [('label', (1, 34596)), ('bbox_target', (1, 36, 62, 62)), ('bbox_weight', (1, 36, 62, 62))]
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 1L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 1L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 1L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 1L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 226, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator angle: Shape inconsistent, Provided=(128,1), inferred shape=(128,)

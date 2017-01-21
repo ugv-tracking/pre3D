@@ -100,7 +100,7 @@ class Kitti(IMDB):
         
 
         roidb = []
-        obj_box_dim = 6 if config.TRAIN.ORIENTATION else 4
+        obj_box_dim = 12 if config.TRAIN.BBOX_3D else 4
         for im in range(self.num_images):
             print 'load', im, ' / ', self.num_images
             roi_rec = dict()
@@ -112,17 +112,27 @@ class Kitti(IMDB):
             roi_rec['width'] = size[1]
             box_list = total_box_list[im]
             boxes = np.concatenate([np.array(box_list[i], dtype=np.float32) for i in range(self.num_classes - 1)], axis=0)
+
             boxes = boxes.reshape(-1, obj_box_dim)
             num_objs_list = [len(box_list[i]) / obj_box_dim for i in range(self.num_classes - 1)]
             total_num_objs = np.sum(num_objs_list)
 
-            orientation_ry = np.zeros((total_num_objs, 1), dtype=np.int32)
+            orientation_ry    = np.zeros((total_num_objs, 1), dtype=np.int32)
             orientation_alpha = np.zeros((total_num_objs, 1), dtype=np.int32)
+            gt_boxes          = np.zeros((total_num_objs, 4), dtype=np.int32)
+            gt_dims           = np.zeros((total_num_objs, 3), dtype=np.int32)
+            gt_angles         = np.zeros((total_num_objs, 1), dtype=np.int32)
+            gt_position       = np.zeros((total_num_objs, 1), dtype=np.int32)
+            gt_confs          = np.ones ((total_num_objs, 1), dtype=np.int32)
 
-            if config.TRAIN.ORIENTATION:
-                orientation_ry = boxes[:, 0]
+
+            if config.TRAIN.BBOX_3D:
+                orientation_ry    = boxes[:, 0]
                 orientation_alpha = boxes[:, 1]
-                boxes = boxes[:, 2:6]
+                gt_boxes          = boxes[:, 2:6]
+                gt_dims           = boxes[:, 6:9]
+                gt_angles         = boxes[:, 0]
+                gt_position       = boxes[:, 9:12]
                 
 
             gt_classes = np.zeros((total_num_objs, ), dtype=np.int32)
@@ -134,14 +144,18 @@ class Kitti(IMDB):
                         overlaps[ix, j+1] = 1
                         break
 
-            roi_rec.update({'boxes': boxes,
-                            'gt_classes': gt_classes,
-                            'orientation_ry': orientation_ry,
+            roi_rec.update({'boxes':             gt_boxes,
+                            'gt_classes':        gt_classes,
+                            'orientation_ry':    orientation_ry,
                             'orientation_alpha': orientation_alpha,
+                            'gt_dims':           gt_dims,
+                            'gt_angles':         gt_angles,
+                            'gt_position':       gt_position,
+                            'gt_confs':          gt_confs,
 
-                            'gt_overlaps': overlaps,
-                            'max_classes': overlaps.argmax(axis=1),
-                            'max_overlaps': overlaps.max(axis=1),
+                            'gt_overlaps':       overlaps,
+                            'max_classes':       overlaps.argmax(axis=1),
+                            'max_overlaps':      overlaps.max(axis=1),
                             'flipped': False})
             roidb.append(roi_rec)
 

@@ -261,9 +261,10 @@ def get_vgg_train(num_classes=21, num_anchors=9):
     angle_loss = mx.symbol.Reshape(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2), name='angle_loss_reshape')
     conf_loss = mx.symbol.Reshape(data=conf_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin), name='angle_loss_reshape')
 
-#    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label)])
-
 
     group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), 
                         dim_loss, angle_loss, conf_loss, mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(angle_label), mx.symbol.BlockGrad(conf_label)])
+
+#    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), 
+#                            mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(angle_label), mx.symbol.BlockGrad(conf_label)])
     return group
