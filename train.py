@@ -47,7 +47,7 @@ max_data_shape.append(('gt_angles', (input_batch_size, 100, 1)))
 max_data_shape.append(('gt_confs', (input_batch_size, 100, 1)))
 
 
-arg_params, aux_params = load_param('/data01/hustxly/model/faster_rcnn/kitti_ry_cls_input_up_2/ry_alpha_car_only_reg', 20, convert=True)
+arg_params, aux_params = load_param('/data01/hustxly/model/faster_rcnn/kitti_ry_cls_input_up_2/ry_alpha_car_only_reg', 18, convert=True)
 # infer shape
 data_shape_dict = dict(train_data.provide_data + train_data.provide_label)
 sym.list_outputs()
