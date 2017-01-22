@@ -256,14 +256,121 @@ def get_vgg_train(num_classes=21, num_anchors=9):
     conf_loss = mx.symbol.SoftmaxOutput(data=fc8_conf, label=conf_label , name='conf_loss')
 
     # reshape output
-    label = mx.symbol.Reshape(data=label, shape=(config.TRAIN.BATCH_IMAGES, -1), name='label_reshape')
-    cls_prob = mx.symbol.Reshape(data=cls_prob, shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes), name='cls_prob_reshape')
-    bbox_loss = mx.symbol.Reshape(data=bbox_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, 4 * num_classes), name='bbox_loss_reshape')
-    dim_loss = mx.symbol.Reshape(data=dim_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, 3), name='dim_loss_reshape')
-    angle_loss = mx.symbol.Reshape(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2), name='angle_loss_reshape')
-    conf_loss = mx.symbol.Reshape(data=conf_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, 1), name='conf_loss_reshape')
+    label       = mx.symbol.Reshape	(data=label,      shape=(config.TRAIN.BATCH_IMAGES, -1),                  name='label_reshape'     )
+    cls_prob    = mx.symbol.Reshape	(data=cls_prob,   shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes),     name='cls_prob_reshape'  )
+    bbox_loss   = mx.symbol.Reshape	(data=bbox_loss,  shape=(config.TRAIN.BATCH_IMAGES, -1, 4 * num_classes), name='bbox_loss_reshape' )
+    dim_loss    = mx.symbol.Reshape	(data=dim_loss,   shape=(config.TRAIN.BATCH_IMAGES, -1, 3),               name='dim_loss_reshape'  )
+    angle_loss  = mx.symbol.Reshape	(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2),       name='angle_loss_reshape')
+    conf_loss   = mx.symbol.Reshape	(data=conf_loss,  shape=(config.TRAIN.BATCH_IMAGES, -1, 1),               name='conf_loss_reshape' )
 
 
     group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), 
                         dim_loss, angle_loss, conf_loss, mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(angle_label), mx.symbol.BlockGrad(conf_label)])
+    return group
+
+def get_vgg_test(num_classes=21, num_anchors=9):
+    """
+    Faster R-CNN end-to-end with VGG 16 conv layers
+    :param num_classes: used to determine output size
+    :param num_anchors: used to determine output size
+    :return: Symbol
+    """
+    data = mx.symbol.Variable(name="data")
+    im_info = mx.symbol.Variable(name="im_info")
+
+    # shared convolutional layers
+    relu5_3 = get_vgg_conv(data)
+
+    # RPN layers
+    rpn_conv = mx.symbol.Convolution(
+        data=relu5_3, kernel=(3, 3), pad=(1, 1), num_filter=512, name="rpn_conv_3x3")
+    rpn_relu = mx.symbol.Activation(data=rpn_conv, act_type="relu", name="rpn_relu")
+    rpn_cls_score = mx.symbol.Convolution(
+        data=rpn_relu, kernel=(1, 1), pad=(0, 0), num_filter=2 * num_anchors, name="rpn_cls_score")
+    rpn_bbox_pred = mx.symbol.Convolution(
+        data=rpn_relu, kernel=(1, 1), pad=(0, 0), num_filter=4 * num_anchors, name="rpn_bbox_pred")
+
+    # ROI Proposal
+    rpn_cls_score_reshape = mx.symbol.Reshape(
+        data=rpn_cls_score, shape=(0, 2, -1, 0), name="rpn_cls_score_reshape")
+    rpn_cls_prob = mx.symbol.SoftmaxActivation(
+        data=rpn_cls_score_reshape, mode="channel", name="rpn_cls_prob")
+    rpn_cls_prob_reshape = mx.symbol.Reshape(
+        data=rpn_cls_prob, shape=(0, 2 * num_anchors, -1, 0), name='rpn_cls_prob_reshape')
+    rois = mx.symbol.Custom(
+        cls_prob=rpn_cls_prob_reshape, bbox_pred=rpn_bbox_pred, im_info=im_info, name='rois',
+        op_type='proposal', feat_stride=16, scales=(8, 16, 32), ratios=(0.5, 1, 2),
+        rpn_pre_nms_top_n=config.TEST.RPN_PRE_NMS_TOP_N, rpn_post_nms_top_n=config.TEST.RPN_POST_NMS_TOP_N,
+        threshold=config.TEST.RPN_NMS_THRESH, rpn_min_size=config.TEST.RPN_MIN_SIZE)
+
+    # Fast R-CNN
+    pool5 = mx.symbol.ROIPooling(
+        name='roi_pool5', data=relu5_3, rois=rois, pooled_size=(7, 7), spatial_scale=0.0625)
+    # group 6
+    flatten = mx.symbol.Flatten(data=pool5, name="flatten")
+    fc6 = mx.symbol.FullyConnected(data=flatten, num_hidden=4096, name="fc6")
+    relu6 = mx.symbol.Activation(data=fc6, act_type="relu", name="relu6")
+    drop6 = mx.symbol.Dropout(data=relu6, p=0.5, name="drop6")
+    # group 7
+    fc7 = mx.symbol.FullyConnected(data=drop6, num_hidden=4096, name="fc7")
+    relu7 = mx.symbol.Activation(data=fc7, act_type="relu", name="relu7")
+    drop7 = mx.symbol.Dropout(data=relu7, p=0.5, name="drop7")
+    # classification
+    cls_score = mx.symbol.FullyConnected(name='cls_score', data=drop7, num_hidden=num_classes)
+    cls_prob = mx.symbol.SoftmaxOutput(name='cls_prob', data=cls_score)
+    # bounding box regression
+    bbox_pred = mx.symbol.FullyConnected(name='bbox_pred', data=drop7, num_hidden=num_classes * 4)
+
+
+    ###########################################################################################
+    # prediction for dims, angle and confidence
+    #dim branch
+    fc6_dim = mx.symbol.FullyConnected(data=drop7, num_hidden=512, name="fc6_dim")
+    relu6_dim = mx.symbol.Activation(data=fc6_dim, act_type="relu", name="relu6_dim")
+    drop6_dim = mx.symbol.Dropout(data=relu6_dim, p=0.5, name="drop6_dim")
+    
+    fc7_dim = mx.symbol.FullyConnected(data=drop6_dim, num_hidden=512, name="fc7_dim")
+    relu7_dim = mx.symbol.Activation(data=fc7_dim, act_type="relu", name="relu7_dim")
+    drop7_dim = mx.symbol.Dropout(data=relu7_dim, p=0.5, name="drop7_dim")
+    
+    fc8_dim = mx.symbol.FullyConnected(data=drop7_dim, num_hidden=3, name="fc8_dim")
+    dim_pred = mx.symbol.LinearRegressionOutput(data = fc8_dim, name='dim_pred')
+
+    #angle branch
+    num_bin = config.NUM_BIN
+    fc6_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc6_angle")
+    relu6_angle = mx.symbol.Activation(data=fc6_angle, act_type="relu", name="relu6_angle")
+    drop6_angle = mx.symbol.Dropout(data=relu6_angle, p=0.5, name="drop6_angle")
+
+    fc7_angle = mx.symbol.FullyConnected(data=drop6_angle, num_hidden=256, name="fc7_angle")
+    relu7_angle = mx.symbol.Activation(data=fc7_angle, act_type="relu", name="relu7_angle")
+    drop7_angle = mx.symbol.Dropout(data=relu7_angle, p=0.5, name="drop7_angle")
+
+    fc8_angle = mx.symbol.FullyConnected(data=drop7_angle, num_hidden=num_bin*2, name="fc8_angle")
+    
+    fc8_angle_reshape = mx.symbol.Reshape(data=fc8_angle, shape=(-1, num_bin, 2), name='fc8_angle_reshape')
+    L2_norm = mx.symbol.L2Normalization(data=fc8_angle_reshape, mode='spatial', name='L2_norm')
+    angle_pred = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_bin*2), name='angle_pred')
+
+    #confidence branch
+    fc6_conf = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc6_conf")
+    relu6_conf = mx.symbol.Activation(data=fc6_conf, act_type="relu", name="relu6_conf")
+    drop6_conf = mx.symbol.Dropout(data=relu6_conf, p=0.5, name="drop6_conf")
+
+    fc7_conf = mx.symbol.FullyConnected(data=drop6_conf, num_hidden=128, name="fc7_conf")
+    relu7_conf = mx.symbol.Activation(data=fc7_conf, act_type="relu", name="relu7_conf")
+    drop7_conf = mx.symbol.Dropout(data=relu7_conf, p=0.5, name="drop7_conf")
+
+    fc8_conf = mx.symbol.FullyConnected(data=drop7_conf, num_hidden=1, name="fc8_conf")
+    conf_pred = mx.symbol.SoftmaxOutput(data=fc8_conf, name='conf_pred')
+
+    # reshape output
+    cls_prob    = mx.symbol.Reshape	(data=cls_prob,   shape=(config.TEST.BATCH_IMAGES, -1, num_classes),     name='cls_prob_reshape'  )
+    bbox_pred   = mx.symbol.Reshape	(data=bbox_pred,  shape=(config.TEST.BATCH_IMAGES, -1, 4 * num_classes), name='bbox_pred_reshape' )
+    dim_pred    = mx.symbol.Reshape	(data=dim_pred,   shape=(config.TEST.BATCH_IMAGES, -1, 3),               name='dim_pred_reshape'  )
+    angle_pred  = mx.symbol.Reshape	(data=angle_pred, shape=(config.TEST.BATCH_IMAGES, -1, num_bin*2),       name='angle_pred_reshape')
+    conf_pred   = mx.symbol.Reshape	(data=conf_pred,  shape=(config.TEST.BATCH_IMAGES, -1, 1),               name='conf_pred_reshape' )
+
+
+    group = mx.symbol.Group([rois, cls_prob, bbox_pred, dim_pred, angle_pred, conf_pred])
     return group

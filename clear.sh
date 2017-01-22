@@ -1,3 +1,3 @@
 rm *~ */*~ */*/*~ */*/*/*~
-rm data/cache/*
 rm *.log
+rm -r .ipy*
