@@ -124,7 +124,7 @@ class RCNNL1LossMetric(mx.metric.EvalMetric):
         self.sum_metric += np.sum(bbox_loss)
         self.num_inst += bbox_loss.shape[0]
 
-###########################################################################
+###################################### For 3D BOX Evaluation #####################################
 class RCNNDimLossMetric(mx.metric.EvalMetric):
     def __init__(self):
         super(RCNNDimLossMetric, self).__init__('RCNNDimLoss')

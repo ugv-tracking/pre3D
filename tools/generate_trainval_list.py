@@ -54,8 +54,8 @@ def generate(list_path, src_path, save_path) :
 
 if __name__ == '__main__':
 
-    list_path = "/home/hustxly/pre3D/data/kitti/imglists/val_image.list"
+    list_path = "data/kitti/imglists/val_image.list"
     src_path  = "/rawdata/liulingbo/3d_detection/kitti/train_val_dataset/left_eye/training_label/training/label_2/"
-    save_path = "/home/hustxly/pre3D/data/kitti/imglists/val.lst"
+    save_path = "data/kitti/imglists/val.lst"
     
     generate(list_path, src_path, save_path)
