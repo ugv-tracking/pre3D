@@ -1,5 +1,3 @@
-#python demo.py --prefix ../pre_train_model/vgg-e2e --epoch 10 --image /rawdata/zehaohuang/000128.png --gpu 7 
-#python demo.py --prefix ../pre_train_model/vgg-e2e --epoch 10 --image myimage.jpg --gpu 7 
-#python demo.py --prefix ../pre_train_model/final --epoch 0 --image 000128.png --gpu 7 
-#python demo.py --prefix ../pre_train_model/final --epoch 0 --image myimage.jpg --gpu 7 
-python example/env/demo.py --prefix ../pre_train_model/final --epoch 0 --image data/test_data/gta2.jpg --gpu 7
+#python example/env/test.py --prefix model/3dbox/3dbox --epoch 20 --image data/test_data/GTA_00001.jpg   --gpu 6
+python example/env/test.py --prefix model/3dbox/3dbox --epoch 20 --image data/test_data/KITTI_00128.png --gpu 6
+
