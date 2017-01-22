@@ -13622,3 +13622,4 @@ output shape
 /home/hustxly/Car/pre3D/rcnn/core/metric.py:170: RuntimeWarning: invalid value encountered in log
   conf_loss = -1 * np.log(conf)
 INFO:root:Epoch[1] Batch [20]	Speed: 0.51 samples/sec	Train-RPNAcc=0.783668,	RPNLogLoss=0.691716,	RPNL1Loss=0.139607,	RCNNAcc=0.741443,	RCNNLogLoss=3.041468,	RCNNL1Loss=0.335148,	RCNNConfLoss=nan,	RCNNDimLoss=0.014287,	RCNNAngleLoss=0.335148,	
+INFO:root:Epoch[1] Batch [40]	Speed: 0.70 samples/sec	Train-RPNAcc=0.810023,	RPNLogLoss=0.692381,	RPNL1Loss=0.152406,	RCNNAcc=0.805450,	RCNNLogLoss=3.042180,	RCNNL1Loss=0.310302,	RCNNConfLoss=nan,	RCNNDimLoss=0.047749,	RCNNAngleLoss=0.310302,	
