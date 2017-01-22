@@ -72,7 +72,9 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     print 'output shape'
     pprint.pprint(out_shape_dict)
 
+
     # initialize params
+
     arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
     arg_params['fc6_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_bias'])
     arg_params['fc7_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_weight'])
