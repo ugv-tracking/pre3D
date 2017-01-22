@@ -1,0 +1,323 @@
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 69
+load 0  /  69
+size:  (375, 1242, 3)
+load 1  /  69
+size:  (375, 1242, 3)
+load 2  /  69
+size:  (375, 1242, 3)
+load 3  /  69
+size:  (375, 1242, 3)
+load 4  /  69
+size:  (374, 1238, 3)
+load 5  /  69
+size:  (375, 1242, 3)
+load 6  /  69
+size:  (375, 1242, 3)
+load 7  /  69
+size:  (375, 1242, 3)
+load 8  /  69
+size:  (375, 1242, 3)
+load 9  /  69
+size:  (375, 1242, 3)
+load 10  /  69
+size:  (375, 1242, 3)
+load 11  /  69
+size:  (375, 1242, 3)
+load 12  /  69
+size:  (375, 1242, 3)
+load 13  /  69
+size:  (374, 1238, 3)
+load 14  /  69
+size:  (375, 1242, 3)
+load 15  /  69
+size:  (375, 1242, 3)
+load 16  /  69
+size:  (375, 1242, 3)
+load 17  /  69
+size:  (375, 1242, 3)
+load 18  /  69
+size:  (375, 1242, 3)
+load 19  /  69
+size:  (375, 1242, 3)
+load 20  /  69
+size:  (375, 1242, 3)
+load 21  /  69
+size:  (375, 1242, 3)
+load 22  /  69
+size:  (376, 1241, 3)
+load 23  /  69
+size:  (375, 1242, 3)
+load 24  /  69
+size:  (375, 1242, 3)
+load 25  /  69
+size:  (375, 1242, 3)
+load 26  /  69
+size:  (375, 1242, 3)
+load 27  /  69
+size:  (375, 1242, 3)
+load 28  /  69
+size:  (375, 1242, 3)
+load 29  /  69
+size:  (375, 1242, 3)
+load 30  /  69
+size:  (375, 1242, 3)
+load 31  /  69
+size:  (375, 1242, 3)
+load 32  /  69
+size:  (375, 1242, 3)
+load 33  /  69
+size:  (375, 1242, 3)
+load 34  /  69
+size:  (376, 1241, 3)
+load 35  /  69
+size:  (375, 1242, 3)
+load 36  /  69
+size:  (375, 1242, 3)
+load 37  /  69
+size:  (375, 1242, 3)
+load 38  /  69
+size:  (375, 1242, 3)
+load 39  /  69
+size:  (375, 1242, 3)
+load 40  /  69
+size:  (375, 1242, 3)
+load 41  /  69
+size:  (375, 1242, 3)
+load 42  /  69
+size:  (375, 1242, 3)
+load 43  /  69
+size:  (376, 1241, 3)
+load 44  /  69
+size:  (375, 1242, 3)
+load 45  /  69
+size:  (375, 1242, 3)
+load 46  /  69
+size:  (375, 1242, 3)
+load 47  /  69
+size:  (375, 1242, 3)
+load 48  /  69
+size:  (375, 1242, 3)
+load 49  /  69
+size:  (375, 1242, 3)
+load 50  /  69
+size:  (375, 1242, 3)
+load 51  /  69
+size:  (375, 1242, 3)
+load 52  /  69
+size:  (375, 1242, 3)
+load 53  /  69
+size:  (375, 1242, 3)
+load 54  /  69
+size:  (375, 1242, 3)
+load 55  /  69
+size:  (375, 1242, 3)
+load 56  /  69
+size:  (375, 1242, 3)
+load 57  /  69
+size:  (375, 1242, 3)
+load 58  /  69
+size:  (375, 1242, 3)
+load 59  /  69
+size:  (375, 1242, 3)
+load 60  /  69
+size:  (375, 1242, 3)
+load 61  /  69
+size:  (375, 1242, 3)
+load 62  /  69
+size:  (375, 1242, 3)
+load 63  /  69
+size:  (375, 1242, 3)
+load 64  /  69
+size:  (375, 1242, 3)
+load 65  /  69
+size:  (375, 1242, 3)
+load 66  /  69
+size:  (375, 1242, 3)
+load 67  /  69
+size:  (375, 1242, 3)
+load 68  /  69
+size:  (375, 1242, 3)
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1)), ('gt_confs', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'angle_loss_reshape_output': (1L, 128L, 16L),
+ 'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'blockgrad3_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'conf_loss_reshape_output': (1L, 128L, 1L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+[10:55:03] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+/home/hustxly/pre3D/rcnn/symbol/symbol_vgg.py:35: RuntimeWarning: invalid value encountered in divide
+  y *= cover_bins/cover_bins.sum(axis=1)[:, np.newaxis]
+/home/hustxly/pre3D/rcnn/core/metric.py:170: RuntimeWarning: invalid value encountered in log
+  conf_loss = -1 * np.log(conf)
+INFO:root:Epoch[1] Batch [20]	Speed: 0.56 samples/sec	Train-RPNAcc=0.804129,	RPNLogLoss=0.691827,	RPNL1Loss=0.106250,	RCNNAcc=0.785714,	RCNNLogLoss=3.038401,	RCNNL1Loss=0.208401,	RCNNConfLoss=nan,	RCNNDimLoss=0.012341,	RCNNAngleLoss=0.208401,	
+INFO:root:Epoch[1] Batch [40]	Speed: 0.73 samples/sec	Train-RPNAcc=0.846227,	RPNLogLoss=0.692427,	RPNL1Loss=0.111284,	RCNNAcc=0.858422,	RCNNLogLoss=3.040519,	RCNNL1Loss=0.168421,	RCNNConfLoss=nan,	RCNNDimLoss=0.035948,	RCNNAngleLoss=0.168421,	
+INFO:root:Epoch[1] Batch [60]	Speed: 0.79 samples/sec	Train-RPNAcc=0.852587,	RPNLogLoss=0.692609,	RPNL1Loss=0.113779,	RCNNAcc=0.871926,	RCNNLogLoss=3.040765,	RCNNL1Loss=0.181358,	RCNNConfLoss=nan,	RCNNDimLoss=0.056906,	RCNNAngleLoss=0.181358,	
+INFO:root:Epoch[1] Train-RPNAcc=0.856601
+INFO:root:Epoch[1] Train-RPNLogLoss=0.692645
+INFO:root:Epoch[1] Train-RPNL1Loss=0.114274
+INFO:root:Epoch[1] Train-RCNNAcc=0.878057
+INFO:root:Epoch[1] Train-RCNNLogLoss=3.040683
+INFO:root:Epoch[1] Train-RCNNL1Loss=0.174589
+INFO:root:Epoch[1] Train-RCNNConfLoss=nan
+INFO:root:Epoch[1] Train-RCNNDimLoss=0.065643
+INFO:root:Epoch[1] Train-RCNNAngleLoss=0.174589
+INFO:root:Epoch[1] Time cost=111.962
+[10:57:04] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [10:57:04] src/operator/tensor/./elemwise_binary_broadcast_op.h:44: Check failed: l == 1 || r == 1 operands could not be broadcast together with shapes (4096,84) (16,)
+
+Stack trace returned 33 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fd7a590171c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op20BinaryBroadcastShapeERKN4nnvm9NodeAttrsEPSt6vectorINS1_6TShapeESaIS6_EES9_+0x69b) [0x7fd7a5a1cddb]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXImperativeInvoke+0x14ba) [0x7fd7a60f03da]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fd84ee30adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fd84ee3040c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fd84f0475fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fd84f048f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (9) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (10) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (11) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (12) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (13) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (14) python() [0x4a1c9a]
+[bt] (15) python() [0x4dfe94]
+[bt] (16) python(PyObject_Call+0x36) [0x505f96]
+[bt] (17) python() [0x592085]
+[bt] (18) python() [0x57c87d]
+[bt] (19) python(PyNumber_Multiply+0x96) [0x4a7a16]
+[bt] (20) python(PyEval_EvalFrameEx+0x15e8) [0x49a868]
+[bt] (21) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (22) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (23) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (24) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (25) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (26) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (27) python() [0x4a1634]
+[bt] (28) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (29) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (30) python(Py_Main+0xb5e) [0x44f904]
+[bt] (31) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fd8503bef45]
+[bt] (32) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 223, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 175, in train_net
+    arg_params=arg_params, aux_params=aux_params, begin_epoch=begin_epoch, num_epoch=end_epoch)
+  File "/home/hustxly/mxnet/python/mxnet/module/base_module.py", line 436, in fit
+    callback(epoch, self.symbol, arg_params, aux_params)
+  File "/home/hustxly/pre3D/rcnn/core/callback.py", line 41, in _callback
+    arg['bbox_pred_weight_test'] = (arg['bbox_pred_weight'].T * mx.nd.array(stds)).T
+  File "/home/hustxly/mxnet/python/mxnet/ndarray.py", line 141, in __mul__
+    return multiply(self, other)
+  File "/home/hustxly/mxnet/python/mxnet/ndarray.py", line 763, in multiply
+    None)
+  File "/home/hustxly/mxnet/python/mxnet/ndarray.py", line 683, in _ufunc_helper
+    return fn_array(lhs, rhs)
+  File "/home/hustxly/mxnet/python/mxnet/_ctypes/ndarray.py", line 131, in generic_ndarray_function
+    c_array(ctypes.c_char_p, [c_str(str(i)) for i in kwargs.values()])))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [10:57:04] src/operator/tensor/./elemwise_binary_broadcast_op.h:44: Check failed: l == 1 || r == 1 operands could not be broadcast together with shapes (4096,84) (16,)
+
+Stack trace returned 33 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fd7a590171c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op20BinaryBroadcastShapeERKN4nnvm9NodeAttrsEPSt6vectorINS1_6TShapeESaIS6_EES9_+0x69b) [0x7fd7a5a1cddb]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXImperativeInvoke+0x14ba) [0x7fd7a60f03da]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fd84ee30adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fd84ee3040c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fd84f0475fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fd84f048f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (9) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (10) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (11) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (12) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (13) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (14) python() [0x4a1c9a]
+[bt] (15) python() [0x4dfe94]
+[bt] (16) python(PyObject_Call+0x36) [0x505f96]
+[bt] (17) python() [0x592085]
+[bt] (18) python() [0x57c87d]
+[bt] (19) python(PyNumber_Multiply+0x96) [0x4a7a16]
+[bt] (20) python(PyEval_EvalFrameEx+0x15e8) [0x49a868]
+[bt] (21) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (22) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (23) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (24) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (25) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (26) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (27) python() [0x4a1634]
+[bt] (28) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (29) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (30) python(Py_Main+0xb5e) [0x44f904]
+[bt] (31) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fd8503bef45]
+[bt] (32) python() [0x578c4e]
+
