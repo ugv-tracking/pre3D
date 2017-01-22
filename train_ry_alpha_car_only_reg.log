@@ -1,0 +1,76 @@
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+append flipped images to roidb
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 227, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 54, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/pre3D/rcnn/core/loader.py", line 250, in __init__
+    self.get_batch()
+  File "/home/hustxly/pre3D/rcnn/core/loader.py", line 323, in get_batch
+    data, label = minibatch.get_rpn_batch(iroidb)
+  File "/home/hustxly/pre3D/rcnn/core/minibatch.py", line 129, in get_rpn_batch
+    imgs, roidb = get_image(roidb)
+  File "/home/hustxly/pre3D/rcnn/core/minibatch.py", line 72, in get_image
+    new_rec['gt_dims']   = roi_rec['gt_dims']
+KeyError: 'gt_dims'

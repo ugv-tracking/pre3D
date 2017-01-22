@@ -44,20 +44,19 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     pprint.pprint(config)
 
     # load dataset and prepare imdb for training
-    imdb  = eval(args.dataset)(args.image_set, args.root_path, args.dataset_path)
+    imdb = eval(args.dataset)(args.image_set, args.root_path, args.dataset_path)
     roidb = imdb.gt_roidb()
+    if args.flip:
+        roidb = imdb.append_flipped_images(roidb)
 
     # load training data
     train_data = AnchorLoader(feat_sym, roidb, batch_size=input_batch_size, shuffle=True,
                               ctx=ctx, work_load_list=args.work_load_list)
 
     # infer max shape
-    max_data_shape = [('data', (input_batch_size, 3, 800, 2500))]
+    max_data_shape = [('data', (input_batch_size, 3, 1000, 1000))]
     max_data_shape, max_label_shape = train_data.infer_shape(max_data_shape)
-    max_data_shape.append(('gt_boxes',  (input_batch_size, 100, 5)))
-    max_data_shape.append(('gt_dims',   (input_batch_size, 100, 3)))
-    max_data_shape.append(('gt_angles', (input_batch_size, 100, 1)))
-    max_data_shape.append(('gt_confs', (input_batch_size, 100, 1)))
+    max_data_shape.append(('gt_boxes', (input_batch_size, 100, 5)))
     print 'providing maximum shape', max_data_shape, max_label_shape
 
     # load pretrained
@@ -71,6 +70,11 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     aux_shape_dict = dict(zip(sym.list_auxiliary_states(), aux_shape))
     print 'output shape'
     pprint.pprint(out_shape_dict)
+    print 'arg shape'
+    pprint.pprint(arg_shape_dict)
+    print 'aux shape'
+    pprint.pprint(aux_shape_dict)
+
 
     # initialize params
     arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
