@@ -37,6 +37,7 @@ Value | Name      | Description
 1     | score     |   Only for results: Float, indicating confidence in detection, needed for p/r curves, higher is better.
 
 ## Usage
+* Clear the Cache:    ***sh clear.sh***
 * Generate data file: ***sh gen_data.sh***
 * Train Model:        ***sh train.sh***
 * Test Result:        ***sh test.sh***

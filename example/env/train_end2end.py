@@ -173,6 +173,9 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
                         'lr_scheduler': mx.lr_scheduler.FactorScheduler(lr_step, 0.1),
                         'rescale_grad': (1.0 / batch_size)}
 
+    print "============================================================================================================================="
+    print "------> Let's begin the train,  du du du! :) "
+    print "============================================================================================================================="
     # train
     mod.fit(train_data, eval_metric=eval_metrics, epoch_end_callback=epoch_end_callback, batch_end_callback=batch_end_callback, kvstore=args.kvstore,
             optimizer='sgd', optimizer_params=optimizer_params,
