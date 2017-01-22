@@ -12,6 +12,7 @@ config.IMAGE_STRIDE = 0
 # symbol
 config.NUM_CLASSES = 4
 config.RPN_FEAT_STRIDE = 16
+config.NUM_BIN = 8
 
 #(375, 1242)
 

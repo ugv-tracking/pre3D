@@ -12,8 +12,8 @@ class AngleOutput(mx.operator.CustomOp):
         self.assign(out_data[0], req[0], in_data[0])
         
     def backward(self, req, out_grad, in_data, out_data, in_grad, aux):
-        num_bin = 4
-        overlap = math.pi/2
+        num_bin = config.NUM_BIN
+        overlap = 2*math.pi/num_bin
         
         lbl = in_data[1].asnumpy()
         y = np.zeros_like(in_data[0].asnumpy())
@@ -226,7 +226,7 @@ def get_vgg_train(num_classes=21, num_anchors=9):
     dim_loss = mx.symbol.LinearRegressionOutput(data = fc8_dim, label = dim_label, name='dim_loss')
 
     #angle branch
-    num_bin = 4
+    num_bin = config.NUM_BIN
     fc6_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc6_angle")
     relu6_angle = mx.symbol.Activation(data=fc6_angle, act_type="relu", name="relu6_angle")
     drop6_angle = mx.symbol.Dropout(data=relu6_angle, p=0.5, name="drop6_angle")

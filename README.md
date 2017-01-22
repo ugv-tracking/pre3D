@@ -38,6 +38,6 @@ Value | Name      | Description
 
 ## Usage
 * Generate data file: ***sh gen_data.sh***
-* Train Model: ***sh train.sh***
-* Test Result: ***sh test.sh***
+* Train Model:        ***sh train.sh***
+* Test Result:        ***sh test.sh***
 
