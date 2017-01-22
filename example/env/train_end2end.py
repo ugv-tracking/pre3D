@@ -160,7 +160,12 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     batch_end_callback = callback.Speedometer(train_data.batch_size, frequent=args.frequent)
     means = np.tile(np.array(config.TRAIN.BBOX_MEANS), imdb.num_classes)
     stds = np.tile(np.array(config.TRAIN.BBOX_STDS), imdb.num_classes)
-    epoch_end_callback = callback.do_checkpoint(prefix, means, stds)
+
+    checkpoint = mx.callback.do_checkpoint(prefix)
+    epoch_end_callback = checkpoint
+    #TODO need to fix the do_checkpoint function
+    #epoch_end_callback = callback.do_checkpoint(prefix, means, stds)
+
     # optimizer
     optimizer_params = {'momentum': 0.9,
                         'wd': 0.0005,
@@ -169,8 +174,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
                         'rescale_grad': (1.0 / batch_size)}
 
     # train
-    mod.fit(train_data, eval_metric=eval_metrics, epoch_end_callback=epoch_end_callback,
-            batch_end_callback=batch_end_callback, kvstore=args.kvstore,
+    mod.fit(train_data, eval_metric=eval_metrics, epoch_end_callback=epoch_end_callback, batch_end_callback=batch_end_callback, kvstore=args.kvstore,
             optimizer='sgd', optimizer_params=optimizer_params,
             arg_params=arg_params, aux_params=aux_params, begin_epoch=begin_epoch, num_epoch=end_epoch)
 

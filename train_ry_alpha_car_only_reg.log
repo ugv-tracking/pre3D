@@ -1,0 +1,108 @@
+enter main
+set config
+load symbol
+set gppu
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': True,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 69
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1)), ('gt_confs', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'angle_loss_reshape_output': (1L, 128L, 16L),
+ 'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'blockgrad3_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'conf_loss_reshape_output': (1L, 128L, 1L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+[12:39:38] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+/home/hustxly/Car/pre3D/rcnn/core/metric.py:170: RuntimeWarning: invalid value encountered in log
+  conf_loss = -1 * np.log(conf)
+/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py:35: RuntimeWarning: invalid value encountered in divide
+  y *= cover_bins/cover_bins.sum(axis=1)[:, np.newaxis]
+INFO:root:Epoch[1] Batch [20]	Speed: 0.70 samples/sec	Train-RPNAcc=0.821243,	RPNLogLoss=0.691514,	RPNL1Loss=0.140268,	RCNNAcc=0.770461,	RCNNLogLoss=3.035389,	RCNNL1Loss=0.216746,	RCNNConfLoss=nan,	RCNNDimLoss=0.009983,	RCNNAngleLoss=0.216746,	
+INFO:root:Epoch[1] Batch [40]	Speed: 0.54 samples/sec	Train-RPNAcc=0.848514,	RPNLogLoss=0.692269,	RPNL1Loss=0.134440,	RCNNAcc=0.838415,	RCNNLogLoss=3.039007,	RCNNL1Loss=0.209552,	RCNNConfLoss=nan,	RCNNDimLoss=0.038546,	RCNNAngleLoss=0.209552,	
+INFO:root:Epoch[1] Batch [60]	Speed: 0.73 samples/sec	Train-RPNAcc=0.861040,	RPNLogLoss=0.692503,	RPNL1Loss=0.121374,	RCNNAcc=0.863730,	RCNNLogLoss=3.039744,	RCNNL1Loss=0.193983,	RCNNConfLoss=nan,	RCNNDimLoss=0.065145,	RCNNAngleLoss=0.193983,	
+INFO:root:Epoch[1] Train-RPNAcc=0.867357
+INFO:root:Epoch[1] Train-RPNLogLoss=0.692550
+INFO:root:Epoch[1] Train-RPNL1Loss=0.114462
+INFO:root:Epoch[1] Train-RCNNAcc=0.870811
+INFO:root:Epoch[1] Train-RCNNLogLoss=3.039786
+INFO:root:Epoch[1] Train-RCNNL1Loss=0.188734
+INFO:root:Epoch[1] Train-RCNNConfLoss=nan
+INFO:root:Epoch[1] Train-RCNNDimLoss=0.074539
+INFO:root:Epoch[1] Train-RCNNAngleLoss=0.188734
+INFO:root:Epoch[1] Time cost=114.469
+INFO:root:Saved checkpoint to "model/3dbox/3dbox-0002.params"
+INFO:root:Epoch[2] Batch [20]	Speed: 0.73 samples/sec	Train-RPNAcc=0.864955,	RPNLogLoss=0.692871,	RPNL1Loss=0.122033,	RCNNAcc=0.895089,	RCNNLogLoss=3.039123,	RCNNL1Loss=0.227861,	RCNNConfLoss=3.295037,	RCNNDimLoss=0.167304,	RCNNAngleLoss=0.227861,	
+INFO:root:Epoch[2] Batch [40]	Speed: 0.75 samples/sec	Train-RPNAcc=0.875667,	RPNLogLoss=0.692825,	RPNL1Loss=0.104102,	RCNNAcc=0.890816,	RCNNLogLoss=3.038376,	RCNNL1Loss=0.241331,	RCNNConfLoss=3.170487,	RCNNDimLoss=0.190880,	RCNNAngleLoss=0.241331,	
+INFO:root:Epoch[2] Batch [60]	Speed: 0.80 samples/sec	Train-RPNAcc=0.877561,	RPNLogLoss=0.692785,	RPNL1Loss=0.117357,	RCNNAcc=0.904201,	RCNNLogLoss=3.037490,	RCNNL1Loss=0.211025,	RCNNConfLoss=3.061688,	RCNNDimLoss=0.214660,	RCNNAngleLoss=0.211025,	
+INFO:root:Epoch[2] Train-RPNAcc=0.878284
+INFO:root:Epoch[2] Train-RPNLogLoss=0.692769
+INFO:root:Epoch[2] Train-RPNL1Loss=0.114171
+INFO:root:Epoch[2] Train-RCNNAcc=0.906250
+INFO:root:Epoch[2] Train-RCNNLogLoss=3.037159
+INFO:root:Epoch[2] Train-RCNNL1Loss=0.201333
+INFO:root:Epoch[2] Train-RCNNConfLoss=3.028109
+INFO:root:Epoch[2] Train-RCNNDimLoss=0.222446
+INFO:root:Epoch[2] Train-RCNNAngleLoss=0.201333
+INFO:root:Epoch[2] Time cost=91.431
+INFO:root:Saved checkpoint to "model/3dbox/3dbox-0003.params"
