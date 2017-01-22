@@ -50,6 +50,18 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
                               ctx=ctx, work_load_list=args.work_load_list)
 
     # infer max shape
+    if config.TRAIN.CROP == 'origin':
+        max_data_shape = [('data', (input_batch_size, 3, max([v[0] for v in config.SCALES]), max([v[1] for v in config.SCALES])))]
+        max_data_shape, max_label_shape = train_data.infer_shape(max_data_shape)
+        max_data_shape.append(('gt_boxes', (input_batch_size, 100, 5)))
+        max_data_shape.append(('gt_angles', (input_batch_size, 100, 1)))
+        max_data_shape.append(('gt_confs', (input_batch_size, 100, 1)))
+        print 'providing maximum shape', max_data_shape, max_label_shape
+    else:
+        max_data_shape = [('gt_boxes', (input_batch_size, 100, 5))]
+        max_label_shape = None
+    '''
+    # infer max shape
     max_data_shape = [('data', (input_batch_size, 3, 800, 2500))]
     max_data_shape, max_label_shape = train_data.infer_shape(max_data_shape)
     max_data_shape.append(('gt_boxes',  (input_batch_size, 100, 5)))
@@ -58,7 +70,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
         max_data_shape.append(('gt_angles', (input_batch_size, 100, 1)))
         max_data_shape.append(('gt_confs', (input_batch_size, 100, 1)))
     print 'providing maximum shape', max_data_shape, max_label_shape
-
+    '''
     # load pretrained
     arg_params, aux_params = load_param(pretrained, epoch, convert=True)
 

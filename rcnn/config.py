@@ -52,8 +52,8 @@ config.TRAIN.FG_THRESH = 0.5
 config.TRAIN.BG_THRESH_HI = 0.5
 config.TRAIN.BG_THRESH_LO = 0.1
 
-config.TRAIN.ORIENTATION = True
-config.TRAIN.BBOX_3D = True
+config.TRAIN.ORIENTATION = False
+config.TRAIN.BBOX_3D = False
 
 # R-CNN bounding box regression
 config.TRAIN.BBOX_REGRESSION_THRESH = 0.5
