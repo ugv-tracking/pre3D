@@ -238,7 +238,7 @@ class AnchorLoader(mx.io.DataIter):
             if config.TRAIN.BBOX_3D:
                 self.data_name = ['data', 'im_info', 'gt_boxes', 'gt_dims', 'gt_angles'] 
         else:
-            self.data_name = ['data']
+            
         self.label_name = ['label', 'bbox_target', 'bbox_weight']
 
         # status variable for synchronization between get_data and get_label

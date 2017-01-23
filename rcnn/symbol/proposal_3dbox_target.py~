@@ -34,7 +34,7 @@ class Proposal3DboxTargetOperator(mx.operator.CustomOp):
         gt_boxes  = in_data[1].asnumpy()
         gt_dims   = in_data[2].asnumpy()
         gt_angles = in_data[3].asnumpy()
-        im_info   = in_data[4].asnumpy()
+        im_info   = in_data[5].asnumpy()
 
         # Include ground-truth boxes in the set of candidate rois
         zeros = np.zeros((gt_boxes.shape[0], 1), dtype=gt_boxes.dtype)

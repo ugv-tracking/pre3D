@@ -92,19 +92,20 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
         if config.TRAIN.BBOX_3D: 
             arg_params['fc6_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_dim_weight'])
             arg_params['fc6_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_dim_bias'])
+            
             arg_params['fc7_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_dim_weight'])
             arg_params['fc7_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_dim_bias'])
-            arg_params['fc8_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_dim_weight'])
-            arg_params['fc8_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_dim_bias'])
-
-            '''
-            arg_params['fc6_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_angle_weight'])
+arg_params['fc6_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_angle_weight'])
             arg_params['fc6_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_angle_bias'])
+
             arg_params['fc7_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_angle_weight'])
             arg_params['fc7_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_angle_bias'])
+
+            arg_params['fc8_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_dim_weight'])
+            arg_params['fc8_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_dim_bias'])
             arg_params['fc8_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_angle_weight'])
             arg_params['fc8_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_angle_bias'])
-            '''
+
 
     # check parameter shapes
     for k in sym.list_arguments():

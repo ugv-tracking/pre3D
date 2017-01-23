@@ -1,0 +1,2878 @@
+  File "example/env/train_end2end.py", line 32
+    if args.3dbox:
+            ^
+SyntaxError: invalid syntax
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1)), ('gt_confs', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+[07:45:22] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [07:45:22] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fed0431771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7fed04b29b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7fed04b1f6f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fedad846adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fedad84640c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fedada5d5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fedada5ef9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fedaedd4f45]
+[bt] (21) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 5L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 5L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 5L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 5L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 233, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 69, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [07:45:22] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fed0431771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7fed04b29b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7fed04b1f6f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fedad846adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fedad84640c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fedada5d5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fedada5ef9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fedaedd4f45]
+[bt] (21) python() [0x578c4e]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1)), ('gt_confs', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+[07:46:33] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [07:46:33] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fc7d211971c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7fc7d292bb9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7fc7d29216f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fc87b648adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fc87b64840c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fc87b85f5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fc87b860f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fc87cbd6f45]
+[bt] (21) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 4L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 4L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 4L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 4L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 67, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [07:46:33] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fc7d211971c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7fc7d292bb9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7fc7d29216f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fc87b648adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fc87b64840c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fc87b85f5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fc87b860f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fc87cbd6f45]
+[bt] (21) python() [0x578c4e]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': False,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+=============================================================================================================================
+------> Let's begin the train,  du du du! :) 
+=============================================================================================================================
+[07:47:48] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+INFO:root:Epoch[3] Batch [20]	Speed: 0.73 samples/sec	Train-RPNAcc=0.897135,	RPNLogLoss=0.262287,	RPNL1Loss=0.081467,	RCNNAcc=0.731399,	RCNNLogLoss=2.121227,	RCNNL1Loss=0.446089,	
+INFO:root:Epoch[3] Batch [40]	Speed: 1.12 samples/sec	Train-RPNAcc=0.904059,	RPNLogLoss=0.246608,	RPNL1Loss=0.075515,	RCNNAcc=0.730564,	RCNNLogLoss=1.911018,	RCNNL1Loss=0.460703,	
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': False,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+=============================================================================================================================
+------> Let's begin the train,  du du du! :) 
+=============================================================================================================================
+[07:49:38] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+INFO:root:Epoch[3] Batch [20]	Speed: 0.61 samples/sec	Train-RPNAcc=0.514695,	RPNLogLoss=0.694717,	RPNL1Loss=0.103671,	RCNNAcc=0.204241,	RCNNLogLoss=2.874820,	RCNNL1Loss=0.322148,	
+INFO:root:Epoch[3] Batch [40]	Speed: 0.97 samples/sec	Train-RPNAcc=0.520579,	RPNLogLoss=0.693996,	RPNL1Loss=0.099401,	RCNNAcc=0.497713,	RCNNLogLoss=2.228241,	RCNNL1Loss=0.307208,	
+INFO:root:Epoch[3] Batch [60]	Speed: 0.88 samples/sec	Train-RPNAcc=0.531634,	RPNLogLoss=0.693165,	RPNL1Loss=0.121303,	RCNNAcc=0.602715,	RCNNLogLoss=1.884734,	RCNNL1Loss=0.342464,	
+INFO:root:Epoch[3] Batch [80]	Speed: 1.03 samples/sec	Train-RPNAcc=0.542438,	RPNLogLoss=0.692186,	RPNL1Loss=0.123103,	RCNNAcc=0.677855,	RCNNLogLoss=1.586494,	RCNNL1Loss=0.302854,	
+INFO:root:Epoch[3] Batch [100]	Speed: 0.94 samples/sec	Train-RPNAcc=0.551091,	RPNLogLoss=0.691064,	RPNL1Loss=0.134217,	RCNNAcc=0.710319,	RCNNLogLoss=1.411952,	RCNNL1Loss=0.309456,	
+INFO:root:Epoch[3] Batch [120]	Speed: 1.05 samples/sec	Train-RPNAcc=0.566180,	RPNLogLoss=0.689298,	RPNL1Loss=0.126683,	RCNNAcc=0.739863,	RCNNLogLoss=1.255871,	RCNNL1Loss=0.298741,	
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': False,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+=============================================================================================================================
+------> Let's begin the train,  du du du! :) 
+=============================================================================================================================
+[07:53:06] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+INFO:root:Epoch[3] Batch [20]	Speed: 0.80 samples/sec	Train-RPNAcc=0.504464,	RPNLogLoss=0.694628,	RPNL1Loss=0.169020,	RCNNAcc=0.201265,	RCNNLogLoss=2.872613,	RCNNL1Loss=0.301996,	
+INFO:root:Epoch[3] Batch [40]	Speed: 0.67 samples/sec	Train-RPNAcc=0.513624,	RPNLogLoss=0.694760,	RPNL1Loss=0.163955,	RCNNAcc=0.509909,	RCNNLogLoss=2.165051,	RCNNL1Loss=0.253436,	
+INFO:root:Epoch[3] Batch [60]	Speed: 0.95 samples/sec	Train-RPNAcc=0.518186,	RPNLogLoss=0.694129,	RPNL1Loss=0.158747,	RCNNAcc=0.621158,	RCNNLogLoss=1.821661,	RCNNL1Loss=0.276377,	
+INFO:root:Epoch[3] Batch [80]	Speed: 1.02 samples/sec	Train-RPNAcc=0.535108,	RPNLogLoss=0.692844,	RPNL1Loss=0.149913,	RCNNAcc=0.685764,	RCNNLogLoss=1.559662,	RCNNL1Loss=0.270204,	
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+[07:57:49] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [07:57:49] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7efb9d8a471c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7efb9e0b6b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7efb9e0ac6f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7efc46dd3adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7efc46dd340c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7efc46fea5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7efc46febf9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7efc48361f45]
+[bt] (21) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 4L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 4L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 4L, 1L)
+  data: (1L, 3L, 752L, 2488L)
+  gt_angles: (1L, 4L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 232, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 66, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [07:57:49] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7efb9d8a471c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7efb9e0b6b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7efb9e0ac6f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7efc46dd3adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7efc46dd340c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7efc46fea5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7efc46febf9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7efc48361f45]
+[bt] (21) python() [0x578c4e]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+[08:00:54] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:00:54] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f50228ca71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7f50230dcb9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7f50230d26f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f50cbdf9adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f50cbdf940c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f50cc0105fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f50cc011f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f50cd387f45]
+[bt] (21) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 4L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 4L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 4L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 4L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 66, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [08:00:54] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f50228ca71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7f50230dcb9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7f50230d26f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f50cbdf9adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f50cbdf940c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f50cc0105fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f50cc011f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f50cd387f45]
+[bt] (21) python() [0x578c4e]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+[08:01:38] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:01:38] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7febd12c771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7febd1ad9b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7febd1acf6f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fec787f6adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fec787f640c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fec78a0d5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fec78a0ef9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fec79d84f45]
+[bt] (21) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 8L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 8L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 8L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 8L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 66, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [08:01:38] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]fc6_weight
+	[39]fc6_bias
+	[40]fc7_weight
+	[41]fc7_bias
+	[42]cls_score_weight
+	[43]cls_score_bias
+	[44]bbox_pred_weight
+	[45]bbox_pred_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7febd12c771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7febd1ad9b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7febd1acf6f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7fec787f6adc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7fec787f640c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7fec78a0d5fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7fec78a0ef9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7fec79d84f45]
+[bt] (21) python() [0x578c4e]
+
+enter main
+[08:08:11] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:08:11] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f2e1aee371c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f2e1b899181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f2e1b803893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f2e1b7f99ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f2e1c4c6558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f2e1b6e7fe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f2ec4412adc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f2ec441240c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f2ec46295fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f2ec462af9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f2ec59a0f45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 34, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py", line 339, in get_vgg_3dbox_train
+    batch_rois=config.TRAIN.BATCH_ROIS, fg_fraction=config.TRAIN.FG_FRACTION)
+  File "/home/hustxly/mxnet/python/mxnet/_ctypes/symbol.py", line 181, in creator
+    ctypes.byref(sym_handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [08:08:11] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f2e1aee371c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f2e1b899181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f2e1b803893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f2e1b7f99ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f2e1c4c6558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f2e1b6e7fe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f2ec4412adc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f2ec441240c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f2ec46295fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f2ec462af9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f2ec59a0f45]
+[bt] (22) python() [0x578c4e]
+
+enter main
+[08:08:32] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:08:32] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f908484e71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f9085204181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f908516e893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f90851649ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f9085e31558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f9085052fe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f912dd7dadc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f912dd7d40c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f912df945fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f912df95f9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f912f30bf45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 34, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py", line 339, in get_vgg_3dbox_train
+    batch_rois=config.TRAIN.BATCH_ROIS, fg_fraction=config.TRAIN.FG_FRACTION)
+  File "/home/hustxly/mxnet/python/mxnet/_ctypes/symbol.py", line 181, in creator
+    ctypes.byref(sym_handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [08:08:32] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f908484e71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f9085204181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f908516e893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f90851649ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f9085e31558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f9085052fe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f912dd7dadc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f912dd7d40c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f912df945fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f912df95f9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f912f30bf45]
+[bt] (22) python() [0x578c4e]
+
+enter main
+[08:10:42] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:10:42] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f85652ed71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f8565ca3181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f8565c0d893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f8565c039ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f85668d0558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f8565af1fe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f860e81cadc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f860e81c40c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f860ea335fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f860ea34f9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f860fdaaf45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 34, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py", line 339, in get_vgg_3dbox_train
+    batch_rois=config.TRAIN.BATCH_ROIS, fg_fraction=config.TRAIN.FG_FRACTION)
+  File "/home/hustxly/mxnet/python/mxnet/_ctypes/symbol.py", line 181, in creator
+    ctypes.byref(sym_handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [08:10:42] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f85652ed71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f8565ca3181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f8565c0d893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f8565c039ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f85668d0558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f8565af1fe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f860e81cadc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f860e81c40c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f860ea335fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f860ea34f9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f860fdaaf45]
+[bt] (22) python() [0x578c4e]
+
+enter main
+[08:11:49] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:11:49] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f8bab53671c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f8babeec181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f8babe56893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f8babe4c9ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f8bacb19558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f8babd3afe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f8c54a65adc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f8c54a6540c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f8c54c7c5fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f8c54c7df9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f8c55ff3f45]
+[bt] (22) python() [0x578c4e]
+
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 34, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py", line 339, in get_vgg_3dbox_train
+    batch_rois=config.TRAIN.BATCH_ROIS, fg_fraction=config.TRAIN.FG_FRACTION)
+  File "/home/hustxly/mxnet/python/mxnet/_ctypes/symbol.py", line 181, in creator
+    ctypes.byref(sym_handle)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [08:11:49] src/operator/./custom-inl.h:127: Check failed: registry_.find(param_.op_type) != registry_.end() Cannot find custom operator type proposal_3dbox_target
+
+Stack trace returned 23 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f8bab53671c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12CustomOpProp4InitERKSt6vectorISt4pairISsSsESaIS4_EE+0xb21) [0x7f8babeec181]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ParsedOpProp4InitERKN4nnvm9NodeAttrsE+0xd3) [0x7f8babe56893]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf7a9ba) [0x7f8babe4c9ba]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm6Symbol13CreateFunctorEPKNS_2OpESt13unordered_mapISsSsSt4hashISsESt8equal_toISsESaISt4pairIKSsSsEEE+0x98) [0x7f8bacb19558]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolCreateAtomicSymbol+0x6a9) [0x7f8babd3afe9]
+[bt] (6) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f8c54a65adc]
+[bt] (7) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f8c54a6540c]
+[bt] (8) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f8c54c7c5fe]
+[bt] (9) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f8c54c7df9e]
+[bt] (10) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (11) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (12) python(PyEval_EvalFrameEx+0x18c5) [0x49ab45]
+[bt] (13) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (14) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (15) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (16) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (17) python() [0x4a1634]
+[bt] (18) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (19) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (20) python(Py_Main+0xb5e) [0x44f904]
+[bt] (21) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f8c55ff3f45]
+[bt] (22) python() [0x578c4e]
+
+enter main
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 34, in train_net
+    sym = eval('get_' + args.network + '_train')()
+  File "/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py", line 412, in get_vgg_3dbox_train
+    conf_loss = mx.symbol.SoftmaxOutput(data=fc8_conf, label=conf_label , name='conf_loss')
+NameError: global name 'conf_label' is not defined
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+[08:14:06] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:14:06] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]gt_dims
+	[39]gt_angles
+	[40]fc6_weight
+	[41]fc6_bias
+	[42]fc7_weight
+	[43]fc7_bias
+	[44]cls_score_weight
+	[45]cls_score_bias
+	[46]bbox_pred_weight
+	[47]bbox_pred_bias
+	[48]fc6_dim_weight
+	[49]fc6_dim_bias
+	[50]fc7_dim_weight
+	[51]fc7_dim_bias
+	[52]fc8_dim_weight
+	[53]fc8_dim_bias
+	[54]fc6_angle_weight
+	[55]fc6_angle_bias
+	[56]fc7_angle_weight
+	[57]fc7_angle_bias
+	[58]fc8_angle_weight
+	[59]fc8_angle_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f6340dee71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7f6341600b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7f63415f66f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f63e231dadc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f63e231d40c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f63e25345fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f63e2535f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f63e38abf45]
+[bt] (21) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 2L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 2L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  gt_confs: (1L, 2L, 1L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 2L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 66, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: [08:14:06] src/c_api/c_api_symbolic.cc:385: InferShapeKeyword argument name gt_confs not found.
+Candidate arguments:
+	[0]data
+	[1]conv1_1_weight
+	[2]conv1_1_bias
+	[3]conv1_2_weight
+	[4]conv1_2_bias
+	[5]conv2_1_weight
+	[6]conv2_1_bias
+	[7]conv2_2_weight
+	[8]conv2_2_bias
+	[9]conv3_1_weight
+	[10]conv3_1_bias
+	[11]conv3_2_weight
+	[12]conv3_2_bias
+	[13]conv3_3_weight
+	[14]conv3_3_bias
+	[15]conv4_1_weight
+	[16]conv4_1_bias
+	[17]conv4_2_weight
+	[18]conv4_2_bias
+	[19]conv4_3_weight
+	[20]conv4_3_bias
+	[21]conv5_1_weight
+	[22]conv5_1_bias
+	[23]conv5_2_weight
+	[24]conv5_2_bias
+	[25]conv5_3_weight
+	[26]conv5_3_bias
+	[27]rpn_conv_3x3_weight
+	[28]rpn_conv_3x3_bias
+	[29]rpn_cls_score_weight
+	[30]rpn_cls_score_bias
+	[31]label
+	[32]bbox_weight
+	[33]rpn_bbox_pred_weight
+	[34]rpn_bbox_pred_bias
+	[35]bbox_target
+	[36]im_info
+	[37]gt_boxes
+	[38]gt_dims
+	[39]gt_angles
+	[40]fc6_weight
+	[41]fc6_bias
+	[42]fc7_weight
+	[43]fc7_bias
+	[44]cls_score_weight
+	[45]cls_score_bias
+	[46]bbox_pred_weight
+	[47]bbox_pred_bias
+	[48]fc6_dim_weight
+	[49]fc6_dim_bias
+	[50]fc7_dim_weight
+	[51]fc7_dim_bias
+	[52]fc8_dim_weight
+	[53]fc8_dim_bias
+	[54]fc6_angle_weight
+	[55]fc6_angle_bias
+	[56]fc7_angle_weight
+	[57]fc7_angle_bias
+	[58]fc8_angle_weight
+	[59]fc8_angle_bias
+
+
+Stack trace returned 22 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f6340dee71c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet14MatchArgumentsIN4nnvm6TShapeEEEvRKNS1_12IndexedGraphERKSt13unordered_mapISsT_St4hashISsESt8equal_toISsESaISt4pairIKSsS7_EEEPSt6vectorIS7_SaIS7_EEPKc+0x4db) [0x7f6341600b9b]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x1053) [0x7f63415f66f3]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f63e231dadc]
+[bt] (4) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f63e231d40c]
+[bt] (5) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f63e25345fe]
+[bt] (6) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f63e2535f9e]
+[bt] (7) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (8) python() [0x4a1c9a]
+[bt] (9) python(PyObject_Call+0x36) [0x505f96]
+[bt] (10) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (11) python() [0x4a1c9a]
+[bt] (12) python(PyObject_Call+0x36) [0x505f96]
+[bt] (13) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (14) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (15) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (16) python() [0x4a1634]
+[bt] (17) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (18) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (19) python(Py_Main+0xb5e) [0x44f904]
+[bt] (20) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f63e38abf45]
+[bt] (21) python() [0x578c4e]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 50, in train_net
+    ctx=ctx, work_load_list=args.work_load_list)
+  File "/home/hustxly/Car/pre3D/rcnn/core/loader.py", line 250, in __init__
+    self.get_batch()
+  File "/home/hustxly/Car/pre3D/rcnn/core/loader.py", line 346, in get_batch
+    data['gt_confs']  = label['gt_confs']
+KeyError: 'gt_confs'
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+Error in proposal_3dbox_target.infer_shape: Traceback (most recent call last):
+  File "/home/hustxly/mxnet/python/mxnet/operator.py", line 617, in infer_shape_entry
+    ret = op_prop.infer_shape(shapes)
+  File "/home/hustxly/Car/pre3D/rcnn/symbol/proposal_3dbox_target.py", line 99, in infer_shape
+    im_info_shape   = in_shape[5]
+IndexError: list index out of range
+
+[08:32:08] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:32:08] src/operator/./custom-inl.h:187: Check failed: info_->infer_shape(shapes.size(), ndims.data(), shapes.data(), info_->p_infer_shape) 
+
+Stack trace returned 29 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f3fc1be371c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK5mxnet2op12CustomOpProp10InferShapeEPSt6vectorIN4nnvm6TShapeESaIS4_EES7_S7_+0xb7c) [0x7f3fc259b27c]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf778f8) [0x7f3fc24f68f8]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c6015f) [0x7f3fc31df15f]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c61615) [0x7f3fc31e0615]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c62275) [0x7f3fc31e1275]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm11ApplyPassesENS_5GraphERKSt6vectorISsSaISsEE+0x703) [0x7f3fc31bf713]
+[bt] (7) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm9ApplyPassENS_5GraphERKSs+0x8e) [0x7f3fc23efb3e]
+[bt] (8) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm4pass10InferShapeENS_5GraphESt6vectorINS_6TShapeESaIS3_EESs+0x240) [0x7f3fc23f39a0]
+[bt] (9) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x321) [0x7f3fc23ea9c1]
+[bt] (10) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f406b112adc]
+[bt] (11) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f406b11240c]
+[bt] (12) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f406b3295fe]
+[bt] (13) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f406b32af9e]
+[bt] (14) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (15) python() [0x4a1c9a]
+[bt] (16) python(PyObject_Call+0x36) [0x505f96]
+[bt] (17) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (18) python() [0x4a1c9a]
+[bt] (19) python(PyObject_Call+0x36) [0x505f96]
+[bt] (20) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (21) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (22) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (23) python() [0x4a1634]
+[bt] (24) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (25) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (26) python(Py_Main+0xb5e) [0x44f904]
+[bt] (27) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f406c6a0f45]
+[bt] (28) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 9L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 9L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 9L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 66, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator roi_target: [08:32:08] src/operator/./custom-inl.h:187: Check failed: info_->infer_shape(shapes.size(), ndims.data(), shapes.data(), info_->p_infer_shape) 
+
+Stack trace returned 29 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f3fc1be371c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNK5mxnet2op12CustomOpProp10InferShapeEPSt6vectorIN4nnvm6TShapeESaIS4_EES7_S7_+0xb7c) [0x7f3fc259b27c]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0xf778f8) [0x7f3fc24f68f8]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c6015f) [0x7f3fc31df15f]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c61615) [0x7f3fc31e0615]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c62275) [0x7f3fc31e1275]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm11ApplyPassesENS_5GraphERKSt6vectorISsSaISsEE+0x703) [0x7f3fc31bf713]
+[bt] (7) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm9ApplyPassENS_5GraphERKSs+0x8e) [0x7f3fc23efb3e]
+[bt] (8) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm4pass10InferShapeENS_5GraphESt6vectorINS_6TShapeESaIS3_EESs+0x240) [0x7f3fc23f39a0]
+[bt] (9) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x321) [0x7f3fc23ea9c1]
+[bt] (10) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f406b112adc]
+[bt] (11) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f406b11240c]
+[bt] (12) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f406b3295fe]
+[bt] (13) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f406b32af9e]
+[bt] (14) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (15) python() [0x4a1c9a]
+[bt] (16) python(PyObject_Call+0x36) [0x505f96]
+[bt] (17) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (18) python() [0x4a1c9a]
+[bt] (19) python(PyObject_Call+0x36) [0x505f96]
+[bt] (20) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (21) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (22) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (23) python() [0x4a1634]
+[bt] (24) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (25) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (26) python(Py_Main+0xb5e) [0x44f904]
+[bt] (27) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f406c6a0f45]
+[bt] (28) python() [0x578c4e]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'angle_loss_reshape_output': (1L, 128L, 16L),
+ 'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 231, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 97, in train_net
+    arg_params['fc6_conf_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_conf_weight'])
+KeyError: 'fc6_conf_weight'
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'angle_loss_reshape_output': (1L, 128L, 16L),
+ 'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+=============================================================================================================================
+------> Let's begin the train,  du du du! :) 
+=============================================================================================================================
+[08:33:57] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+Error in CustomOp.forward: Traceback (most recent call last):
+  File "/home/hustxly/mxnet/python/mxnet/operator.py", line 724, in forward_entry
+    aux=tensors[4])
+  File "/home/hustxly/Car/pre3D/rcnn/symbol/proposal_3dbox_target.py", line 46, in forward
+    sample_rois(all_rois, fg_rois_per_image, rois_per_image, self._num_classes, gt_boxes=gt_boxes, gt_dims=gt_dims, gt_angles=gt_angles)
+  File "/home/hustxly/Car/pre3D/rcnn/core/minibatch.py", line 316, in sample_rois
+    return rois, labels, bbox_targets, bbox_weights, dim_label, angle_label, conf_label
+NameError: global name 'conf_label' is not defined
+
+[08:34:14] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:34:14] src/operator/custom.cc:80: Check failed: op_info_->forward(ptrs.size(), ptrs.data(), tags.data(), reqs.data(), ctx.is_train, op_info_->p_forward) 
+
+Stack trace returned 6 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fada8ad771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZZN5mxnet2op8CustomOpIN7mshadow3gpuEE7ForwardERKNS_9OpContextERKSt6vectorINS_5TBlobESaIS9_EERKS8_INS_9OpReqTypeESaISE_EESD_SD_ENUlvE_clEv+0xa7) [0x7fada9491c07]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNSt6thread5_ImplISt12_Bind_simpleIFZN5mxnet2op8CustomOpIN7mshadow3gpuEEC1EP12CustomOpInfoEUlvE0_vEEE6_M_runEv+0xde) [0x7fada948c3de]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0xb1a60) [0x7fad9e81ea60]
+[bt] (4) /lib/x86_64-linux-gnu/libpthread.so.0(+0x8184) [0x7fae53940184]
+[bt] (5) /lib/x86_64-linux-gnu/libc.so.6(clone+0x6d) [0x7fae5366d37d]
+
+terminate called after throwing an instance of 'dmlc::Error'
+  what():  [08:34:14] src/operator/custom.cc:80: Check failed: op_info_->forward(ptrs.size(), ptrs.data(), tags.data(), reqs.data(), ctx.is_train, op_info_->p_forward) 
+
+Stack trace returned 6 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7fada8ad771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZZN5mxnet2op8CustomOpIN7mshadow3gpuEE7ForwardERKNS_9OpContextERKSt6vectorINS_5TBlobESaIS9_EERKS8_INS_9OpReqTypeESaISE_EESD_SD_ENUlvE_clEv+0xa7) [0x7fada9491c07]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZNSt6thread5_ImplISt12_Bind_simpleIFZN5mxnet2op8CustomOpIN7mshadow3gpuEEC1EP12CustomOpInfoEUlvE0_vEEE6_M_runEv+0xde) [0x7fada948c3de]
+[bt] (3) /usr/lib/x86_64-linux-gnu/libstdc++.so.6(+0xb1a60) [0x7fad9e81ea60]
+[bt] (4) /lib/x86_64-linux-gnu/libpthread.so.0(+0x8184) [0x7fae53940184]
+[bt] (5) /lib/x86_64-linux-gnu/libc.so.6(clone+0x6d) [0x7fae5366d37d]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'angle_loss_reshape_output': (1L, 128L, 16L),
+ 'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+=============================================================================================================================
+------> Let's begin the train,  du du du! :) 
+=============================================================================================================================
+[08:34:57] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py:36: RuntimeWarning: invalid value encountered in divide
+  y *= cover_bins/cover_bins.sum(axis=1)[:, np.newaxis]
+INFO:root:Epoch[3] Batch [20]	Speed: 0.69 samples/sec	Train-RPNAcc=0.776972,	RPNLogLoss=0.693366,	RPNL1Loss=0.150342,	RCNNAcc=0.752976,	RCNNLogLoss=3.056548,	RCNNL1Loss=0.416547,	RCNNDimLoss=0.025311,	RCNNAngleLoss=0.416547,	
+INFO:root:Epoch[3] Batch [40]	Speed: 1.25 samples/sec	Train-RPNAcc=0.824219,	RPNLogLoss=0.693222,	RPNL1Loss=0.141086,	RCNNAcc=0.801639,	RCNNLogLoss=3.049946,	RCNNL1Loss=0.366908,	RCNNDimLoss=0.065069,	RCNNAngleLoss=0.366908,	
+INFO:root:Epoch[3] Batch [60]	Speed: 1.12 samples/sec	Train-RPNAcc=0.834721,	RPNLogLoss=0.693151,	RPNL1Loss=0.141454,	RCNNAcc=0.845543,	RCNNLogLoss=3.047133,	RCNNL1Loss=0.278239,	RCNNDimLoss=0.102318,	RCNNAngleLoss=0.278239,	
+INFO:root:Epoch[3] Batch [80]	Speed: 1.25 samples/sec	Train-RPNAcc=0.843654,	RPNLogLoss=0.693095,	RPNL1Loss=0.137591,	RCNNAcc=0.866898,	RCNNLogLoss=3.045314,	RCNNL1Loss=0.238390,	RCNNDimLoss=0.128646,	RCNNAngleLoss=0.238390,	
+INFO:root:Epoch[3] Batch [100]	Speed: 1.27 samples/sec	Train-RPNAcc=0.850402,	RPNLogLoss=0.693044,	RPNL1Loss=0.132597,	RCNNAcc=0.876856,	RCNNLogLoss=3.043907,	RCNNL1Loss=0.230196,	RCNNDimLoss=0.149702,	RCNNAngleLoss=0.230196,	
+INFO:root:Epoch[3] Batch [120]	Speed: 1.16 samples/sec	Train-RPNAcc=0.844848,	RPNLogLoss=0.693007,	RPNL1Loss=0.131902,	RCNNAcc=0.874548,	RCNNLogLoss=3.042775,	RCNNL1Loss=0.247196,	RCNNDimLoss=0.169542,	RCNNAngleLoss=0.247196,	
+INFO:root:Epoch[3] Batch [140]	Speed: 1.22 samples/sec	Train-RPNAcc=0.841423,	RPNLogLoss=0.692971,	RPNL1Loss=0.137188,	RCNNAcc=0.875222,	RCNNLogLoss=3.041734,	RCNNL1Loss=0.245108,	RCNNDimLoss=0.191410,	RCNNAngleLoss=0.245108,	
+INFO:root:Epoch[3] Batch [160]	Speed: 1.13 samples/sec	Train-RPNAcc=0.841615,	RPNLogLoss=0.692934,	RPNL1Loss=0.132377,	RCNNAcc=0.872622,	RCNNLogLoss=3.040806,	RCNNL1Loss=0.259524,	RCNNDimLoss=0.214361,	RCNNAngleLoss=0.259524,	
+INFO:root:Epoch[3] Batch [180]	Speed: 1.23 samples/sec	Train-RPNAcc=0.843685,	RPNLogLoss=0.692896,	RPNL1Loss=0.132944,	RCNNAcc=0.877719,	RCNNLogLoss=3.039835,	RCNNL1Loss=0.246812,	RCNNDimLoss=0.237220,	RCNNAngleLoss=0.246812,	
+INFO:root:Epoch[3] Batch [200]	Speed: 1.25 samples/sec	Train-RPNAcc=0.846276,	RPNLogLoss=0.692855,	RPNL1Loss=0.133203,	RCNNAcc=0.876749,	RCNNLogLoss=3.038973,	RCNNL1Loss=0.250157,	RCNNDimLoss=0.257950,	RCNNAngleLoss=0.250157,	
+INFO:root:Epoch[3] Batch [220]	Speed: 1.20 samples/sec	Train-RPNAcc=0.845871,	RPNLogLoss=0.692820,	RPNL1Loss=0.137346,	RCNNAcc=0.878358,	RCNNLogLoss=3.038097,	RCNNL1Loss=0.247793,	RCNNDimLoss=0.277915,	RCNNAngleLoss=0.247793,	
+INFO:root:Epoch[3] Batch [240]	Speed: 1.20 samples/sec	Train-RPNAcc=0.846262,	RPNLogLoss=0.692785,	RPNL1Loss=0.139914,	RCNNAcc=0.882683,	RCNNLogLoss=3.037188,	RCNNL1Loss=0.236765,	RCNNDimLoss=0.296495,	RCNNAngleLoss=0.236765,	
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+[08:56:45] /home/hustxly/mxnet/dmlc-core/include/dmlc/./logging.h:300: [08:56:45] src/operator/tensor/./../elemwise_op_common.h:54: Incompatible attr in node _minus2 at 1-th input: expected (128,16), got (128,1)
+
+Stack trace returned 29 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f2d04c8771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ElemwiseAttrIN4nnvm6TShapeEXadL_ZNS0_13shape_is_noneERKS3_EELb1EEEbRKNS2_9NodeAttrsEPSt6vectorIT_SaISA_EESD_+0x317) [0x7f2d0517d6e7]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op13ElemwiseShapeILi2ELi1EEEbRKN4nnvm9NodeAttrsEPSt6vectorINS2_6TShapeESaIS7_EESA_+0x3f1) [0x7f2d0517e2e1]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c6015f) [0x7f2d0628315f]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c61615) [0x7f2d06284615]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c62275) [0x7f2d06285275]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm11ApplyPassesENS_5GraphERKSt6vectorISsSaISsEE+0x703) [0x7f2d06263713]
+[bt] (7) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm9ApplyPassENS_5GraphERKSs+0x8e) [0x7f2d05493b3e]
+[bt] (8) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm4pass10InferShapeENS_5GraphESt6vectorINS_6TShapeESaIS3_EESs+0x240) [0x7f2d054979a0]
+[bt] (9) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x321) [0x7f2d0548e9c1]
+[bt] (10) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f2dae1b6adc]
+[bt] (11) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f2dae1b640c]
+[bt] (12) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f2dae3cd5fe]
+[bt] (13) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f2dae3cef9e]
+[bt] (14) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (15) python() [0x4a1c9a]
+[bt] (16) python(PyObject_Call+0x36) [0x505f96]
+[bt] (17) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (18) python() [0x4a1c9a]
+[bt] (19) python(PyObject_Call+0x36) [0x505f96]
+[bt] (20) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (21) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (22) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (23) python() [0x4a1634]
+[bt] (24) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (25) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (26) python(Py_Main+0xb5e) [0x44f904]
+[bt] (27) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f2daf744f45]
+[bt] (28) python() [0x578c4e]
+
+infer_shape error. Arguments:
+  bbox_target: (1L, 36L, 47L, 155L)
+  im_info: (1L, 3L)
+  gt_dims: (1L, 3L, 3L)
+  label: (1L, 65565L)
+  gt_boxes: (1L, 3L, 5L)
+  bbox_weight: (1L, 36L, 47L, 155L)
+  data: (1L, 3L, 752L, 2491L)
+  gt_angles: (1L, 3L)
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 225, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 66, in train_net
+    arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 535, in infer_shape
+    return self._infer_shape_impl(False, *args, **kwargs)
+  File "/home/hustxly/mxnet/python/mxnet/symbol.py", line 602, in _infer_shape_impl
+    ctypes.byref(complete)))
+  File "/home/hustxly/mxnet/python/mxnet/base.py", line 75, in check_call
+    raise MXNetError(py_str(_LIB.MXGetLastError()))
+mxnet.base.MXNetError: Error in operator _minus2: [08:56:45] src/operator/tensor/./../elemwise_op_common.h:54: Incompatible attr in node _minus2 at 1-th input: expected (128,16), got (128,1)
+
+Stack trace returned 29 entries:
+[bt] (0) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4dmlc15LogMessageFatalD1Ev+0x3c) [0x7f2d04c8771c]
+[bt] (1) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op12ElemwiseAttrIN4nnvm6TShapeEXadL_ZNS0_13shape_is_noneERKS3_EELb1EEEbRKNS2_9NodeAttrsEPSt6vectorIT_SaISA_EESD_+0x317) [0x7f2d0517d6e7]
+[bt] (2) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN5mxnet2op13ElemwiseShapeILi2ELi1EEEbRKN4nnvm9NodeAttrsEPSt6vectorINS2_6TShapeESaIS7_EESA_+0x3f1) [0x7f2d0517e2e1]
+[bt] (3) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c6015f) [0x7f2d0628315f]
+[bt] (4) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c61615) [0x7f2d06284615]
+[bt] (5) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(+0x1c62275) [0x7f2d06285275]
+[bt] (6) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm11ApplyPassesENS_5GraphERKSt6vectorISsSaISsEE+0x703) [0x7f2d06263713]
+[bt] (7) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm9ApplyPassENS_5GraphERKSs+0x8e) [0x7f2d05493b3e]
+[bt] (8) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(_ZN4nnvm4pass10InferShapeENS_5GraphESt6vectorINS_6TShapeESaIS3_EESs+0x240) [0x7f2d054979a0]
+[bt] (9) /home/hustxly/mxnet/python/mxnet/../../lib/libmxnet.so(MXSymbolInferShape+0x321) [0x7f2d0548e9c1]
+[bt] (10) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call_unix64+0x4c) [0x7f2dae1b6adc]
+[bt] (11) /usr/lib/x86_64-linux-gnu/libffi.so.6(ffi_call+0x1fc) [0x7f2dae1b640c]
+[bt] (12) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(_ctypes_callproc+0x48e) [0x7f2dae3cd5fe]
+[bt] (13) /usr/lib/python2.7/lib-dynload/_ctypes.x86_64-linux-gnu.so(+0x15f9e) [0x7f2dae3cef9e]
+[bt] (14) python(PyEval_EvalFrameEx+0x965) [0x499be5]
+[bt] (15) python() [0x4a1c9a]
+[bt] (16) python(PyObject_Call+0x36) [0x505f96]
+[bt] (17) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (18) python() [0x4a1c9a]
+[bt] (19) python(PyObject_Call+0x36) [0x505f96]
+[bt] (20) python(PyEval_EvalFrameEx+0x1dfa) [0x49b07a]
+[bt] (21) python(PyEval_EvalCodeEx+0x2ac) [0x4a090c]
+[bt] (22) python(PyEval_EvalFrameEx+0x7d2) [0x499a52]
+[bt] (23) python() [0x4a1634]
+[bt] (24) python(PyRun_FileExFlags+0x92) [0x44e4a5]
+[bt] (25) python(PyRun_SimpleFileExFlags+0x2ee) [0x44ec9f]
+[bt] (26) python(Py_Main+0xb5e) [0x44f904]
+[bt] (27) /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf5) [0x7f2daf744f45]
+[bt] (28) python() [0x578c4e]
+
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'angle_loss_reshape_output': (1L, 128L, 16L),
+ 'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'blockgrad2_output': (128L, 1L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+=============================================================================================================================
+------> Let's begin the train,  du du du! :) 
+=============================================================================================================================
+[08:58:17] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+/home/hustxly/Car/pre3D/rcnn/symbol/symbol_vgg.py:36: RuntimeWarning: invalid value encountered in divide
+  y *= cover_bins/cover_bins.sum(axis=1)[:, np.newaxis]
+INFO:root:Epoch[3] Batch [20]	Speed: 0.98 samples/sec	Train-RPNAcc=0.812314,	RPNLogLoss=0.693276,	RPNL1Loss=0.125456,	RCNNAcc=0.819196,	RCNNLogLoss=3.066943,	RCNNL1Loss=0.250362,	RCNNDimLoss=0.014134,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [40]	Speed: 1.36 samples/sec	Train-RPNAcc=0.850800,	RPNLogLoss=0.693171,	RPNL1Loss=0.122430,	RCNNAcc=0.865854,	RCNNLogLoss=3.055165,	RCNNL1Loss=0.209993,	RCNNDimLoss=0.039633,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [60]	Speed: 0.77 samples/sec	Train-RPNAcc=0.832544,	RPNLogLoss=0.693123,	RPNL1Loss=0.145813,	RCNNAcc=0.866931,	RCNNLogLoss=3.050657,	RCNNL1Loss=0.243711,	RCNNDimLoss=0.068537,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [80]	Speed: 1.22 samples/sec	Train-RPNAcc=0.838831,	RPNLogLoss=0.693077,	RPNL1Loss=0.144307,	RCNNAcc=0.872878,	RCNNLogLoss=3.047991,	RCNNL1Loss=0.238511,	RCNNDimLoss=0.097690,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [100]	Speed: 1.22 samples/sec	Train-RPNAcc=0.835628,	RPNLogLoss=0.693040,	RPNL1Loss=0.152765,	RCNNAcc=0.873221,	RCNNLogLoss=3.046101,	RCNNL1Loss=0.247488,	RCNNDimLoss=0.125941,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [120]	Speed: 1.17 samples/sec	Train-RPNAcc=0.833807,	RPNLogLoss=0.693005,	RPNL1Loss=0.148417,	RCNNAcc=0.872998,	RCNNLogLoss=3.044599,	RCNNL1Loss=0.255032,	RCNNDimLoss=0.152862,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [140]	Speed: 1.23 samples/sec	Train-RPNAcc=0.837406,	RPNLogLoss=0.692966,	RPNL1Loss=0.145074,	RCNNAcc=0.876995,	RCNNLogLoss=3.043273,	RCNNL1Loss=0.245680,	RCNNDimLoss=0.179773,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [160]	Speed: 1.25 samples/sec	Train-RPNAcc=0.840305,	RPNLogLoss=0.692928,	RPNL1Loss=0.141398,	RCNNAcc=0.882570,	RCNNLogLoss=3.042058,	RCNNL1Loss=0.234549,	RCNNDimLoss=0.203884,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [180]	Speed: 1.24 samples/sec	Train-RPNAcc=0.842887,	RPNLogLoss=0.692891,	RPNL1Loss=0.136121,	RCNNAcc=0.883676,	RCNNLogLoss=3.040976,	RCNNL1Loss=0.227701,	RCNNDimLoss=0.224796,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [200]	Speed: 1.10 samples/sec	Train-RPNAcc=0.837065,	RPNLogLoss=0.692865,	RPNL1Loss=0.139491,	RCNNAcc=0.880131,	RCNNLogLoss=3.040021,	RCNNL1Loss=0.237714,	RCNNDimLoss=0.245026,	RCNNAngleLoss=nan,	
+INFO:root:Epoch[3] Batch [220]	Speed: 1.15 samples/sec	Train-RPNAcc=0.836998,	RPNLogLoss=0.692832,	RPNL1Loss=0.137228,	RCNNAcc=0.877651,	RCNNLogLoss=3.039106,	RCNNL1Loss=0.243157,	RCNNDimLoss=0.266317,	RCNNAngleLoss=nan,	
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+Traceback (most recent call last):
+  File "example/env/train_end2end.py", line 225, in <module>
+    lr=args.lr, lr_step=args.lr_step)
+  File "example/env/train_end2end.py", line 95, in train_net
+    arg_params['fc6_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_angle_weight'])
+KeyError: 'fc6_angle_weight'
+enter main
+{'ANCHOR_RATIOS': [0.5, 1, 2],
+ 'ANCHOR_SCALES': [8, 16, 32, 48],
+ 'EPS': 1e-14,
+ 'FIXED_PARAMS': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'FIXED_PARAMS_FINETUNE': ['conv1', 'conv2', 'gamma', 'beta'],
+ 'IMAGE_STRIDE': 0,
+ 'INVALID_ORI': -10000,
+ 'NUM_ANCHORS': 12,
+ 'NUM_BIN': 8,
+ 'NUM_CLASSES': 4,
+ 'PI': 3.141592653,
+ 'PIXEL_MEANS': array([[[ 123.68 ,  116.779,  103.939]]]),
+ 'RCNN_FEAT_SRTIDE': 16,
+ 'RPN_FEAT_STRIDE': 16,
+ 'RY_CLASSES': 72,
+ 'SCALES': [(752, 2500)],
+ 'TEST': {'BATCH_IMAGES': 1,
+          'CXX_PROPOSAL': False,
+          'HAS_RPN': False,
+          'NMS': 0.3,
+          'RPN_MIN_SIZE': 16,
+          'RPN_NMS_THRESH': 0.7,
+          'RPN_POST_NMS_TOP_N': 300,
+          'RPN_PRE_NMS_TOP_N': 6000},
+ 'TRAIN': {'BATCH_IMAGES': 1,
+           'BATCH_ROIS': 128,
+           'BATCH_SIZE': 1,
+           'BBOX_3D': True,
+           'BBOX_INSIDE_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BBOX_MEANS': [0.0, 0.0, 0.0, 0.0],
+           'BBOX_NORMALIZATION_PRECOMPUTED': True,
+           'BBOX_REGRESSION_THRESH': 0.5,
+           'BBOX_STDS': [0.1, 0.1, 0.2, 0.2],
+           'BBOX_WEIGHTS': array([ 1.,  1.,  1.,  1.]),
+           'BG_THRESH_HI': 0.5,
+           'BG_THRESH_LO': 0.0,
+           'CXX_PROPOSAL': False,
+           'END2END': True,
+           'FG_FRACTION': 0.25,
+           'FG_THRESH': 0.5,
+           'HAS_RPN': False,
+           'ORIENTATION': False,
+           'ORIENTATION_INSIDE_WEIGHTS': 4,
+           'ORIENTATION_WEIGHTS': 4,
+           'RPN_BATCH_SIZE': 256,
+           'RPN_BBOX_INSIDE_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_BBOX_WEIGHTS': [1.0, 1.0, 1.0, 1.0],
+           'RPN_CLOBBER_POSITIVES': False,
+           'RPN_FG_FRACTION': 0.5,
+           'RPN_MIN_SIZE': 16,
+           'RPN_NEGATIVE_OVERLAP': 0.3,
+           'RPN_NMS_THRESH': 0.7,
+           'RPN_POSITIVE_OVERLAP': 0.7,
+           'RPN_POSITIVE_WEIGHT': -1.0,
+           'RPN_POST_NMS_TOP_N': 2000,
+           'RPN_PRE_NMS_TOP_N': 12000}}
+num_images 6684
+kitti_val gt roidb loaded from data/cache/kitti_val_gt_roidb.pkl
+providing maximum shape [('data', (1, 3, 800, 2500)), ('gt_boxes', (1, 100, 5)), ('gt_dims', (1, 100, 3)), ('gt_angles', (1, 100, 1))] [('label', (1, 70200)), ('bbox_target', (1, 36, 50, 156)), ('bbox_weight', (1, 36, 50, 156))]
+output shape
+{'bbox_loss_reshape_output': (1L, 128L, 84L),
+ 'blockgrad0_output': (1L, 128L),
+ 'blockgrad1_output': (128L, 3L),
+ 'cls_prob_reshape_output': (1L, 128L, 21L),
+ 'dim_loss_reshape_output': (1L, 128L, 3L),
+ 'rpn_bbox_loss_output': (1L, 36L, 47L, 155L),
+ 'rpn_cls_prob_output': (1L, 2L, 423L, 155L)}
+=============================================================================================================================
+------> Let's begin the train,  du du du! :) 
+=============================================================================================================================
+[09:05:40] src/operator/./cudnn_convolution-inl.h:55: Running performance tests to find the best convolution algorithm, this can take a while...
+INFO:root:Epoch[3] Batch [20]	Speed: 0.59 samples/sec	Train-RPNAcc=0.516183,	RPNLogLoss=0.694605,	RPNL1Loss=0.155060,	RCNNAcc=0.219122,	RCNNLogLoss=2.860561,	RCNNL1Loss=0.369022,	RCNNDimLoss=0.198324,	
+INFO:root:Epoch[3] Batch [40]	Speed: 0.88 samples/sec	Train-RPNAcc=0.516197,	RPNLogLoss=0.696123,	RPNL1Loss=0.190959,	RCNNAcc=0.495617,	RCNNLogLoss=2.217160,	RCNNL1Loss=0.359020,	RCNNDimLoss=0.700412,	
+INFO:root:Epoch[3] Batch [60]	Speed: 1.01 samples/sec	Train-RPNAcc=0.529393,	RPNLogLoss=0.695563,	RPNL1Loss=0.167574,	RCNNAcc=0.623463,	RCNNLogLoss=1.862259,	RCNNL1Loss=0.310422,	RCNNDimLoss=0.820242,	
+INFO:root:Epoch[3] Batch [80]	Speed: 0.87 samples/sec	Train-RPNAcc=0.541522,	RPNLogLoss=0.694069,	RPNL1Loss=0.165152,	RCNNAcc=0.671875,	RCNNLogLoss=1.640505,	RCNNL1Loss=0.317094,	RCNNDimLoss=0.941450,	
+INFO:root:Epoch[3] Batch [100]	Speed: 0.87 samples/sec	Train-RPNAcc=0.552290,	RPNLogLoss=0.692880,	RPNL1Loss=0.160987,	RCNNAcc=0.702738,	RCNNLogLoss=1.485250,	RCNNL1Loss=0.325199,	RCNNDimLoss=1.049458,	
+INFO:root:Epoch[3] Batch [120]	Speed: 0.93 samples/sec	Train-RPNAcc=0.561176,	RPNLogLoss=0.692354,	RPNL1Loss=0.156141,	RCNNAcc=0.733213,	RCNNLogLoss=1.356408,	RCNNL1Loss=0.317860,	RCNNDimLoss=1.058319,	
+INFO:root:Epoch[3] Batch [140]	Speed: 0.78 samples/sec	Train-RPNAcc=0.571338,	RPNLogLoss=0.690991,	RPNL1Loss=0.165638,	RCNNAcc=0.747119,	RCNNLogLoss=1.253512,	RCNNL1Loss=0.339902,	RCNNDimLoss=1.156182,	
+INFO:root:Epoch[3] Batch [160]	Speed: 0.94 samples/sec	Train-RPNAcc=0.581085,	RPNLogLoss=0.690189,	RPNL1Loss=0.156184,	RCNNAcc=0.765091,	RCNNLogLoss=1.149506,	RCNNL1Loss=0.336922,	RCNNDimLoss=1.157536,	
+INFO:root:Epoch[3] Batch [180]	Speed: 1.02 samples/sec	Train-RPNAcc=0.590513,	RPNLogLoss=0.689189,	RPNL1Loss=0.155560,	RCNNAcc=0.782372,	RCNNLogLoss=1.056848,	RCNNL1Loss=0.325219,	RCNNDimLoss=1.128108,	
+INFO:root:Epoch[3] Batch [200]	Speed: 0.93 samples/sec	Train-RPNAcc=0.599483,	RPNLogLoss=0.687879,	RPNL1Loss=0.152710,	RCNNAcc=0.791356,	RCNNLogLoss=0.993846,	RCNNL1Loss=0.333099,	RCNNDimLoss=1.153844,	
+INFO:root:Epoch[3] Batch [220]	Speed: 0.94 samples/sec	Train-RPNAcc=0.607890,	RPNLogLoss=0.686640,	RPNL1Loss=0.152794,	RCNNAcc=0.800375,	RCNNLogLoss=0.937296,	RCNNL1Loss=0.332333,	RCNNDimLoss=1.147086,	
+INFO:root:Epoch[3] Batch [240]	Speed: 0.88 samples/sec	Train-RPNAcc=0.614302,	RPNLogLoss=0.685566,	RPNL1Loss=0.153293,	RCNNAcc=0.806406,	RCNNLogLoss=0.893679,	RCNNL1Loss=0.337712,	RCNNDimLoss=1.162662,	
+INFO:root:Epoch[3] Batch [260]	Speed: 0.97 samples/sec	Train-RPNAcc=0.620315,	RPNLogLoss=0.684333,	RPNL1Loss=0.149558,	RCNNAcc=0.812171,	RCNNLogLoss=0.852581,	RCNNL1Loss=0.342088,	RCNNDimLoss=1.183634,	
+INFO:root:Epoch[3] Batch [280]	Speed: 0.90 samples/sec	Train-RPNAcc=0.623888,	RPNLogLoss=0.683163,	RPNL1Loss=0.151942,	RCNNAcc=0.817782,	RCNNLogLoss=0.814501,	RCNNL1Loss=0.343413,	RCNNDimLoss=1.193786,	
+INFO:root:Epoch[3] Batch [300]	Speed: 0.94 samples/sec	Train-RPNAcc=0.627427,	RPNLogLoss=0.682299,	RPNL1Loss=0.152487,	RCNNAcc=0.824076,	RCNNLogLoss=0.781128,	RCNNL1Loss=0.338958,	RCNNDimLoss=1.177464,	
+INFO:root:Epoch[3] Batch [320]	Speed: 1.01 samples/sec	Train-RPNAcc=0.631815,	RPNLogLoss=0.680888,	RPNL1Loss=0.153589,	RCNNAcc=0.830607,	RCNNLogLoss=0.748621,	RCNNL1Loss=0.332330,	RCNNDimLoss=1.156430,	
+INFO:root:Epoch[3] Batch [340]	Speed: 0.98 samples/sec	Train-RPNAcc=0.636994,	RPNLogLoss=0.679925,	RPNL1Loss=0.151662,	RCNNAcc=0.834792,	RCNNLogLoss=0.723750,	RCNNL1Loss=0.332145,	RCNNDimLoss=1.157390,	
+INFO:root:Epoch[3] Batch [360]	Speed: 1.01 samples/sec	Train-RPNAcc=0.642291,	RPNLogLoss=0.678879,	RPNL1Loss=0.152320,	RCNNAcc=0.838773,	RCNNLogLoss=0.699329,	RCNNL1Loss=0.330727,	RCNNDimLoss=1.159014,	
+INFO:root:Epoch[3] Batch [380]	Speed: 1.02 samples/sec	Train-RPNAcc=0.648745,	RPNLogLoss=0.677286,	RPNL1Loss=0.150559,	RCNNAcc=0.842274,	RCNNLogLoss=0.676629,	RCNNL1Loss=0.330706,	RCNNDimLoss=1.161042,	
+INFO:root:Epoch[3] Batch [400]	Speed: 1.03 samples/sec	Train-RPNAcc=0.654876,	RPNLogLoss=0.675603,	RPNL1Loss=0.149518,	RCNNAcc=0.845913,	RCNNLogLoss=0.655097,	RCNNL1Loss=0.329894,	RCNNDimLoss=1.159155,	
+INFO:root:Epoch[3] Batch [420]	Speed: 1.03 samples/sec	Train-RPNAcc=0.661966,	RPNLogLoss=0.673845,	RPNL1Loss=0.147264,	RCNNAcc=0.849595,	RCNNLogLoss=0.634801,	RCNNL1Loss=0.327012,	RCNNDimLoss=1.150219,	
+INFO:root:Epoch[3] Batch [440]	Speed: 1.05 samples/sec	Train-RPNAcc=0.669165,	RPNLogLoss=0.671700,	RPNL1Loss=0.145288,	RCNNAcc=0.852679,	RCNNLogLoss=0.617341,	RCNNL1Loss=0.323490,	RCNNDimLoss=1.140918,	
+INFO:root:Epoch[3] Batch [460]	Speed: 1.07 samples/sec	Train-RPNAcc=0.675603,	RPNLogLoss=0.669910,	RPNL1Loss=0.144528,	RCNNAcc=0.856477,	RCNNLogLoss=0.600067,	RCNNL1Loss=0.319953,	RCNNDimLoss=1.135751,	
+INFO:root:Epoch[3] Batch [480]	Speed: 1.10 samples/sec	Train-RPNAcc=0.682034,	RPNLogLoss=0.668398,	RPNL1Loss=0.142036,	RCNNAcc=0.859066,	RCNNLogLoss=0.586176,	RCNNL1Loss=0.318727,	RCNNDimLoss=1.129182,	
+INFO:root:Epoch[3] Batch [500]	Speed: 1.04 samples/sec	Train-RPNAcc=0.687438,	RPNLogLoss=0.666825,	RPNL1Loss=0.140275,	RCNNAcc=0.861153,	RCNNLogLoss=0.573892,	RCNNL1Loss=0.316956,	RCNNDimLoss=1.125012,	
+INFO:root:Epoch[3] Batch [520]	Speed: 1.04 samples/sec	Train-RPNAcc=0.693431,	RPNLogLoss=0.665240,	RPNL1Loss=0.139166,	RCNNAcc=0.862854,	RCNNLogLoss=0.562909,	RCNNL1Loss=0.319208,	RCNNDimLoss=1.132073,	
+INFO:root:Epoch[3] Batch [540]	Speed: 1.08 samples/sec	Train-RPNAcc=0.699464,	RPNLogLoss=0.664000,	RPNL1Loss=0.136382,	RCNNAcc=0.864487,	RCNNLogLoss=0.553693,	RCNNL1Loss=0.321608,	RCNNDimLoss=1.136853,	
+INFO:root:Epoch[3] Batch [560]	Speed: 1.00 samples/sec	Train-RPNAcc=0.702937,	RPNLogLoss=0.663360,	RPNL1Loss=0.138186,	RCNNAcc=0.866575,	RCNNLogLoss=0.543655,	RCNNL1Loss=0.321058,	RCNNDimLoss=1.136472,	
+INFO:root:Epoch[3] Batch [580]	Speed: 1.09 samples/sec	Train-RPNAcc=0.707999,	RPNLogLoss=0.661650,	RPNL1Loss=0.137585,	RCNNAcc=0.868909,	RCNNLogLoss=0.532733,	RCNNL1Loss=0.317475,	RCNNDimLoss=1.126903,	
+INFO:root:Epoch[3] Batch [600]	Speed: 1.13 samples/sec	Train-RPNAcc=0.713095,	RPNLogLoss=0.660122,	RPNL1Loss=0.136077,	RCNNAcc=0.870723,	RCNNLogLoss=0.523544,	RCNNL1Loss=0.315597,	RCNNDimLoss=1.117703,	
+INFO:root:Epoch[3] Batch [620]	Speed: 1.08 samples/sec	Train-RPNAcc=0.717297,	RPNLogLoss=0.658450,	RPNL1Loss=0.135738,	RCNNAcc=0.872723,	RCNNLogLoss=0.514491,	RCNNL1Loss=0.314106,	RCNNDimLoss=1.110013,	
+INFO:root:Epoch[3] Batch [640]	Speed: 1.07 samples/sec	Train-RPNAcc=0.721632,	RPNLogLoss=0.657293,	RPNL1Loss=0.134320,	RCNNAcc=0.874354,	RCNNLogLoss=0.507655,	RCNNL1Loss=0.314231,	RCNNDimLoss=1.116362,	
+INFO:root:Epoch[3] Batch [660]	Speed: 1.00 samples/sec	Train-RPNAcc=0.724707,	RPNLogLoss=0.656251,	RPNL1Loss=0.134029,	RCNNAcc=0.875118,	RCNNLogLoss=0.501984,	RCNNL1Loss=0.316847,	RCNNDimLoss=1.124275,	
+INFO:root:Epoch[3] Batch [680]	Speed: 0.96 samples/sec	Train-RPNAcc=0.728192,	RPNLogLoss=0.654968,	RPNL1Loss=0.133049,	RCNNAcc=0.875860,	RCNNLogLoss=0.496602,	RCNNL1Loss=0.317784,	RCNNDimLoss=1.127337,	
+INFO:root:Epoch[3] Batch [700]	Speed: 1.07 samples/sec	Train-RPNAcc=0.732402,	RPNLogLoss=0.652963,	RPNL1Loss=0.131541,	RCNNAcc=0.877084,	RCNNLogLoss=0.490202,	RCNNL1Loss=0.317296,	RCNNDimLoss=1.122929,	
+INFO:root:Epoch[3] Batch [720]	Speed: 1.02 samples/sec	Train-RPNAcc=0.735453,	RPNLogLoss=0.651957,	RPNL1Loss=0.131198,	RCNNAcc=0.877590,	RCNNLogLoss=0.486535,	RCNNL1Loss=0.318068,	RCNNDimLoss=1.123579,	
+INFO:root:Epoch[3] Batch [740]	Speed: 1.07 samples/sec	Train-RPNAcc=0.739314,	RPNLogLoss=0.650301,	RPNL1Loss=0.129644,	RCNNAcc=0.878722,	RCNNLogLoss=0.480613,	RCNNL1Loss=0.318225,	RCNNDimLoss=1.128733,	
+INFO:root:Epoch[3] Batch [760]	Speed: 1.06 samples/sec	Train-RPNAcc=0.742480,	RPNLogLoss=0.648697,	RPNL1Loss=0.128391,	RCNNAcc=0.879301,	RCNNLogLoss=0.476216,	RCNNL1Loss=0.318787,	RCNNDimLoss=1.133875,	
+INFO:root:Epoch[3] Batch [780]	Speed: 1.09 samples/sec	Train-RPNAcc=0.746009,	RPNLogLoss=0.646687,	RPNL1Loss=0.127099,	RCNNAcc=0.880722,	RCNNLogLoss=0.469775,	RCNNL1Loss=0.317879,	RCNNDimLoss=1.132776,	
+INFO:root:Epoch[3] Batch [800]	Speed: 1.13 samples/sec	Train-RPNAcc=0.749746,	RPNLogLoss=0.644294,	RPNL1Loss=0.125349,	RCNNAcc=0.881710,	RCNNLogLoss=0.464049,	RCNNL1Loss=0.317972,	RCNNDimLoss=1.133694,	
+INFO:root:Epoch[3] Batch [820]	Speed: 1.06 samples/sec	Train-RPNAcc=0.752636,	RPNLogLoss=0.641924,	RPNL1Loss=0.124450,	RCNNAcc=0.882470,	RCNNLogLoss=0.459412,	RCNNL1Loss=0.318085,	RCNNDimLoss=1.135431,	
+INFO:root:Epoch[3] Batch [840]	Speed: 1.07 samples/sec	Train-RPNAcc=0.755165,	RPNLogLoss=0.639388,	RPNL1Loss=0.123860,	RCNNAcc=0.882878,	RCNNLogLoss=0.455401,	RCNNL1Loss=0.317778,	RCNNDimLoss=1.140290,	
+INFO:root:Epoch[3] Batch [860]	Speed: 1.04 samples/sec	Train-RPNAcc=0.757595,	RPNLogLoss=0.637999,	RPNL1Loss=0.123206,	RCNNAcc=0.883538,	RCNNLogLoss=0.451255,	RCNNL1Loss=0.318115,	RCNNDimLoss=1.140812,	
+INFO:root:Epoch[3] Batch [880]	Speed: 1.06 samples/sec	Train-RPNAcc=0.760198,	RPNLogLoss=0.635903,	RPNL1Loss=0.122232,	RCNNAcc=0.884178,	RCNNLogLoss=0.447051,	RCNNL1Loss=0.318685,	RCNNDimLoss=1.144306,	
+INFO:root:Epoch[3] Batch [900]	Speed: 1.03 samples/sec	Train-RPNAcc=0.762725,	RPNLogLoss=0.634023,	RPNL1Loss=0.121652,	RCNNAcc=0.884755,	RCNNLogLoss=0.442888,	RCNNL1Loss=0.318844,	RCNNDimLoss=1.146507,	
+INFO:root:Epoch[3] Batch [920]	Speed: 1.10 samples/sec	Train-RPNAcc=0.765366,	RPNLogLoss=0.632064,	RPNL1Loss=0.120704,	RCNNAcc=0.885510,	RCNNLogLoss=0.438646,	RCNNL1Loss=0.319263,	RCNNDimLoss=1.146328,	
+INFO:root:Epoch[3] Batch [940]	Speed: 1.13 samples/sec	Train-RPNAcc=0.768149,	RPNLogLoss=0.629230,	RPNL1Loss=0.119541,	RCNNAcc=0.886490,	RCNNLogLoss=0.434379,	RCNNL1Loss=0.320183,	RCNNDimLoss=1.149196,	
+INFO:root:Epoch[3] Batch [960]	Speed: 1.06 samples/sec	Train-RPNAcc=0.770612,	RPNLogLoss=0.626926,	RPNL1Loss=0.118878,	RCNNAcc=0.887178,	RCNNLogLoss=0.430917,	RCNNL1Loss=0.320467,	RCNNDimLoss=1.150806,	
+INFO:root:Epoch[3] Batch [980]	Speed: 1.09 samples/sec	Train-RPNAcc=0.773039,	RPNLogLoss=0.624315,	RPNL1Loss=0.117956,	RCNNAcc=0.887870,	RCNNLogLoss=0.427089,	RCNNL1Loss=0.320756,	RCNNDimLoss=1.154585,	
+INFO:root:Epoch[3] Batch [1000]	Speed: 1.08 samples/sec	Train-RPNAcc=0.775330,	RPNLogLoss=0.622055,	RPNL1Loss=0.117473,	RCNNAcc=0.888330,	RCNNLogLoss=0.423876,	RCNNL1Loss=0.320890,	RCNNDimLoss=1.154794,	
+INFO:root:Epoch[3] Batch [1020]	Speed: 1.12 samples/sec	Train-RPNAcc=0.777833,	RPNLogLoss=0.619733,	RPNL1Loss=0.116590,	RCNNAcc=0.888957,	RCNNLogLoss=0.420220,	RCNNL1Loss=0.320768,	RCNNDimLoss=1.155790,	
+INFO:root:Epoch[3] Batch [1040]	Speed: 1.11 samples/sec	Train-RPNAcc=0.779802,	RPNLogLoss=0.617635,	RPNL1Loss=0.116036,	RCNNAcc=0.889950,	RCNNLogLoss=0.416215,	RCNNL1Loss=0.319659,	RCNNDimLoss=1.153725,	
+INFO:root:Epoch[3] Batch [1060]	Speed: 1.07 samples/sec	Train-RPNAcc=0.781386,	RPNLogLoss=0.615562,	RPNL1Loss=0.115642,	RCNNAcc=0.890191,	RCNNLogLoss=0.413810,	RCNNL1Loss=0.320412,	RCNNDimLoss=1.158090,	
+INFO:root:Epoch[3] Batch [1080]	Speed: 1.16 samples/sec	Train-RPNAcc=0.783667,	RPNLogLoss=0.613628,	RPNL1Loss=0.114553,	RCNNAcc=0.890719,	RCNNLogLoss=0.411121,	RCNNL1Loss=0.320934,	RCNNDimLoss=1.161396,	
+INFO:root:Epoch[3] Batch [1100]	Speed: 1.06 samples/sec	Train-RPNAcc=0.785468,	RPNLogLoss=0.611818,	RPNL1Loss=0.113759,	RCNNAcc=0.890987,	RCNNLogLoss=0.408686,	RCNNL1Loss=0.322141,	RCNNDimLoss=1.166309,	
+INFO:root:Epoch[3] Batch [1120]	Speed: 1.05 samples/sec	Train-RPNAcc=0.787153,	RPNLogLoss=0.609577,	RPNL1Loss=0.113344,	RCNNAcc=0.891468,	RCNNLogLoss=0.405571,	RCNNL1Loss=0.323105,	RCNNDimLoss=1.170963,	
+INFO:root:Epoch[3] Batch [1140]	Speed: 1.12 samples/sec	Train-RPNAcc=0.788823,	RPNLogLoss=0.606772,	RPNL1Loss=0.112828,	RCNNAcc=0.892255,	RCNNLogLoss=0.402257,	RCNNL1Loss=0.322521,	RCNNDimLoss=1.170411,	
+INFO:root:Epoch[3] Batch [1160]	Speed: 1.07 samples/sec	Train-RPNAcc=0.790324,	RPNLogLoss=0.604384,	RPNL1Loss=0.112530,	RCNNAcc=0.892792,	RCNNLogLoss=0.399350,	RCNNL1Loss=0.321800,	RCNNDimLoss=1.169955,	
+INFO:root:Epoch[3] Batch [1180]	Speed: 1.13 samples/sec	Train-RPNAcc=0.792086,	RPNLogLoss=0.601675,	RPNL1Loss=0.111466,	RCNNAcc=0.893463,	RCNNLogLoss=0.396198,	RCNNL1Loss=0.321045,	RCNNDimLoss=1.170102,	
+INFO:root:Epoch[3] Batch [1200]	Speed: 1.10 samples/sec	Train-RPNAcc=0.793876,	RPNLogLoss=0.599051,	RPNL1Loss=0.110754,	RCNNAcc=0.894248,	RCNNLogLoss=0.392748,	RCNNL1Loss=0.320797,	RCNNDimLoss=1.170118,	
+INFO:root:Epoch[3] Batch [1220]	Speed: 1.04 samples/sec	Train-RPNAcc=0.795243,	RPNLogLoss=0.596411,	RPNL1Loss=0.110179,	RCNNAcc=0.894925,	RCNNLogLoss=0.389244,	RCNNL1Loss=0.320650,	RCNNDimLoss=1.173476,	
+INFO:root:Epoch[3] Batch [1240]	Speed: 1.07 samples/sec	Train-RPNAcc=0.796862,	RPNLogLoss=0.593484,	RPNL1Loss=0.109601,	RCNNAcc=0.895353,	RCNNLogLoss=0.386643,	RCNNL1Loss=0.320444,	RCNNDimLoss=1.174874,	
+INFO:root:Epoch[3] Batch [1260]	Speed: 1.09 samples/sec	Train-RPNAcc=0.798569,	RPNLogLoss=0.590535,	RPNL1Loss=0.108839,	RCNNAcc=0.895829,	RCNNLogLoss=0.384140,	RCNNL1Loss=0.320338,	RCNNDimLoss=1.176698,	
+INFO:root:Epoch[3] Batch [1280]	Speed: 0.98 samples/sec	Train-RPNAcc=0.799616,	RPNLogLoss=0.587969,	RPNL1Loss=0.108425,	RCNNAcc=0.896236,	RCNNLogLoss=0.381860,	RCNNL1Loss=0.321159,	RCNNDimLoss=1.181280,	
+INFO:root:Epoch[3] Batch [1300]	Speed: 1.08 samples/sec	Train-RPNAcc=0.801103,	RPNLogLoss=0.584760,	RPNL1Loss=0.107660,	RCNNAcc=0.896780,	RCNNLogLoss=0.379176,	RCNNL1Loss=0.321301,	RCNNDimLoss=1.184197,	
+INFO:root:Epoch[3] Batch [1320]	Speed: 1.07 samples/sec	Train-RPNAcc=0.802461,	RPNLogLoss=0.581945,	RPNL1Loss=0.107070,	RCNNAcc=0.897172,	RCNNLogLoss=0.376987,	RCNNL1Loss=0.322711,	RCNNDimLoss=1.189751,	
+INFO:root:Epoch[3] Batch [1340]	Speed: 1.04 samples/sec	Train-RPNAcc=0.803281,	RPNLogLoss=0.579501,	RPNL1Loss=0.106884,	RCNNAcc=0.897476,	RCNNLogLoss=0.375229,	RCNNL1Loss=0.323299,	RCNNDimLoss=1.193118,	
+INFO:root:Epoch[3] Batch [1360]	Speed: 1.07 samples/sec	Train-RPNAcc=0.804369,	RPNLogLoss=0.576811,	RPNL1Loss=0.106423,	RCNNAcc=0.898219,	RCNNLogLoss=0.372088,	RCNNL1Loss=0.323210,	RCNNDimLoss=1.196517,	
+INFO:root:Epoch[3] Batch [1380]	Speed: 1.11 samples/sec	Train-RPNAcc=0.805776,	RPNLogLoss=0.574159,	RPNL1Loss=0.105980,	RCNNAcc=0.898822,	RCNNLogLoss=0.369293,	RCNNL1Loss=0.322243,	RCNNDimLoss=1.195475,	
+INFO:root:Epoch[3] Batch [1400]	Speed: 1.06 samples/sec	Train-RPNAcc=0.806862,	RPNLogLoss=0.571658,	RPNL1Loss=0.105752,	RCNNAcc=0.899179,	RCNNLogLoss=0.367303,	RCNNL1Loss=0.322024,	RCNNDimLoss=1.197070,	
+INFO:root:Epoch[3] Batch [1420]	Speed: 1.06 samples/sec	Train-RPNAcc=0.808030,	RPNLogLoss=0.569127,	RPNL1Loss=0.105222,	RCNNAcc=0.899697,	RCNNLogLoss=0.365028,	RCNNL1Loss=0.321361,	RCNNDimLoss=1.195353,	
+INFO:root:Epoch[3] Batch [1440]	Speed: 1.08 samples/sec	Train-RPNAcc=0.809144,	RPNLogLoss=0.566320,	RPNL1Loss=0.104734,	RCNNAcc=0.900086,	RCNNLogLoss=0.362884,	RCNNL1Loss=0.320952,	RCNNDimLoss=1.194671,	
+INFO:root:Epoch[3] Batch [1460]	Speed: 1.04 samples/sec	Train-RPNAcc=0.810334,	RPNLogLoss=0.563213,	RPNL1Loss=0.104298,	RCNNAcc=0.900699,	RCNNLogLoss=0.360338,	RCNNL1Loss=0.320246,	RCNNDimLoss=1.194031,	
+INFO:root:Epoch[3] Batch [1480]	Speed: 0.89 samples/sec	Train-RPNAcc=0.810635,	RPNLogLoss=0.561155,	RPNL1Loss=0.104347,	RCNNAcc=0.900917,	RCNNLogLoss=0.358737,	RCNNL1Loss=0.320736,	RCNNDimLoss=1.196554,	
+INFO:root:Epoch[3] Batch [1500]	Speed: 0.97 samples/sec	Train-RPNAcc=0.811584,	RPNLogLoss=0.558827,	RPNL1Loss=0.103954,	RCNNAcc=0.901264,	RCNNLogLoss=0.356902,	RCNNL1Loss=0.320566,	RCNNDimLoss=1.198479,	
+INFO:root:Epoch[3] Batch [1520]	Speed: 0.99 samples/sec	Train-RPNAcc=0.812687,	RPNLogLoss=0.556203,	RPNL1Loss=0.103472,	RCNNAcc=0.901576,	RCNNLogLoss=0.355092,	RCNNL1Loss=0.321136,	RCNNDimLoss=1.200958,	
+INFO:root:Epoch[3] Batch [1540]	Speed: 0.95 samples/sec	Train-RPNAcc=0.813197,	RPNLogLoss=0.553974,	RPNL1Loss=0.103325,	RCNNAcc=0.901560,	RCNNLogLoss=0.354085,	RCNNL1Loss=0.322271,	RCNNDimLoss=1.205998,	
+INFO:root:Epoch[3] Batch [1560]	Speed: 1.08 samples/sec	Train-RPNAcc=0.814249,	RPNLogLoss=0.551826,	RPNL1Loss=0.102704,	RCNNAcc=0.901961,	RCNNLogLoss=0.352285,	RCNNL1Loss=0.322789,	RCNNDimLoss=1.209513,	
+INFO:root:Epoch[3] Batch [1580]	Speed: 1.10 samples/sec	Train-RPNAcc=0.815544,	RPNLogLoss=0.549354,	RPNL1Loss=0.102046,	RCNNAcc=0.902490,	RCNNLogLoss=0.350062,	RCNNL1Loss=0.321758,	RCNNDimLoss=1.208068,	
+INFO:root:Epoch[3] Batch [1600]	Speed: 1.09 samples/sec	Train-RPNAcc=0.817063,	RPNLogLoss=0.546663,	RPNL1Loss=0.101234,	RCNNAcc=0.903020,	RCNNLogLoss=0.347648,	RCNNL1Loss=0.321355,	RCNNDimLoss=1.208777,	
+INFO:root:Epoch[3] Batch [1620]	Speed: 1.01 samples/sec	Train-RPNAcc=0.818023,	RPNLogLoss=0.544161,	RPNL1Loss=0.100743,	RCNNAcc=0.903344,	RCNNLogLoss=0.346017,	RCNNL1Loss=0.321247,	RCNNDimLoss=1.209892,	
+INFO:root:Epoch[3] Batch [1640]	Speed: 1.07 samples/sec	Train-RPNAcc=0.819289,	RPNLogLoss=0.541983,	RPNL1Loss=0.100079,	RCNNAcc=0.903803,	RCNNLogLoss=0.344093,	RCNNL1Loss=0.321063,	RCNNDimLoss=1.210879,	
+INFO:root:Epoch[3] Batch [1660]	Speed: 1.08 samples/sec	Train-RPNAcc=0.820430,	RPNLogLoss=0.539434,	RPNL1Loss=0.099397,	RCNNAcc=0.904105,	RCNNLogLoss=0.342706,	RCNNL1Loss=0.320653,	RCNNDimLoss=1.210708,	
+INFO:root:Epoch[3] Batch [1680]	Speed: 1.11 samples/sec	Train-RPNAcc=0.821433,	RPNLogLoss=0.537231,	RPNL1Loss=0.099018,	RCNNAcc=0.904726,	RCNNLogLoss=0.340420,	RCNNL1Loss=0.320495,	RCNNDimLoss=1.212237,	
+INFO:root:Epoch[3] Batch [1700]	Speed: 0.98 samples/sec	Train-RPNAcc=0.821771,	RPNLogLoss=0.535283,	RPNL1Loss=0.098784,	RCNNAcc=0.904854,	RCNNLogLoss=0.339194,	RCNNL1Loss=0.320352,	RCNNDimLoss=1.213858,	
+INFO:root:Epoch[3] Batch [1720]	Speed: 1.09 samples/sec	Train-RPNAcc=0.822548,	RPNLogLoss=0.532692,	RPNL1Loss=0.098366,	RCNNAcc=0.905174,	RCNNLogLoss=0.337623,	RCNNL1Loss=0.320675,	RCNNDimLoss=1.215463,	
+INFO:root:Epoch[3] Batch [1740]	Speed: 1.00 samples/sec	Train-RPNAcc=0.823270,	RPNLogLoss=0.530867,	RPNL1Loss=0.098004,	RCNNAcc=0.905474,	RCNNLogLoss=0.336353,	RCNNL1Loss=0.320852,	RCNNDimLoss=1.218586,	
+INFO:root:Epoch[3] Batch [1760]	Speed: 1.06 samples/sec	Train-RPNAcc=0.824203,	RPNLogLoss=0.528355,	RPNL1Loss=0.097569,	RCNNAcc=0.905873,	RCNNLogLoss=0.334462,	RCNNL1Loss=0.319941,	RCNNDimLoss=1.216790,	
+INFO:root:Epoch[3] Batch [1780]	Speed: 0.99 samples/sec	Train-RPNAcc=0.824918,	RPNLogLoss=0.526252,	RPNL1Loss=0.097211,	RCNNAcc=0.906180,	RCNNLogLoss=0.333003,	RCNNL1Loss=0.320140,	RCNNDimLoss=1.220346,	
+INFO:root:Epoch[3] Batch [1800]	Speed: 1.01 samples/sec	Train-RPNAcc=0.825737,	RPNLogLoss=0.523873,	RPNL1Loss=0.096760,	RCNNAcc=0.906666,	RCNNLogLoss=0.330949,	RCNNL1Loss=0.319921,	RCNNDimLoss=1.221124,	
+INFO:root:Epoch[3] Batch [1820]	Speed: 1.04 samples/sec	Train-RPNAcc=0.826574,	RPNLogLoss=0.521534,	RPNL1Loss=0.096479,	RCNNAcc=0.907039,	RCNNLogLoss=0.329524,	RCNNL1Loss=0.319616,	RCNNDimLoss=1.221209,	
+INFO:root:Epoch[3] Batch [1840]	Speed: 1.07 samples/sec	Train-RPNAcc=0.827295,	RPNLogLoss=0.519507,	RPNL1Loss=0.096190,	RCNNAcc=0.907362,	RCNNLogLoss=0.328027,	RCNNL1Loss=0.318913,	RCNNDimLoss=1.220620,	
+INFO:root:Epoch[3] Batch [1860]	Speed: 0.97 samples/sec	Train-RPNAcc=0.827802,	RPNLogLoss=0.517663,	RPNL1Loss=0.095983,	RCNNAcc=0.907719,	RCNNLogLoss=0.326558,	RCNNL1Loss=0.318878,	RCNNDimLoss=1.221636,	
+INFO:root:Epoch[3] Batch [1880]	Speed: 0.97 samples/sec	Train-RPNAcc=0.828380,	RPNLogLoss=0.515630,	RPNL1Loss=0.095743,	RCNNAcc=0.908019,	RCNNLogLoss=0.325008,	RCNNL1Loss=0.318883,	RCNNDimLoss=1.222739,	
+INFO:root:Epoch[3] Batch [1900]	Speed: 1.04 samples/sec	Train-RPNAcc=0.829337,	RPNLogLoss=0.513091,	RPNL1Loss=0.095272,	RCNNAcc=0.908403,	RCNNLogLoss=0.323225,	RCNNL1Loss=0.318600,	RCNNDimLoss=1.223227,	
+INFO:root:Epoch[3] Batch [1920]	Speed: 0.93 samples/sec	Train-RPNAcc=0.829992,	RPNLogLoss=0.510901,	RPNL1Loss=0.094948,	RCNNAcc=0.908588,	RCNNLogLoss=0.322044,	RCNNL1Loss=0.318863,	RCNNDimLoss=1.225049,	
+INFO:root:Epoch[3] Batch [1940]	Speed: 0.97 samples/sec	Train-RPNAcc=0.830614,	RPNLogLoss=0.508835,	RPNL1Loss=0.094832,	RCNNAcc=0.908927,	RCNNLogLoss=0.320538,	RCNNL1Loss=0.318748,	RCNNDimLoss=1.226693,	
+INFO:root:Epoch[3] Batch [1960]	Speed: 0.95 samples/sec	Train-RPNAcc=0.831503,	RPNLogLoss=0.506384,	RPNL1Loss=0.094482,	RCNNAcc=0.909118,	RCNNLogLoss=0.319415,	RCNNL1Loss=0.318575,	RCNNDimLoss=1.227326,	
+INFO:root:Epoch[3] Batch [1980]	Speed: 0.99 samples/sec	Train-RPNAcc=0.832092,	RPNLogLoss=0.504192,	RPNL1Loss=0.094270,	RCNNAcc=0.909511,	RCNNLogLoss=0.317834,	RCNNL1Loss=0.318301,	RCNNDimLoss=1.227647,	
+INFO:root:Epoch[3] Batch [2000]	Speed: 1.00 samples/sec	Train-RPNAcc=0.832867,	RPNLogLoss=0.502196,	RPNL1Loss=0.093919,	RCNNAcc=0.909940,	RCNNLogLoss=0.316152,	RCNNL1Loss=0.318042,	RCNNDimLoss=1.228175,	
+INFO:root:Epoch[3] Batch [2020]	Speed: 0.94 samples/sec	Train-RPNAcc=0.833498,	RPNLogLoss=0.500334,	RPNL1Loss=0.093704,	RCNNAcc=0.910224,	RCNNLogLoss=0.314849,	RCNNL1Loss=0.317731,	RCNNDimLoss=1.229788,	
+INFO:root:Epoch[3] Batch [2040]	Speed: 0.91 samples/sec	Train-RPNAcc=0.833905,	RPNLogLoss=0.498564,	RPNL1Loss=0.093681,	RCNNAcc=0.910323,	RCNNLogLoss=0.314001,	RCNNL1Loss=0.318005,	RCNNDimLoss=1.230344,	
+INFO:root:Epoch[3] Batch [2060]	Speed: 0.93 samples/sec	Train-RPNAcc=0.834618,	RPNLogLoss=0.496488,	RPNL1Loss=0.093286,	RCNNAcc=0.910651,	RCNNLogLoss=0.312514,	RCNNL1Loss=0.317476,	RCNNDimLoss=1.230578,	
+INFO:root:Epoch[3] Batch [2080]	Speed: 1.00 samples/sec	Train-RPNAcc=0.835354,	RPNLogLoss=0.494308,	RPNL1Loss=0.092869,	RCNNAcc=0.910901,	RCNNLogLoss=0.311262,	RCNNL1Loss=0.317030,	RCNNDimLoss=1.231078,	
+INFO:root:Epoch[3] Batch [2100]	Speed: 1.03 samples/sec	Train-RPNAcc=0.836311,	RPNLogLoss=0.492116,	RPNL1Loss=0.092515,	RCNNAcc=0.911322,	RCNNLogLoss=0.309647,	RCNNL1Loss=0.316486,	RCNNDimLoss=1.229903,	
+INFO:root:Epoch[3] Batch [2120]	Speed: 0.95 samples/sec	Train-RPNAcc=0.837074,	RPNLogLoss=0.489835,	RPNL1Loss=0.092177,	RCNNAcc=0.911624,	RCNNLogLoss=0.308290,	RCNNL1Loss=0.316332,	RCNNDimLoss=1.230837,	
+INFO:root:Epoch[3] Batch [2140]	Speed: 1.00 samples/sec	Train-RPNAcc=0.837994,	RPNLogLoss=0.487225,	RPNL1Loss=0.091740,	RCNNAcc=0.912081,	RCNNLogLoss=0.306562,	RCNNL1Loss=0.315823,	RCNNDimLoss=1.230501,	
+INFO:root:Epoch[3] Batch [2160]	Speed: 0.94 samples/sec	Train-RPNAcc=0.838553,	RPNLogLoss=0.485101,	RPNL1Loss=0.091502,	RCNNAcc=0.912273,	RCNNLogLoss=0.305459,	RCNNL1Loss=0.315713,	RCNNDimLoss=1.230614,	

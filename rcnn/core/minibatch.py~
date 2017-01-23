@@ -313,7 +313,7 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
             angle_label[index, ] = src_angle
 
     if config.TRAIN.BBOX_3D:
-        return rois, labels, bbox_targets, bbox_weights, dim_label, angle_label
+        return rois, labels, bbox_targets, bbox_weights, dim_label, angle_label, conf_label
     else:
         return rois, labels, bbox_targets, bbox_weights
 

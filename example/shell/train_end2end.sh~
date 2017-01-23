@@ -1,5 +1,5 @@
 python example/env/train_end2end.py \
---network vgg_3dbox \
+--network vgg \
 --pretrained model/final --epoch 1 \
 --prefix model/3dbox/3dbox \
 --begin_epoch 3 --end_epoch 20 \
