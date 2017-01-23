@@ -42,3 +42,7 @@ Value | Name      | Description
 * Train Model:        ***sh train.sh***
 * Test Result:        ***sh test.sh***
 
+## Training step
+* Firstly, train the **Faster RCNN** networks, by set config.TRAIN.BBOX_3D = False
+* Secondly, fix the **conv1 **
+

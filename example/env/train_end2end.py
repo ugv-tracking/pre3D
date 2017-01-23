@@ -28,10 +28,16 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     config.TRAIN.BBOX_NORMALIZATION_PRECOMPUTED = True
 
     config.TRAIN.BG_THRESH_LO = 0.0
-    config.TRAIN.BBOX_3D = True
+    if args.bbox:
+        config.TRAIN.BBOX_3D = True
+    else:
+        config.TRAIN.BBOX_3D = False
 
     # load symbol
-    sym = eval('get_' + args.network + '_train')()
+    if args.bbox:
+        sym = eval('get_vgg_3dbox_train')()
+    else:
+        sym = eval('get_vgg_train')()
     feat_sym = sym.get_internals()['rpn_cls_score_output']
 
     # setup multi-gpu
@@ -69,33 +75,20 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     aux_shape_dict = dict(zip(sym.list_auxiliary_states(), aux_shape))
     print 'output shape'
     pprint.pprint(out_shape_dict)
+    print 'arg_shape'
+    pprint.pprint(arg_shape_dict)
 
 
     # initialize params
     if not args.resume:
-        arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
-        arg_params['fc6_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_bias'])
-        arg_params['fc7_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_weight'])
-        arg_params['fc7_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_bias'])
-        arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
-        arg_params['rpn_conv_3x3_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_conv_3x3_bias'])
-        arg_params['rpn_cls_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_cls_score_weight'])
-        arg_params['rpn_cls_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_cls_score_bias'])
-        arg_params['rpn_bbox_pred_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_bbox_pred_weight'])
-        arg_params['rpn_bbox_pred_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_bbox_pred_bias'])
-        arg_params['cls_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['cls_score_weight'])
-        arg_params['cls_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['cls_score_bias'])
-        arg_params['bbox_pred_weight'] = mx.random.normal(0, 0.001, shape=arg_shape_dict['bbox_pred_weight'])
-        arg_params['bbox_pred_bias'] = mx.nd.zeros(shape=arg_shape_dict['bbox_pred_bias'])
-
         # initial 3D BBOX estimation
         if config.TRAIN.BBOX_3D: 
-            arg_params['fc6_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_dim_weight'])
-            arg_params['fc6_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_dim_bias'])
-            arg_params['fc7_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_dim_weight'])
-            arg_params['fc7_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_dim_bias'])
             arg_params['fc8_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_dim_weight'])
             arg_params['fc8_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_dim_bias'])
+            arg_params['fc9_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc9_dim_weight'])
+            arg_params['fc9_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc9_dim_bias'])
+            arg_params['fc10_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc10_dim_weight'])
+            arg_params['fc10_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc10_dim_bias'])
 
             '''
             arg_params['fc6_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_angle_weight'])
@@ -105,6 +98,21 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
             arg_params['fc8_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_angle_weight'])
             arg_params['fc8_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_angle_bias'])
             '''
+        else:
+            arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
+            arg_params['fc6_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_bias'])
+            arg_params['fc7_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_weight'])
+            arg_params['fc7_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_bias'])
+            arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
+            arg_params['rpn_conv_3x3_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_conv_3x3_bias'])
+            arg_params['rpn_cls_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_cls_score_weight'])
+            arg_params['rpn_cls_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_cls_score_bias'])
+            arg_params['rpn_bbox_pred_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_bbox_pred_weight'])
+            arg_params['rpn_bbox_pred_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_bbox_pred_bias'])
+            arg_params['cls_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['cls_score_weight'])
+            arg_params['cls_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['cls_score_bias'])
+            arg_params['bbox_pred_weight'] = mx.random.normal(0, 0.001, shape=arg_shape_dict['bbox_pred_weight'])
+            arg_params['bbox_pred_bias'] = mx.nd.zeros(shape=arg_shape_dict['bbox_pred_bias'])
 
     # check parameter shapes
     for k in sym.list_arguments():
@@ -119,7 +127,13 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
             'shape inconsistent for ' + k + ' inferred ' + str(aux_shape_dict[k]) + ' provided ' + str(aux_params[k].shape)
 
     # create solver
-    fixed_param_prefix = ['conv1', 'conv2']
+    if config.TRAIN.BBOX_3D:
+        fixed_param_prefix = ['conv1', 'conv2', 'conv3', 'conv4', 'conv5', 'rpn_conv_3x3', 'rpn_cls_score', 'rpn_bbox_pred', 'cls_score', 'bbox_pred', 'fc6', 'fc7']
+    else:
+        fixed_param_prefix = ['conv1', 'conv2']
+    print 'fixed_param'
+    pprint.pprint(fixed_param_prefix)
+
     data_names = [k[0] for k in train_data.provide_data]
     label_names = [k[0] for k in train_data.provide_label]
     mod = MutableModule(sym, data_names=data_names, label_names=label_names,
@@ -167,7 +181,18 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
 
     # train
     print "============================================================================================================================="
-    print "------> Let's begin the train,  du du du! :) "
+
+    if not args.resume:
+        if config.TRAIN.BBOX_3D: 
+            print "------> Initial from Vgg module. Let's begin the train,  du du du! :) "
+        else:
+            print "------> Initial the Vgg module, and train with 3dparty pre-module."
+    else:
+        if config.TRAIN.BBOX_3D: 
+            print "------> Train from prefix module. Let's begin the train,  du du du! :) "
+        else:
+            print "------> Without initial the Vgg module, and train with our pre-module."
+
     print "============================================================================================================================="
     mod.fit(train_data, eval_metric=eval_metrics, epoch_end_callback=epoch_end_callback, batch_end_callback=batch_end_callback, kvstore=args.kvstore,
             optimizer='sgd', optimizer_params=optimizer_params,
@@ -189,6 +214,7 @@ def parse_args():
                         default=os.path.join('data', 'VOCdevkit'), type=str)
 
     # training
+    parser.add_argument('--bbox', help='continue training', action='store_true', default=False)
     parser.add_argument('--frequent', help='frequency of logging',
                         default=20, type=int)
     parser.add_argument('--kvstore', help='the kv-store type',
@@ -197,7 +223,6 @@ def parse_args():
                         default=None, type=list)
     parser.add_argument('--flip', help='flip images', action='store_true', default=True)
     parser.add_argument('--resume', help='continue training', action='store_true', default=False)
-    parser.add_argument('--3dbox',  help='triggle for 3dbox detection', action='store_true', default=False)
 
     # e2e
     parser.add_argument('--gpus', help='GPU device to train with',

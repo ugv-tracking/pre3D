@@ -370,36 +370,36 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     bbox_loss = mx.sym.MakeLoss(name='bbox_loss', data=bbox_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
 
     #dim branch
-    fc6_dim = mx.symbol.FullyConnected(data=drop7, num_hidden=512, name="fc6_dim")
-    relu6_dim = mx.symbol.Activation(data=fc6_dim, act_type="relu", name="relu6_dim")
-    drop6_dim = mx.symbol.Dropout(data=relu6_dim, p=0.5, name="drop6_dim")
+    fc8_dim = mx.symbol.FullyConnected(data=drop7, num_hidden=512, name="fc8_dim")
+    relu8_dim = mx.symbol.Activation(data=fc8_dim, act_type="relu", name="relu8_dim")
+    drop8_dim = mx.symbol.Dropout(data=relu8_dim, p=0.5, name="drop8_dim")
     
-    fc7_dim = mx.symbol.FullyConnected(data=drop6_dim, num_hidden=512, name="fc7_dim")
-    relu7_dim = mx.symbol.Activation(data=fc7_dim, act_type="relu", name="relu7_dim")
-    drop7_dim = mx.symbol.Dropout(data=relu7_dim, p=0.5, name="drop7_dim")
+    fc9_dim = mx.symbol.FullyConnected(data=drop8_dim, num_hidden=512, name="fc9_dim")
+    relu9_dim = mx.symbol.Activation(data=fc7_dim, act_type="relu", name="relu9_dim")
+    drop9_dim = mx.symbol.Dropout(data=relu7_dim, p=0.5, name="drop9_dim")
     
-    fc8_dim = mx.symbol.FullyConnected(data=drop7_dim, num_hidden=3, name="fc8_dim")
-    dim_loss = mx.symbol.LinearRegressionOutput(data = fc8_dim, label = dim_label, name='dim_loss')
+    fc10_dim = mx.symbol.FullyConnected(data=drop9_dim, num_hidden=3, name="fc10_dim")
+    dim_loss = mx.symbol.LinearRegressionOutput(data = fc10_dim, label = dim_label, name='dim_loss')
 
     #angle branch
     num_bin = config.NUM_BIN
-    fc6_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc6_angle")
-    relu6_angle = mx.symbol.Activation(data=fc6_angle, act_type="relu", name="relu6_angle")
-    drop6_angle = mx.symbol.Dropout(data=relu6_angle, p=0.5, name="drop6_angle")
+    fc8_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_angle")
+    relu8_angle = mx.symbol.Activation(data=fc8_angle, act_type="relu", name="relu8_angle")
+    drop8_angle = mx.symbol.Dropout(data=relu8_angle, p=0.5, name="drop8_angle")
 
-    fc7_angle = mx.symbol.FullyConnected(data=drop6_angle, num_hidden=256, name="fc7_angle")
-    relu7_angle = mx.symbol.Activation(data=fc7_angle, act_type="relu", name="relu7_angle")
-    drop7_angle = mx.symbol.Dropout(data=relu7_angle, p=0.5, name="drop7_angle")
+    fc9_angle = mx.symbol.FullyConnected(data=drop8_angle, num_hidden=256, name="fc9_angle")
+    relu9_angle = mx.symbol.Activation(data=fc9_angle, act_type="relu", name="relu9_angle")
+    drop9_angle = mx.symbol.Dropout(data=relu9_angle, p=0.5, name="drop9_angle")
 
-    fc8_angle = mx.symbol.FullyConnected(data=drop7_angle, num_hidden=num_bin*2, name="fc8_angle")
+    fc10_angle = mx.symbol.FullyConnected(data=drop9_angle, num_hidden=num_bin*2, name="fc10_angle")
     
-    fc8_angle_reshape = mx.symbol.Reshape(data=fc8_angle, shape=(-1, num_bin, 2), name='fc8_angle_reshape')
-    L2_norm = mx.symbol.L2Normalization(data=fc8_angle_reshape, mode='spatial', name='L2_norm')
+    fc10_angle_reshape = mx.symbol.Reshape(data=fc10_angle, shape=(-1, num_bin, 2), name='fc10_angle_reshape')
+    L2_norm = mx.symbol.L2Normalization(data=fc10_angle_reshape, mode='spatial', name='L2_norm')
     angle_flatten = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_bin*2), name='angle_flatten')
 
-    #angle_loss_ = mx.symbol.smooth_l1(name='angle_loss_', scalar=1.0, data=(angle_flatten - angle_label))
-    #angle_loss = mx.sym.MakeLoss(name='angle_loss', data=angle_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
-    #angle_loss = mx.symbol.Custom(data=angle_flatten, label=angle_label, name='angle_loss', op_type='angle')
+    angle_loss_ = mx.symbol.smooth_l1(name='angle_loss_', scalar=1.0, data=(angle_flatten - angle_label))
+    angle_loss = mx.sym.MakeLoss(name='angle_loss', data=angle_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
+    angle_loss = mx.symbol.Custom(data=angle_flatten, label=angle_label, name='angle_loss', op_type='angle')
 
 
     # reshape output
@@ -407,7 +407,7 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     cls_prob    = mx.symbol.Reshape	(data=cls_prob,   shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes),     name='cls_prob_reshape'  )
     bbox_loss   = mx.symbol.Reshape	(data=bbox_loss,  shape=(config.TRAIN.BATCH_IMAGES, -1, 4 * num_classes), name='bbox_loss_reshape' )
     dim_loss    = mx.symbol.Reshape	(data=dim_loss,   shape=(config.TRAIN.BATCH_IMAGES, -1, 3),               name='dim_loss_reshape'  )
-    #angle_loss  = mx.symbol.Reshape	(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2),       name='angle_loss_reshape')
+    angle_loss  = mx.symbol.Reshape	(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2),       name='angle_loss_reshape')
 
 
     group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, mx.symbol.BlockGrad(dim_label)])
@@ -471,32 +471,37 @@ def get_vgg_3dbox_test(num_classes=21, num_anchors=9):
     ###########################################################################################
     # prediction for dims, angle and confidence
     #dim branch
-    fc6_dim = mx.symbol.FullyConnected(data=drop7, num_hidden=512, name="fc6_dim")
-    relu6_dim = mx.symbol.Activation(data=fc6_dim, act_type="relu", name="relu6_dim")
-    drop6_dim = mx.symbol.Dropout(data=relu6_dim, p=0.5, name="drop6_dim")
+    fc8_dim = mx.symbol.FullyConnected(data=drop7, num_hidden=512, name="fc8_dim")
+    relu8_dim = mx.symbol.Activation(data=fc8_dim, act_type="relu", name="relu8_dim")
+    drop8_dim = mx.symbol.Dropout(data=relu8_dim, p=0.5, name="drop8_dim")
     
-    fc7_dim = mx.symbol.FullyConnected(data=drop6_dim, num_hidden=512, name="fc7_dim")
-    relu7_dim = mx.symbol.Activation(data=fc7_dim, act_type="relu", name="relu7_dim")
-    drop7_dim = mx.symbol.Dropout(data=relu7_dim, p=0.5, name="drop7_dim")
+    fc9_dim = mx.symbol.FullyConnected(data=drop8_dim, num_hidden=512, name="fc9_dim")
+    relu9_dim = mx.symbol.Activation(data=fc7_dim, act_type="relu", name="relu9_dim")
+    drop9_dim = mx.symbol.Dropout(data=relu7_dim, p=0.5, name="drop9_dim")
     
-    fc8_dim = mx.symbol.FullyConnected(data=drop7_dim, num_hidden=3, name="fc8_dim")
-    dim_pred = mx.symbol.LinearRegressionOutput(data = fc8_dim, name='dim_pred')
+    fc10_dim = mx.symbol.FullyConnected(data=drop9_dim, num_hidden=3, name="fc10_dim")
+    dim_loss = mx.symbol.LinearRegressionOutput(data = fc10_dim, label = dim_label, name='dim_loss')
 
     #angle branch
     num_bin = config.NUM_BIN
-    fc6_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc6_angle")
-    relu6_angle = mx.symbol.Activation(data=fc6_angle, act_type="relu", name="relu6_angle")
-    drop6_angle = mx.symbol.Dropout(data=relu6_angle, p=0.5, name="drop6_angle")
+    fc8_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_angle")
+    relu8_angle = mx.symbol.Activation(data=fc8_angle, act_type="relu", name="relu8_angle")
+    drop8_angle = mx.symbol.Dropout(data=relu8_angle, p=0.5, name="drop8_angle")
 
-    fc7_angle = mx.symbol.FullyConnected(data=drop6_angle, num_hidden=256, name="fc7_angle")
-    relu7_angle = mx.symbol.Activation(data=fc7_angle, act_type="relu", name="relu7_angle")
-    drop7_angle = mx.symbol.Dropout(data=relu7_angle, p=0.5, name="drop7_angle")
+    fc9_angle = mx.symbol.FullyConnected(data=drop8_angle, num_hidden=256, name="fc9_angle")
+    relu9_angle = mx.symbol.Activation(data=fc9_angle, act_type="relu", name="relu9_angle")
+    drop9_angle = mx.symbol.Dropout(data=relu9_angle, p=0.5, name="drop9_angle")
 
-    fc8_angle = mx.symbol.FullyConnected(data=drop7_angle, num_hidden=num_bin*2, name="fc8_angle")
+    fc10_angle = mx.symbol.FullyConnected(data=drop9_angle, num_hidden=num_bin*2, name="fc10_angle")
     
-    fc8_angle_reshape = mx.symbol.Reshape(data=fc8_angle, shape=(-1, num_bin, 2), name='fc8_angle_reshape')
-    L2_norm = mx.symbol.L2Normalization(data=fc8_angle_reshape, mode='spatial', name='L2_norm')
-    angle_pred = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_bin*2), name='angle_pred')
+    fc10_angle_reshape = mx.symbol.Reshape(data=fc10_angle, shape=(-1, num_bin, 2), name='fc10_angle_reshape')
+    L2_norm = mx.symbol.L2Normalization(data=fc10_angle_reshape, mode='spatial', name='L2_norm')
+    angle_flatten = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_bin*2), name='angle_flatten')
+
+    angle_loss_ = mx.symbol.smooth_l1(name='angle_loss_', scalar=1.0, data=(angle_flatten - angle_label))
+    angle_loss = mx.sym.MakeLoss(name='angle_loss', data=angle_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
+    angle_loss = mx.symbol.Custom(data=angle_flatten, label=angle_label, name='angle_loss', op_type='angle')
+
 
     # reshape output
     cls_prob    = mx.symbol.Reshape	(data=cls_prob,   shape=(config.TEST.BATCH_IMAGES, -1, num_classes),     name='cls_prob_reshape'  )
@@ -504,5 +509,6 @@ def get_vgg_3dbox_test(num_classes=21, num_anchors=9):
     dim_pred    = mx.symbol.Reshape	(data=dim_pred,   shape=(config.TEST.BATCH_IMAGES, -1, 3),               name='dim_pred_reshape'  )
     angle_pred  = mx.symbol.Reshape	(data=angle_pred, shape=(config.TEST.BATCH_IMAGES, -1, num_bin*2),       name='angle_pred_reshape')
 
-    group = mx.symbol.Group([rois, cls_prob, bbox_pred, dim_pred, angle_pred])
+    group = mx.symbol.Group([rois, cls_prob, bbox_pred, dim_pred])
+    #group = mx.symbol.Group([rois, cls_prob, bbox_pred, dim_pred, angle_pred])
     return group
