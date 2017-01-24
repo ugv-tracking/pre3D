@@ -17,8 +17,9 @@ data =
 label =
     {'label': [num_rois],
     'bbox_target': [num_rois, 4 * num_classes],
-    'bbox_inside_weight': [num_rois, 4 * num_classes],
-    'bbox_outside_weight': [num_rois, 4 * num_classes]}
+    'bbox_weight': [num_rois, 4 * num_classes],
+    'dims': [num_rois, 3 * num_classes],
+    'angle': [num_rois, 1 * num_classes]}
 
 roidb basic format [image_index]
 ['image', 'height', 'width', 'flipped',
@@ -34,7 +35,7 @@ import os
 from ..config import config
 from ..processing import image_processing
 from ..processing.bbox_regression import bbox_overlaps
-from ..processing.bbox_regression import expand_bbox_regression_targets
+from ..processing.bbox_regression import expand_bbox_regression_targets, expand_3dbox_label
 from ..processing.bbox_transform import bbox_transform
 from ..processing.generate_anchor import generate_anchors
 
@@ -243,7 +244,6 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
     :param labels: maybe precomputed
     :param overlaps: maybe precomputed (max_overlaps)
     :param bbox_targets: maybe precomputed
-    :param gt_boxes: optional for e2e [n, 5] (x1, y1, x2, y2, cls)
     :return: (labels, rois, bbox_targets, bbox_weights)
     """
     if labels is None:
@@ -312,8 +312,11 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
             src_angle = gt_angles[gt_assignment_keep_indexes[index]]
             angle_label[index, ] = src_angle
 
+        dims, angles = \
+            expand_3dbox_label(bbox_target_data, num_classes, dim_label, angle_label)
+
     if config.TRAIN.BBOX_3D:
-        return rois, labels, bbox_targets, bbox_weights, dim_label, angle_label
+        return rois, labels, bbox_targets, bbox_weights, dims, angles
     else:
         return rois, labels, bbox_targets, bbox_weights
 

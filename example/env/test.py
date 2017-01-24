@@ -50,9 +50,9 @@ def demo_net(detector, image_name):
     config.TEST.HAS_RPN = True
 
     if args.bbox:
-        config.TRAIN.BBOX_3D = True
+        config.TEST.BBOX_3D = True
     else:
-        config.TRAIN.BBOX_3D = False
+        config.TEST.BBOX_3D = False
 
     assert os.path.exists(image_name), image_name + ' not found'
     im = cv2.imread(image_name)
@@ -61,18 +61,23 @@ def demo_net(detector, image_name):
     im_info = np.array([[im_array.shape[2], im_array.shape[3], im_scale]], dtype=np.float32)
     print im_info
     
-    scores, boxes = detector.im_detect(im_array, im_info)
+    if config.TEST.BBOX_3D:
+        scores, boxes, dims = detector.im_detect(im_array, im_info)
+    else:
+        scores, boxes = detector.im_detect(im_array, im_info)
     
     all_boxes = [[] for _ in CLASSES]
     CONF_THRESH = 0.98
     NMS_THRESH = 0.3
     for cls in CLASSES:
         cls_ind = CLASSES.index(cls)
-        cls_boxes = boxes[:, 4 * cls_ind:4 * (cls_ind + 1)]
+        cls_boxes  = boxes[:, 4 * cls_ind:4 * (cls_ind + 1)]
+        cls_dims   = dims[:, 3 * cls_ind:3*(cls_ind + 1)]
         cls_scores = scores[:, cls_ind]
         keep = np.where(cls_scores >= CONF_THRESH)[0]
-        cls_boxes = cls_boxes[keep, :]
+        cls_boxes  = cls_boxes[keep, :]
         cls_scores = cls_scores[keep]
+        cls_dims   = cls_dims[keep, :]
         dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis])).astype(np.float32)
         keep = nms(dets.astype(np.float32), NMS_THRESH)
         all_boxes[cls_ind] = dets[keep, :]

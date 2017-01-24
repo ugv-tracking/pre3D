@@ -103,8 +103,8 @@ class Proposal3DboxTargetProp(mx.operator.CustomOpProp):
         bbox_target_shape = (self._batch_rois, self._num_classes * 4)
         bbox_weight_shape = (self._batch_rois, self._num_classes * 4)
         if config.TRAIN.BBOX_3D:
-            dim_label_shape   = (self._batch_rois, 3)
-            angle_label_shape = (self._batch_rois, 1)
+            dim_label_shape   = (self._batch_rois, self._num_classes * 3)
+            angle_label_shape = (self._batch_rois, self._num_classes * 1)
 
         if config.TRAIN.BBOX_3D:
             return [rpn_rois_shape, gt_boxes_shape, gt_dims_shape, gt_angles_shape, im_info_shape], \

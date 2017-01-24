@@ -39,10 +39,8 @@ Value | Name      | Description
 ## Usage
 * Clear the Cache:    ***sh clear.sh***
 * Generate data file: ***sh gen_data.sh***
-* Train Model:        ***sh train.sh***
-* Test Result:        ***sh test.sh***
+* Train Model:        ***sh example/shell/train_3dbox.sh***
+* Test Result:        ***sh example/shell/test_3dbox.sh***
 
 ## Training step
-* Firstly, train the **Faster RCNN** networks, by set config.TRAIN.BBOX_3D = False
-* Secondly, fix the **conv1 **
-
+Firstly, train the 3dbox net with the initialization from vgg nets
