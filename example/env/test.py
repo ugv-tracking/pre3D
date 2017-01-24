@@ -8,7 +8,7 @@ from rcnn.core.detector import Detector
 from rcnn.symbol import *
 from rcnn.processing.image_processing import resize, transform
 from rcnn.processing.nms import nms
-from rcnn.core.tester import vis_all_detection
+from rcnn.core.tester import vis_all_detection, vis_3dbox_detection
 from rcnn.utils.load_model import load_param
 
 
@@ -72,18 +72,24 @@ def demo_net(detector, image_name):
     for cls in CLASSES:
         cls_ind = CLASSES.index(cls)
         cls_boxes  = boxes[:, 4 * cls_ind:4 * (cls_ind + 1)]
-        cls_dims   = dims[:, 3 * cls_ind:3*(cls_ind + 1)]
         cls_scores = scores[:, cls_ind]
         keep = np.where(cls_scores >= CONF_THRESH)[0]
         cls_boxes  = cls_boxes[keep, :]
         cls_scores = cls_scores[keep]
-        cls_dims   = cls_dims[keep, :]
-        dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis])).astype(np.float32)
+        if config.TEST.BBOX_3D:
+            cls_dims   = dims[:, 3 * cls_ind:3*(cls_ind + 1)]
+            cls_dims   = cls_dims[keep, :]
+            dets = np.hstack((cls_boxes, cls_dims, cls_scores[:, np.newaxis])).astype(np.float32)
+        else:
+            dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis])).astype(np.float32)
         keep = nms(dets.astype(np.float32), NMS_THRESH)
         all_boxes[cls_ind] = dets[keep, :]
 
     boxes_this_image = [[]] + [all_boxes[j] for j in range(1, len(CLASSES))]
-    vis_all_detection(im_array, boxes_this_image, CLASSES, 0)
+    if config.TEST.BBOX_3D:
+        vis_3dbox_detection(im_array, boxes_this_image, CLASSES, 0)
+    else:
+        vis_all_detection(im_array, boxes_this_image, CLASSES, 0)
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Demonstrate a Faster R-CNN network')
@@ -91,8 +97,7 @@ def parse_args():
     parser.add_argument('--bbox', help='continue training', action='store_true', default=False)
     parser.add_argument('--prefix', dest='prefix', help='saved model prefix', type=str)
     parser.add_argument('--epoch', dest='epoch', help='epoch of pretrained model', type=int)
-    parser.add_argument('--gpu', dest='gpu_id', help='GPU device to test with',
-                        default=0, type=int)
+    parser.add_argument('--gpu', dest='gpu_id', help='GPU device to test with', default=0, type=int)
     args = parser.parse_args()
     return args
 
