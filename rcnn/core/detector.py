@@ -38,8 +38,8 @@ class Detector(object):
         # fill in label
         arg_shapes_dict = {name: shape for name, shape in zip(self.symbol.list_arguments(), arg_shapes)}
         self.arg_params['cls_prob_label']  = mx.nd.zeros(arg_shapes_dict['cls_prob_label'],  self.ctx)
-        self.arg_params['dim_pred_label']  = mx.nd.zeros(arg_shapes_dict['dim_pred_label'],  self.ctx)
-        self.arg_params['conf_pred_label'] = mx.nd.zeros(arg_shapes_dict['conf_pred_label'], self.ctx)
+        if config.TRAIN.BBOX_3D:
+            self.arg_params['dim_pred_label']  = mx.nd.zeros(arg_shapes_dict['dim_pred_label'],  self.ctx)
 
         print 'to executor'
         # execute
@@ -53,8 +53,9 @@ class Detector(object):
         # save output
         scores        = output_dict['cls_prob_reshape_output'    ].asnumpy()[0]
         bbox_deltas   = output_dict['bbox_pred_reshape_output'   ].asnumpy()[0]
-        dims_deltas   = output_dict['dim_pred_reshape_output'    ].asnumpy()[0]
-        angle_deltas  = output_dict['angle_pred_reshape_output'  ].asnumpy()[0]
+        if config.TRAIN.BBOX_3D:
+            dims_deltas   = output_dict['dim_pred_reshape_output'    ].asnumpy()[0]
+            #angle_deltas  = output_dict['angle_pred_reshape_output'  ].asnumpy()[0]
 
         if config.TEST.HAS_RPN:
             rois = output_dict['rois_output'].asnumpy()[:, 1:]

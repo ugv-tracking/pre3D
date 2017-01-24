@@ -5,20 +5,23 @@ import mxnet as mx
 import numpy as np
 from rcnn.config import config
 from rcnn.core.detector import Detector
-from rcnn.symbol import get_vgg_test
+from rcnn.symbol import *
 from rcnn.processing.image_processing import resize, transform
 from rcnn.processing.nms import nms
 from rcnn.core.tester import vis_all_detection
 from rcnn.utils.load_model import load_param
 
 
-def get_net(prefix, epoch, ctx):
-    args, auxs = load_param(prefix, epoch, convert=True, ctx=ctx)
-    #sym = get_vgg_test(num_classes=4, num_anchors=12)
-    sym = get_vgg_test()
+def get_net(arguments, ctx):
+    args, auxs = load_param(arguments.prefix, arguments.epoch, convert=True, ctx=ctx)
 
-    #a = mx.viz.plot_network(sym, shape={"data":(1, 1, 600, 1000),  "im_info":(3)}, node_attrs={"shape":'rect',"fixedsize":'false'})
-    #a.view()
+    if arguments.bbox:
+        sym = eval('get_vgg_3dbox_test')()
+    else:
+        sym = eval('get_vgg_test')()
+
+    a = mx.viz.plot_network(sym, shape={"data":(1,  3, 800, 2500),  "im_info":(3)}, node_attrs={"shape":'rect',"fixedsize":'false'})
+    a.view()
 
     detector = Detector(sym, ctx, args, auxs)
     return detector
@@ -45,11 +48,14 @@ def demo_net(detector, image_name):
     """
 
     config.TEST.HAS_RPN = True
+
+    if args.bbox:
+        config.TRAIN.BBOX_3D = True
+    else:
+        config.TRAIN.BBOX_3D = False
+
     assert os.path.exists(image_name), image_name + ' not found'
     im = cv2.imread(image_name)
-    #cv2.imshow('', im)
-    #cv2.waitKey(0)
-    #im_array, im_scale = resize(im, config.SCALES[0], 1000) #config.MAX_SIZE)
     im_array, im_scale = resize(im, 360, 124200) 
     im_array = transform(im_array, config.PIXEL_MEANS)
     im_info = np.array([[im_array.shape[2], im_array.shape[3], im_scale]], dtype=np.float32)
@@ -58,20 +64,12 @@ def demo_net(detector, image_name):
     scores, boxes = detector.im_detect(im_array, im_info)
     
     all_boxes = [[] for _ in CLASSES]
-    CONF_THRESH = 0.05
+    CONF_THRESH = 0.98
     NMS_THRESH = 0.3
     for cls in CLASSES:
-        if cls != 'car':
-            continue
-
         cls_ind = CLASSES.index(cls)
         cls_boxes = boxes[:, 4 * cls_ind:4 * (cls_ind + 1)]
         cls_scores = scores[:, cls_ind]
-        
-        print cls_scores
-        print "======================================="
-        print cls_boxes
-
         keep = np.where(cls_scores >= CONF_THRESH)[0]
         cls_boxes = cls_boxes[keep, :]
         cls_scores = cls_scores[keep]
@@ -81,11 +79,11 @@ def demo_net(detector, image_name):
 
     boxes_this_image = [[]] + [all_boxes[j] for j in range(1, len(CLASSES))]
     vis_all_detection(im_array, boxes_this_image, CLASSES, 0)
-    
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Demonstrate a Faster R-CNN network')
     parser.add_argument('--image', dest='image', help='custom image', type=str)
+    parser.add_argument('--bbox', help='continue training', action='store_true', default=False)
     parser.add_argument('--prefix', dest='prefix', help='saved model prefix', type=str)
     parser.add_argument('--epoch', dest='epoch', help='epoch of pretrained model', type=int)
     parser.add_argument('--gpu', dest='gpu_id', help='GPU device to test with',
@@ -96,6 +94,6 @@ def parse_args():
 if __name__ == '__main__':
     args = parse_args()
     ctx = mx.gpu(args.gpu_id)
-    detector = get_net(args.prefix, args.epoch, ctx)
+    detector = get_net(args, ctx)
 
     demo_net(detector, args.image)

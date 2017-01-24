@@ -93,6 +93,7 @@ config.TEST = edict()
 config.TEST.HAS_RPN = False
 config.TEST.BATCH_IMAGES = 1
 config.TEST.NMS = 0.3
+config.TEST.BBOX_3D = False
 
 # RPN proposal
 config.TEST.CXX_PROPOSAL = False
