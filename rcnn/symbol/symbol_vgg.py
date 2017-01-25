@@ -379,7 +379,8 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     drop9_dim = mx.symbol.Dropout(data=relu9_dim, p=0.5, name="drop9_dim")
     
     fc10_dim = mx.symbol.FullyConnected(data=drop9_dim, num_hidden=num_classes * 3, name="fc10_dim")
-    dim_loss = mx.symbol.LinearRegressionOutput(data = fc10_dim, label = dim_label, name='dim_loss')
+    dim_loss_ = mx.symbol.smooth_l1(name='dim_loss_', scalar=1.0, data=(fc10_dim - dim_label))
+    dim_loss = mx.sym.MakeLoss(name='dim_loss', data=dim_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
 
     #angle branch
     num_bin = config.NUM_BIN

@@ -139,22 +139,6 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
         self.sum_metric += np.sum(dim_loss)
         self.num_inst += dim_loss.shape[0]
 
-'''
-class RCNNAngleLossMetric(mx.metric.EvalMetric):
-    def __init__(self):
-        super(RCNNAngleLossMetric, self).__init__('RCNNAngleLoss')
-
-    def update(self, labels, preds):
-        pred = preds[5]
-
-        angle_loss = pred.asnumpy()
-        first_dim = angle_loss.shape[0] * angle_loss.shape[1]
-        angle_loss = angle_loss.reshape(first_dim, -1)
-
-        self.sum_metric += np.sum(angle_loss)
-        self.num_inst += angle_loss.shape[0]
-
-'''
 class RCNNAngleLossMetric(mx.metric.EvalMetric):
     def __init__(self):
         super(RCNNAngleLossMetric, self).__init__('RCNNAngleLoss')
