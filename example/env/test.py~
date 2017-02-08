@@ -20,8 +20,8 @@ def get_net(arguments, ctx):
     else:
         sym = eval('get_vgg_test')()
 
-    a = mx.viz.plot_network(sym, shape={"data":(1,  3, 800, 2500),  "im_info":(3)}, node_attrs={"shape":'rect',"fixedsize":'false'})
-    a.view()
+    #a = mx.viz.plot_network(sym, shape={"data":(1,  3, 800, 2500),  "im_info":(3)}, node_attrs={"shape":'rect',"fixedsize":'false'})
+    #a.view()
 
     detector = Detector(sym, ctx, args, auxs)
     return detector

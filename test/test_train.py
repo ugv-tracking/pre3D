@@ -21,13 +21,13 @@ logger.setLevel(logging.INFO)
 config.TRAIN.BATCH_IMAGES = 1
 config.TRAIN.BATCH_ROIS = 128
 config.TRAIN.END2END = True
-config.TRAIN.BBOX_3D = True
+config.TRAIN.BBOX_3D = False
 config.TRAIN.BBOX_NORMALIZATION_PRECOMPUTED = True
 config.TRAIN.BG_THRESH_LO = 0.0
 
 # load symbol
-sym = eval('get_vgg_train')()
-feat_sym = sym.get_internals()['rpn_score_output']
+sym = eval('get_vgg_3dbox_train')()
+feat_sym = sym.get_internals()['rpn_cls_score_output']
 
 ctx=[mx.gpu(4)]
 batch_size = len(ctx)

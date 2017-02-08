@@ -183,7 +183,7 @@ def vis_all_detection(im_array, detections, class_names=None, thresh=0.7):
         color = (random.random(), random.random(), random.random())  # generate a random color
         dets = detections[j]
         for i in range(dets.shape[0]):
-            bbox = dets[i, :4]
+            bbox  = dets[i, :4]
             score = dets[i, -1]
             if score > thresh:
                 rect = plt.Rectangle((bbox[0], bbox[1]),
@@ -193,5 +193,38 @@ def vis_all_detection(im_array, detections, class_names=None, thresh=0.7):
                 plt.gca().add_patch(rect)
                 plt.gca().text(bbox[0], bbox[1] - 2,
                                '{:s} {:.3f}'.format(name, score),
+                               bbox=dict(facecolor=color, alpha=0.5), fontsize=12, color='white')
+    plt.show()
+
+def vis_3dbox_detection(im_array, detections, class_names=None, thresh=0.7):
+    """
+    visualize all detections in one image
+    :param im_array: [b=1 c h w] in rgb
+    :param detections: [ numpy.ndarray([[x1 y1 x2 y2 score]]) for j in classes ]
+    :param class_names: list of names in imdb
+    :param thresh: threshold for valid detections
+    :return:
+    """
+    import matplotlib.pyplot as plt
+    import random
+    im = image_processing.transform_inverse(im_array, config.PIXEL_MEANS)
+    plt.imshow(im)
+    for j, name in enumerate(class_names):
+        if name == '__background__':
+            continue
+        color = (random.random(), random.random(), random.random())  # generate a random color
+        dets = detections[j]
+        for i in range(dets.shape[0]):
+            bbox  = dets[i, :4]
+            dim   = dets[i, 4:7]
+            score = dets[i, -1]
+            if score > thresh:
+                rect = plt.Rectangle((bbox[0], bbox[1]),
+                                     bbox[2] - bbox[0],
+                                     bbox[3] - bbox[1], fill=False,
+                                     edgecolor=color, linewidth=3.5)
+                plt.gca().add_patch(rect)
+                plt.gca().text(bbox[0], bbox[1] - 2,
+                               '{:s} {:.3f} {:.3f} {:.3f} {:.3f}'.format(name, score, dim[0], dim[1], dim[2]),
                                bbox=dict(facecolor=color, alpha=0.5), fontsize=12, color='white')
     plt.show()

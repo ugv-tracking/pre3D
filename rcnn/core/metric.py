@@ -144,7 +144,7 @@ class RCNNAngleLossMetric(mx.metric.EvalMetric):
         super(RCNNAngleLossMetric, self).__init__('RCNNAngleLoss')
 
     def update(self, labels, preds):
-        pred = preds[3]
+        pred = preds[6]
         
         angle_loss = pred.asnumpy()
         first_dim = angle_loss.shape[0] * angle_loss.shape[1]
@@ -152,22 +152,3 @@ class RCNNAngleLossMetric(mx.metric.EvalMetric):
 
         self.sum_metric += np.sum(angle_loss)
         self.num_inst += angle_loss.shape[0]
-
-class RCNNConfLossMetric(mx.metric.EvalMetric):
-    def __init__(self):
-        super(RCNNConfLossMetric, self).__init__('RCNNConfLoss')
-
-    def update(self, labels, preds):
-        pred = preds[5]
-        label = preds[4]
-        
-        last_dim = pred.shape[-1]
-        pred = pred.asnumpy().reshape(-1, last_dim)
-        label = label.asnumpy().reshape(-1,).astype('int32')
-        conf = pred[np.arange(label.shape[0]), label]
-
-        conf += 1e-14
-        conf_loss = -1 * np.log(conf)
-        conf_loss = np.sum(conf_loss)
-        self.sum_metric += conf_loss
-        self.num_inst += label.shape[0]

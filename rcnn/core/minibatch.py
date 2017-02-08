@@ -17,8 +17,9 @@ data =
 label =
     {'label': [num_rois],
     'bbox_target': [num_rois, 4 * num_classes],
-    'bbox_inside_weight': [num_rois, 4 * num_classes],
-    'bbox_outside_weight': [num_rois, 4 * num_classes]}
+    'bbox_weight': [num_rois, 4 * num_classes],
+    'dims': [num_rois, 3 * num_classes],
+    'angle': [num_rois, 1 * num_classes]}
 
 roidb basic format [image_index]
 ['image', 'height', 'width', 'flipped',
@@ -34,7 +35,7 @@ import os
 from ..config import config
 from ..processing import image_processing
 from ..processing.bbox_regression import bbox_overlaps
-from ..processing.bbox_regression import expand_bbox_regression_targets
+from ..processing.bbox_regression import expand_bbox_regression_targets, expand_3dbox_label
 from ..processing.bbox_transform import bbox_transform
 from ..processing.generate_anchor import generate_anchors
 
@@ -71,7 +72,6 @@ def get_image(roidb):
         if config.TRAIN.BBOX_3D:
             new_rec['gt_dims']   = roi_rec['gt_dims']
             new_rec['gt_angles'] = roi_rec['gt_angles']
-            new_rec['gt_confs']  = roi_rec['gt_confs']
 
         processed_roidb.append(new_rec)
     return processed_ims, processed_roidb
@@ -139,16 +139,19 @@ def get_rpn_batch(roidb):
     else:
         gt_boxes = np.empty((0, 5), dtype=np.float32)
 
-    gt_dims = np.array([roidb[0]['gt_dims']], dtype=np.float32)
-    gt_angles = np.array([roidb[0]['gt_angles']], dtype=np.float32)
-    gt_confs = np.array([roidb[0]['gt_confs']], dtype=np.float32)
+    if config.TRAIN.BBOX_3D:
+        gt_dims = np.array([roidb[0]['gt_dims']], dtype=np.float32)
+        gt_angles = np.array([roidb[0]['gt_angles']], dtype=np.float32)
 
     data = {'data': im_array,
-            'im_info': im_info,}
-    label = {'gt_boxes': gt_boxes,
-             'gt_dims': gt_dims,
-             'gt_angles': gt_angles,
-             'gt_confs': gt_confs}
+            'im_info': im_info}
+
+    if config.TRAIN.BBOX_3D:
+        label = {'gt_boxes': gt_boxes,
+                 'gt_dims': gt_dims,
+                 'gt_angles': gt_angles}
+    else:
+        label = {'gt_boxes': gt_boxes}
 
     return data, label
 
@@ -231,7 +234,7 @@ def _compute_targets(ex_rois, gt_rois):
 
 
 def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
-                labels=None, overlaps=None, bbox_targets=None, gt_boxes=None, gt_dims=None, gt_angles=None, gt_confs=None):
+                labels=None, overlaps=None, bbox_targets=None, gt_boxes=None, gt_dims=None, gt_angles=None):
     """
     generate random sample of ROIs comprising foreground and background examples
     :param rois: all_rois [n, 4]; e2e: [n, 5] with batch_index
@@ -241,7 +244,6 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
     :param labels: maybe precomputed
     :param overlaps: maybe precomputed (max_overlaps)
     :param bbox_targets: maybe precomputed
-    :param gt_boxes: optional for e2e [n, 5] (x1, y1, x2, y2, cls)
     :return: (labels, rois, bbox_targets, bbox_weights)
     """
     if labels is None:
@@ -296,10 +298,9 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
         expand_bbox_regression_targets(bbox_target_data, num_classes)
 
     ###############################################################################################
-    # 3d bbox dimension, rotation, confidence
+    # 3d bbox dimension, rotation
     dim_label   = np.zeros((len(rois), 3), dtype=np.float32)
     angle_label = np.zeros((len(rois), 1), dtype=np.float32)
-    conf_label  = np.zeros((len(rois), 1), dtype=np.float32)
     
     if config.TRAIN.BBOX_3D:
         gt_assignment_keep_indexes = gt_assignment[keep_indexes]
@@ -311,11 +312,11 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
             src_angle = gt_angles[gt_assignment_keep_indexes[index]]
             angle_label[index, ] = src_angle
 
-            src_conf = gt_confs[gt_assignment_keep_indexes[index]]
-            conf_label[index, ] = src_conf
+        dims, angles = \
+            expand_3dbox_label(bbox_target_data, num_classes, dim_label, angle_label)
 
     if config.TRAIN.BBOX_3D:
-        return rois, labels, bbox_targets, bbox_weights, dim_label, angle_label, conf_label
+        return rois, labels, bbox_targets, bbox_weights, dims, angles
     else:
         return rois, labels, bbox_targets, bbox_weights
 

@@ -139,3 +139,15 @@ def expand_bbox_regression_targets(bbox_targets_data, num_classes):
         bbox_weights[index, start:end] = config.TRAIN.BBOX_WEIGHTS
     return bbox_targets, bbox_weights
 
+def expand_3dbox_label(bbox_targets_data, num_classes, dim_label, angle_label):
+    classes = bbox_targets_data[:, 0]
+    dims   = np.zeros((classes.size, 3 * num_classes), dtype=np.float32)
+    angles = np.zeros((classes.size, 1 * num_classes), dtype=np.float32)
+    indexes = np.where(classes > 0)[0]
+    for index in indexes:
+        cls = classes[index]
+        start = int(3 * cls)
+        end = start + 3
+        dims[index, start:end]   = dim_label[index, :]
+        angles[index, start:end] = angle_label[index, :]
+    return dims, angles
