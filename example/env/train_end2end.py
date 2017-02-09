@@ -90,14 +90,14 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
             arg_params['fc10_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc10_dim_weight'])
             arg_params['fc10_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc10_dim_bias'])
             
-            '''
+            
             arg_params['fc8_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_angle_weight'])
             arg_params['fc8_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_angle_bias'])
             arg_params['fc9_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc9_angle_weight'])
             arg_params['fc9_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc9_angle_bias'])
             arg_params['fc10_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc10_angle_weight'])
             arg_params['fc10_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc10_angle_bias'])
-            '''
+
             arg_params['fc8_conf_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_conf_weight'])
             arg_params['fc8_conf_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_conf_bias'])
             arg_params['fc9_conf_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc9_conf_weight'])
@@ -162,8 +162,8 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     if config.TRAIN.BBOX_3D: 
         dim_metric   = metric.RCNNDimLossMetric()
         conf_metric  = metric.RCNNConfLossMetric()
-        #angle_metric = metric.RCNNAngleLossMetric()
-        for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric, dim_metric, conf_metric]:
+        angle_metric = metric.RCNNAngleLossMetric()
+        for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric, dim_metric, conf_metric, angle_metric]:
             eval_metrics.add(child_metric)
     else:
         for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric]:

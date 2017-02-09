@@ -13,29 +13,34 @@ class AngleOutput(mx.operator.CustomOp):
         self.assign(out_data[0], req[0], in_data[0])
         
     def backward(self, req, out_grad, in_data, out_data, in_grad, aux):
+        
         num_bin = config.NUM_BIN
         overlap = 2*math.pi/num_bin
         
-        lbl = in_data[1].asnumpy()
-        y = np.zeros_like(in_data[0].asnumpy())
+        # The out is with the same shape as data (128, 21, 8*2)
+        # The label has shape (128, 21, 8*2) too
+        out     = np.zeros_like(in_data[0].asnumpy())
+        label   = in_data[1].asnumpy()
 
         bins_angle = np.linspace(0, 2*math.pi, num = num_bin, endpoint = False)
         bins_angle = np.vstack((bins_angle,bins_angle)).reshape(-1, order='F')
 
-        dist = np.abs(lbl - bins_angle)
+        print 'angle is ', label
+
+        dist = np.abs(label - bins_angle)
 
         cover_bins = np.zeros_like(dist)
         cover_bins[dist < overlap] = 1
         
         for i in xrange(2*num_bin):
             if i%2 == 0:
-                y[:,i] = -np.cos(lbl[:,0] - bins_angle[i])
+                out[:,:,i] = -np.cos(label[:,:,i] - bins_angle[i])
             else:
-                y[:,i] = -np.sin(lbl[:,0] - bins_angle[i])
+                out[:,:,i] = -np.sin(label[:,:,i] - bins_angle[i])
 
-        y *= cover_bins/cover_bins.sum(axis=1)[:, np.newaxis]
-        
-        self.assign(in_grad[0], req[0], mx.nd.array(y))
+        #print out[:, 10:100, :]
+        out *= cover_bins/cover_bins.sum(axis=2)[:, :, np.newaxis]
+        self.assign(in_grad[0], req[0], mx.nd.array(out))
 
         
 @mx.operator.register("angle")
@@ -51,7 +56,8 @@ class AngleProp(mx.operator.CustomOpProp):
 
     def infer_shape(self, in_shape):
         data_shape = in_shape[0]
-        label_shape = (in_shape[0][0], congif.NUM_CLASSES, config.NUM_BIN * 2)
+        label_shape = in_shape[1]
+        #label_shape = (in_shape[0][0], congif.NUM_CLASSES, config.NUM_BIN * 2)
         output_shape = in_shape[0]
         return [data_shape, label_shape], [output_shape], []
 
@@ -424,7 +430,7 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     #group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label)])
     #group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, conf_prob, mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label)])
     group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, conf_prob, 
-                             mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label), mx.symbol.BlockGrad(angle_label)])
+                             mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label), angle_loss, mx.symbol.BlockGrad(angle_label)])
     return group
 
 def get_vgg_3dbox_test(num_classes=21, num_anchors=9):
