@@ -300,7 +300,8 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
     ###############################################################################################
     # 3d bbox dimension, rotation
     dim_label   = np.zeros((len(rois), 3), dtype=np.float32)
-    angle_label = np.zeros((len(rois), 1), dtype=np.float32)
+    angle_label = np.zeros((len(rois), 2), dtype=np.float32)
+    conf_label  = np.zeros((len(rois), 1), dtype=np.float32)
     
     if config.TRAIN.BBOX_3D:
         gt_assignment_keep_indexes = gt_assignment[keep_indexes]
@@ -310,13 +311,15 @@ def sample_rois(rois, fg_rois_per_image, rois_per_image, num_classes,
             dim_label[index, ] = src_dim
 
             src_angle = gt_angles[gt_assignment_keep_indexes[index]]
-            angle_label[index, ] = src_angle
+            angle_label[index, 0] = src_angle
+            angle_label[index, 1] = src_angle
+            conf_label[index, ]  = src_angle
 
-        dims, angles = \
-            expand_3dbox_label(bbox_target_data, num_classes, dim_label, angle_label)
+        dims, angles, confs = \
+            expand_3dbox_label(bbox_target_data, num_classes, dim_label, angle_label, conf_label)
 
     if config.TRAIN.BBOX_3D:
-        return rois, labels, bbox_targets, bbox_weights, dims, angles
+        return rois, labels, bbox_targets, bbox_weights, dims, angles, confs
     else:
         return rois, labels, bbox_targets, bbox_weights
 

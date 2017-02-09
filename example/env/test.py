@@ -76,6 +76,7 @@ def demo_net(detector, image_name):
         keep = np.where(cls_scores >= CONF_THRESH)[0]
         cls_boxes  = cls_boxes[keep, :]
         cls_scores = cls_scores[keep]
+        print cls, keep, cls_scores
         if config.TEST.BBOX_3D:
             cls_dims   = dims[:, 3 * cls_ind:3*(cls_ind + 1)]
             cls_dims   = cls_dims[keep, :]

@@ -3,6 +3,12 @@ import numpy as np
 
 from rcnn.config import config
 
+CLASSES = ('__background__',
+           'aeroplane', 'bicycle', 'bird', 'boat',
+           'bottle', 'bus', 'car', 'cat', 'chair',
+           'cow', 'diningtable', 'dog', 'horse',
+           'motorbike', 'person', 'pottedplant',
+           'sheep', 'sofa', 'train', 'tvmonitor')
 
 class RPNAccMetric(mx.metric.EvalMetric):
     def __init__(self):
@@ -130,14 +136,44 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
         super(RCNNDimLossMetric, self).__init__('RCNNDimLoss')
 
     def update(self, labels, preds):
-        pred = preds[5]
+        cls_prob   = preds[2][0]       
+        dim        = preds[5][0]
+        conf       = preds[6][0]
 
-        dim_loss = pred.asnumpy()
-        first_dim = dim_loss.shape[0] * dim_loss.shape[1]
-        dim_loss = dim_loss.reshape(first_dim, -1)
+        NUM_CLASSES = 21
+        CONF_THRESH = 0.99
 
-        self.sum_metric += np.sum(dim_loss)
-        self.num_inst += dim_loss.shape[0]
+        scores      = cls_prob.asnumpy()
+        dim         = dim.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN, 3)
+        conf        = conf.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN * 1)
+
+        final_dims  = np.array([[0,0,0]])
+        for cls in CLASSES:        
+
+            cls_ind = CLASSES.index(cls)
+            if cls != 'car':
+                continue
+            score_cls  = scores[:, cls_ind]
+            keep = np.where(score_cls >= CONF_THRESH)[0]
+            if keep.shape[0] == 0:
+                continue 
+            dim_loss   = dim[keep, cls_ind].reshape(-1, config.NUM_BIN, 3)
+            conf_loss  = conf[keep, cls_ind].reshape(-1, config.NUM_BIN)
+            #print dim_loss.shape
+            for i in range(keep.shape[0]):
+                best_angle = np.where(conf_loss[i] == np.max(conf_loss[i]))
+                best_angle = np.asarray(best_angle).reshape(-1, 1)
+                #print 'angle ', best_angle
+                #print best_angle.shape
+                if best_angle.shape[0] != 1:
+                    continue
+                best_dim   = dim_loss[i, best_angle]            
+                #print 'shape ', best_dim.shape                
+                final_dims = np.append(final_dims, best_dim.reshape(1, 3), axis = 0)
+				
+
+        self.sum_metric += np.sum(final_dims)
+        self.num_inst += final_dims.shape[0]-1
 
 class RCNNAngleLossMetric(mx.metric.EvalMetric):
     def __init__(self):
@@ -145,6 +181,7 @@ class RCNNAngleLossMetric(mx.metric.EvalMetric):
 
     def update(self, labels, preds):
         pred = preds[6]
+
         
         angle_loss = pred.asnumpy()
         first_dim = angle_loss.shape[0] * angle_loss.shape[1]
@@ -152,3 +189,46 @@ class RCNNAngleLossMetric(mx.metric.EvalMetric):
 
         self.sum_metric += np.sum(angle_loss)
         self.num_inst += angle_loss.shape[0]
+
+class RCNNConfLossMetric(mx.metric.EvalMetric):
+    def __init__(self):
+        super(RCNNConfLossMetric, self).__init__('RCNNConfLogLoss')
+
+    def update(self, labels, preds):
+        cls_prob   = preds[2][0]       
+        conf       = preds[6][0]
+        gt_conf    = preds[8]
+
+        NUM_CLASSES = 21
+        CONF_THRESH = 0.99
+
+        scores      = cls_prob.asnumpy()
+        conf        = conf.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN * 1)
+        gt_conf     = gt_conf.asnumpy() 
+
+        final_cls  = np.array([[0]]).astype('float64')
+        for cls in CLASSES:        
+            cls_ind = CLASSES.index(cls)
+            if cls != 'car':
+                continue
+            score_cls  = scores[:, cls_ind]
+            keep = np.where(score_cls >= CONF_THRESH)[0]
+            if keep.shape[0] == 0:
+                continue 
+
+            conf_loss  = conf[keep, cls_ind].reshape(-1, config.NUM_BIN)
+            angles     = gt_conf[keep, cls_ind].reshape(-1, config.NUM_BIN)
+            for i in range(keep.shape[0]):
+                best_angle = np.where(conf_loss[i] == np.max(conf_loss[i]))
+                best_angle = np.asarray(best_angle).reshape(-1, 1)
+                if best_angle.shape[0] != 1:
+                    continue
+                final_cls = np.append(final_cls, angles[i, best_angle].astype('float64'), axis = 0)
+
+
+        final_cls += 1e-14
+        final_cls_loss = -1 * np.log(final_cls)
+        final_cls_loss = np.sum(final_cls_loss)
+        self.sum_metric += final_cls_loss
+        self.num_inst += final_cls.shape[0]-1
+

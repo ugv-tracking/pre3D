@@ -3,6 +3,7 @@ This file has functions about generating bounding box regression targets
 """
 
 import numpy as np
+import math
 
 from rcnn.config import config
 from bbox_transform import bbox_transform
@@ -139,15 +140,27 @@ def expand_bbox_regression_targets(bbox_targets_data, num_classes):
         bbox_weights[index, start:end] = config.TRAIN.BBOX_WEIGHTS
     return bbox_targets, bbox_weights
 
-def expand_3dbox_label(bbox_targets_data, num_classes, dim_label, angle_label):
+def expand_3dbox_label(bbox_targets_data, num_classes, dim_label, angle_label, conf_label):
     classes = bbox_targets_data[:, 0]
-    dims   = np.zeros((classes.size, 3 * num_classes), dtype=np.float32)
-    angles = np.zeros((classes.size, 1 * num_classes), dtype=np.float32)
+    dims   = np.zeros((classes.size, num_classes, 3 * config.NUM_BIN), dtype=np.float32)
+    angles = np.zeros((classes.size, num_classes, 2 * config.NUM_BIN), dtype=np.float32)
+    confs  = np.zeros((classes.size, num_classes, 1 * config.NUM_BIN), dtype=np.float32)
     indexes = np.where(classes > 0)[0]
     for index in indexes:
         cls = classes[index]
-        start = int(3 * cls)
-        end = start + 3
-        dims[index, start:end]   = dim_label[index, :]
-        angles[index, start:end] = angle_label[index, :]
-    return dims, angles
+        for ag_bin in range(config.NUM_BIN):
+
+            start = int(3 * ag_bin)
+            end = start + 3
+            dims[index, int(cls), start:end]    = dim_label[index, :]
+
+            start = int(2 * ag_bin)
+            end = start + 2
+            angles[index, int(cls), start:end]  = angle_label[index, :]
+
+            d_angle = abs(angle_label[index, 0] - ag_bin / config.NUM_BIN * 2 * math.pi)
+            if d_angle > math.pi:
+                d_angle = 2 * math.pi - d_angle
+            confs [index, int(cls), ag_bin] = np.exp(-d_angle**2 /2 )/(math.sqrt(2*math.pi))
+
+    return dims, angles, confs
