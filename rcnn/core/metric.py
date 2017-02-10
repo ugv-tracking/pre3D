@@ -136,12 +136,28 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
         super(RCNNDimLossMetric, self).__init__('RCNNDimLoss')
 
     def update(self, labels, preds):
-        cls_prob   = preds[2][0].asnumpy()
-        dim_loss   = preds[5][0].asnumpy()
-        conf       = preds[6][0].asnumpy()
+
+        cls_prob   = preds[2].asnumpy()
+        dim_loss   = preds[5].asnumpy()
+        #dim_pred   = preds[6].asnumpy()
+        dim_label  = preds[6].asnumpy()
+
+        score      = cls_prob[0][:,1:]
+        score      = score.max(1)
+        keep       = score>config.THRESH_3DBOX
+        
+        # keep the effective dims
+        dim_loss   = dim_loss[0][keep]
+        #dim_pred   = dim_pred[0][keep]
+        dim_label  = dim_label[keep]
+        #print dim_loss.shape, dim_label
+
+        self.sum_metric += np.sum(dim_loss)*10
+        self.num_inst += dim_loss.shape[0]
+
         #dim_pred   = preds[11].asnumpy()
         #dim_label  = preds[12].asnumpy()
-
+        '''
         score      = cls_prob[:,1:]
         score      = score.max(1)
         keep       = score>config.THRESH_3DBOX
@@ -153,12 +169,14 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
         CONF_THRESH = config.THRESH_3DBOX
 
         scores      = cls_prob
-        dim_loss         = dim_loss.reshape(-1, NUM_CLASSES, config.NUM_BIN, 3)
+        dim_loss    = dim_loss.reshape(-1, NUM_CLASSES, config.NUM_BIN, 3)
         conf        = conf.reshape(-1, NUM_CLASSES, config.NUM_BIN * 1)
 
         final_dims  = np.array([[0,0,0]])
         for cls in CLASSES:        
-
+            dim_tmp = dim_loss[:, cls_ind].reshape
+            final_dims = np.append(final_dims, best_dim.reshape(1, 3), axis = 0)
+            
             cls_ind = CLASSES.index(cls)
             if cls == 0:
                 continue
@@ -184,7 +202,7 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
 
         self.sum_metric += np.sum(final_dims)
         self.num_inst += final_dims.shape[0]-1
-
+        '''
 class RCNNAngleLossMetric(mx.metric.EvalMetric):
     def __init__(self):
         super(RCNNAngleLossMetric, self).__init__('RCNNAngleLoss')

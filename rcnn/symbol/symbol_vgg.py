@@ -461,8 +461,10 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     angle_loss  = mx.symbol.Reshape	(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes, config.NUM_BIN * 2),   name='angle_loss_reshape')
     conf_prob   = mx.symbol.Reshape	(data=conf_prob,  shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes, config.NUM_BIN * 1),   name='conf_prob_reshape')
 
-    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, conf_prob, 
-                             mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label), angle_loss, mx.symbol.BlockGrad(angle_label)])
+    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), 
+                             dim_loss, mx.symbol.BlockGrad(dim_label)])
+                             #conf_prob, mx.symbol.BlockGrad(conf_label), 
+                             #angle_loss, mx.symbol.BlockGrad(angle_label)])
     return group
 
 def get_vgg_3dbox_test(num_classes=21, num_anchors=9):

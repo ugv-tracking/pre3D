@@ -141,6 +141,7 @@ def expand_bbox_regression_targets(bbox_targets_data, num_classes):
     return bbox_targets, bbox_weights
 
 def expand_3dbox_label(bbox_targets_data, num_classes, dim_label, angle_label, conf_label):
+    print 'dim label is ', dim_label.shape, dim_label
     classes = bbox_targets_data[:, 0]
     dims   = np.zeros((classes.size, num_classes, 3 * config.NUM_BIN), dtype=np.float32)
     angles = np.zeros((classes.size, num_classes, 2 * config.NUM_BIN), dtype=np.float32)
