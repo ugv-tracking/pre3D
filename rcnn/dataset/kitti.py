@@ -24,7 +24,7 @@ class Kitti(IMDB):
         self.root_path = root_path
         self.data_path = dataset_path
 
-        self.classes = ['__background__', 'car', 'pedestrian', 'cyclist']
+        self.classes = config.CLASSES
         self.num_classes = len(self.classes)
         self.image_set_index = self.load_image_set_index()
         self.num_images = len(self.image_set_index)
@@ -43,6 +43,7 @@ class Kitti(IMDB):
                 if len(line) > 1:
                     label = line.strip().split(':')
                     image_set_index.append(label[0])
+
         return image_set_index
 
     def image_path_from_index(self, index):

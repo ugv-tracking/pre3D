@@ -35,9 +35,9 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
 
     # load symbol
     if args.bbox:
-        sym = eval('get_vgg_3dbox_train')()
+        sym = eval('get_vgg_3dbox_train')(num_classes=config.NUM_CLASSES)
     else:
-        sym = eval('get_vgg_train')()
+        sym = eval('get_vgg_train')(num_classes=config.NUM_CLASSES)
     feat_sym = sym.get_internals()['rpn_cls_score_output']
 
     # setup multi-gpu

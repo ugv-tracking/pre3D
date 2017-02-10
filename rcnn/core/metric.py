@@ -3,12 +3,7 @@ import numpy as np
 
 from rcnn.config import config
 
-CLASSES = ('__background__',
-           'aeroplane', 'bicycle', 'bird', 'boat',
-           'bottle', 'bus', 'car', 'cat', 'chair',
-           'cow', 'diningtable', 'dog', 'horse',
-           'motorbike', 'person', 'pottedplant',
-           'sheep', 'sofa', 'train', 'tvmonitor')
+CLASSES = config.CLASSES
 
 class RPNAccMetric(mx.metric.EvalMetric):
     def __init__(self):
@@ -137,11 +132,10 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
 
     def update(self, labels, preds):
         cls_prob   = preds[2][0]       
-        dim        = preds[5][0]
         conf       = preds[6][0]
+        dim        = preds[5][0]
 
-        NUM_CLASSES = 21
-        CONF_THRESH = 0.99
+        NUM_CLASSES = config.NUM_CLASSES
 
         scores      = cls_prob.asnumpy()
         dim         = dim.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN, 3)
@@ -154,21 +148,17 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
             if cls != 'car':
                 continue
             score_cls  = scores[:, cls_ind]
-            keep = np.where(score_cls >= CONF_THRESH)[0]
+            keep = np.where(score_cls >= config.CONF_THRESH)[0]
             if keep.shape[0] == 0:
                 continue 
             dim_loss   = dim[keep, cls_ind].reshape(-1, config.NUM_BIN, 3)
             conf_loss  = conf[keep, cls_ind].reshape(-1, config.NUM_BIN)
-            #print dim_loss.shape
             for i in range(keep.shape[0]):
                 best_angle = np.where(conf_loss[i] == np.max(conf_loss[i]))
                 best_angle = np.asarray(best_angle).reshape(-1, 1)
-                #print 'angle ', best_angle
-                #print best_angle.shape
                 if best_angle.shape[0] != 1:
                     continue
-                best_dim   = dim_loss[i, best_angle]            
-                #print 'shape ', best_dim.shape                
+                best_dim   = dim_loss[i, best_angle]                           
                 final_dims = np.append(final_dims, best_dim.reshape(1, 3), axis = 0)
 				
 
@@ -180,8 +170,7 @@ class RCNNAngleLossMetric(mx.metric.EvalMetric):
         super(RCNNAngleLossMetric, self).__init__('RCNNAngleLoss')
 
     def update(self, labels, preds):
-        pred = preds[6]
-
+        pred = preds[9]
         
         angle_loss = pred.asnumpy()
         first_dim = angle_loss.shape[0] * angle_loss.shape[1]
@@ -199,8 +188,7 @@ class RCNNConfLossMetric(mx.metric.EvalMetric):
         conf       = preds[6][0]
         gt_conf    = preds[8]
 
-        NUM_CLASSES = 21
-        CONF_THRESH = 0.99
+        NUM_CLASSES = config.NUM_CLASSES
 
         scores      = cls_prob.asnumpy()
         conf        = conf.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN * 1)
@@ -212,7 +200,7 @@ class RCNNConfLossMetric(mx.metric.EvalMetric):
             if cls != 'car':
                 continue
             score_cls  = scores[:, cls_ind]
-            keep = np.where(score_cls >= CONF_THRESH)[0]
+            keep = np.where(score_cls >= config.CONF_THRESH)[0]
             if keep.shape[0] == 0:
                 continue 
 

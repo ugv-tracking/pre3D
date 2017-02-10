@@ -16,9 +16,9 @@ def get_net(arguments, ctx):
     args, auxs = load_param(arguments.prefix, arguments.epoch, convert=True, ctx=ctx)
 
     if arguments.bbox:
-        sym = eval('get_vgg_3dbox_test')()
+        sym = eval('get_vgg_3dbox_test')(num_classes=config.NUM_CLASSES)
     else:
-        sym = eval('get_vgg_test')()
+        sym = eval('get_vgg_test')(num_classes=config.NUM_CLASSES)
 
     a = mx.viz.plot_network(sym, shape={"data":(1,  3, 800, 2500),  "im_info":(3)}, node_attrs={"shape":'rect',"fixedsize":'false'})
     a.view()
@@ -27,17 +27,9 @@ def get_net(arguments, ctx):
     return detector
 
 
-CLASSES = ('__background__',
-           'aeroplane', 'bicycle', 'bird', 'boat',
-           'bottle', 'bus', 'car', 'cat', 'chair',
-           'cow', 'diningtable', 'dog', 'horse',
-           'motorbike', 'person', 'pottedplant',
-           'sheep', 'sofa', 'train', 'tvmonitor')
 
-'''
-CLASSES = ('__background__',
-           'car', 'person', 'Cyclist')
-'''
+CLASSES = config.CLASSES
+
 
 def demo_net(detector, image_name):
     """
@@ -67,7 +59,7 @@ def demo_net(detector, image_name):
         scores, boxes = detector.im_detect(im_array, im_info)
     
     all_boxes = [[] for _ in CLASSES]
-    CONF_THRESH = 0.98
+    CONF_THRESH = 0.1
     NMS_THRESH = 0.3
     for cls in CLASSES:
         cls_ind = CLASSES.index(cls)

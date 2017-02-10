@@ -17,15 +17,13 @@ class AngleOutput(mx.operator.CustomOp):
         num_bin = config.NUM_BIN
         overlap = 2*math.pi/num_bin
         
-        # The out is with the same shape as data (128, 21, 8*2)
-        # The label has shape (128, 21, 8*2) too
+        # The out is with the same shape as data (128, 4, 8*2)
+        # The label has shape (128, 4, 8*2) too
         out     = np.zeros_like(in_data[0].asnumpy())
         label   = in_data[1].asnumpy()
 
         bins_angle = np.linspace(0, 2*math.pi, num = num_bin, endpoint = False)
         bins_angle = np.vstack((bins_angle,bins_angle)).reshape(-1, order='F')
-
-        print 'angle is ', label
 
         dist = np.abs(label - bins_angle)
 
@@ -502,7 +500,6 @@ def get_vgg_3dbox_test(num_classes=21, num_anchors=9):
     dim_pred = mx.symbol.LinearRegressionOutput(data = fc10_dim, name='dim_pred')
 
     #angle branch
-    num_bin = config.NUM_BIN
     fc8_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_angle")
     relu8_angle = mx.symbol.Activation(data=fc8_angle, act_type="relu", name="relu8_angle")
     drop8_angle = mx.symbol.Dropout(data=relu8_angle, p=0.5, name="drop8_angle")
@@ -511,15 +508,25 @@ def get_vgg_3dbox_test(num_classes=21, num_anchors=9):
     relu9_angle = mx.symbol.Activation(data=fc9_angle, act_type="relu", name="relu9_angle")
     drop9_angle = mx.symbol.Dropout(data=relu9_angle, p=0.5, name="drop9_angle")
 
-    fc10_angle = mx.symbol.FullyConnected(data=drop9_angle, num_hidden=num_bin*2, name="fc10_angle")
+    fc10_angle = mx.symbol.FullyConnected(data=drop9_angle, num_hidden=num_classes * config.NUM_BIN * 2, name="fc10_angle")
     
-    fc10_angle_reshape = mx.symbol.Reshape(data=fc10_angle, shape=(-1, num_bin, 2), name='fc10_angle_reshape')
+    fc10_angle_reshape = mx.symbol.Reshape(data=fc10_angle, shape=(-1, num_classes, config.NUM_BIN, 2), name='fc10_angle_reshape')
     L2_norm = mx.symbol.L2Normalization(data=fc10_angle_reshape, mode='spatial', name='L2_norm')
-    angle_flatten = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_bin*2), name='angle_flatten')
+    angle_flatten = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_classes, config.NUM_BIN * 2), name='angle_flatten')
+    angle_loss = mx.symbol.Custom(data=angle_flatten, label=angle_label, name='angle_loss', op_type='angle')
 
-    #angle_loss_ = mx.symbol.smooth_l1(name='angle_loss_', scalar=1.0, data=(angle_flatten - angle_label))
-    #angle_loss = mx.sym.MakeLoss(name='angle_loss', data=angle_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
-    #angle_loss = mx.symbol.Custom(data=angle_flatten, name='angle_loss', op_type='angle')
+    #conf branch
+    fc8_conf = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_conf")
+    relu8_conf = mx.symbol.Activation(data=fc8_conf, act_type="relu", name="relu8_conf")
+    drop8_conf = mx.symbol.Dropout(data=relu8_conf, p=0.5, name="drop8_conf")
+
+    fc9_conf = mx.symbol.FullyConnected(data=drop8_conf, num_hidden=256, name="fc9_conf")
+    relu9_conf = mx.symbol.Activation(data=fc9_conf, act_type="relu", name="relu9_conf")
+    drop9_conf = mx.symbol.Dropout(data=relu9_conf, p=0.5, name="drop9_conf")
+
+    conf_score = mx.symbol.FullyConnected(name='conf_score', data=drop9_conf, num_hidden=num_classes * config.NUM_BIN)
+    conf_score = mx.symbol.Reshape(data=conf_score, shape=(-1, num_classes, config.NUM_BIN), name="conf_score_reshape")
+    conf_prob = mx.symbol.SoftmaxOutput(name='conf_prob', data=conf_score, label=conf_label, normalization='batch')
 
 
     # reshape output
