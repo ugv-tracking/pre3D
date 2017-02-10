@@ -13,6 +13,7 @@ config.IMAGE_STRIDE = 0
 config.NUM_CLASSES = 21
 config.RPN_FEAT_STRIDE = 16
 config.NUM_BIN = 4
+config.THRESH_3DBOX = 0.997
 
 #(375, 1242)
 

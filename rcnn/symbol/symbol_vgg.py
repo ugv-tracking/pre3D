@@ -25,8 +25,6 @@ class AngleOutput(mx.operator.CustomOp):
         bins_angle = np.linspace(0, 2*math.pi, num = num_bin, endpoint = False)
         bins_angle = np.vstack((bins_angle,bins_angle)).reshape(-1, order='F')
 
-        print 'angle is ', label
-
         dist = np.abs(label - bins_angle)
 
         cover_bins = np.zeros_like(dist)
@@ -42,7 +40,6 @@ class AngleOutput(mx.operator.CustomOp):
         out *= cover_bins/cover_bins.sum(axis=2)[:, :, np.newaxis]
         self.assign(in_grad[0], req[0], mx.nd.array(out))
 
-        
 @mx.operator.register("angle")
 class AngleProp(mx.operator.CustomOpProp):
     def __init__(self):
@@ -63,6 +60,43 @@ class AngleProp(mx.operator.CustomOpProp):
 
     def create_operator(self, ctx, shapes, dtypes):
         return AngleOutput()
+
+class DropExtract(mx.operator.CustomOp):
+    def forward(self, is_train, req, in_data, out_data, aux):
+        drop_in     = in_data[0].asnumpy()
+        score       = in_data[1].asnumpy()[:,1:]
+        score       = score.max(1)
+        drop_cls    = (score>config.THRESH_3DBOX).reshape(-1,1)
+        keep        = score[score>config.THRESH_3DBOX]
+        #print 'Useful box has ', keep.shape[0], keep
+
+        drop_cls    = np.broadcast_to(drop_cls, (drop_cls.shape[0], 4096))
+        drop_out    = drop_in * drop_cls
+        self.assign(out_data[0], req[0], mx.nd.array(drop_out))
+    def backward(self, req, out_grad, in_data, out_data, in_grad, aux):
+        self.assign(in_grad[0], req[0], out_grad[0])
+
+@mx.operator.register("dropExtract")
+class DropExtractProp(mx.operator.CustomOpProp):
+    def __init__(self):
+        super(DropExtractProp, self).__init__(need_top_grad=False)
+
+    def list_arguments(self):
+        return ['data', 'score']
+
+    def list_outputs(self):
+        return ['output']
+
+    def infer_shape(self, in_shape):
+        data_shape = in_shape[0]
+        score_shape = in_shape[1]
+        output_shape = in_shape[0]
+        return [data_shape, score_shape], [output_shape], []
+
+    def create_operator(self, ctx, shapes, dtypes):
+        return DropExtract()
+
+
 
 def get_vgg_conv(data):
     """
@@ -353,45 +387,45 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     angle_label = group[5]
     conf_label  = group[6]
 
-    #TODO for test
-    angle_label1 = mx.symbol.Dropout(data=angle_label, p=0.5, name="drop_angle")
-
     # Fast R-CNN
     pool5 = mx.symbol.ROIPooling(
         name='roi_pool5', data=relu5_3, rois=rois1, pooled_size=(7, 7), spatial_scale=0.0625)
     # group 6
-    flatten = mx.symbol.Flatten(data=pool5, name="flatten")
-    fc6 = mx.symbol.FullyConnected(data=flatten, num_hidden=4096, name="fc6")
-    relu6 = mx.symbol.Activation(data=fc6, act_type="relu", name="relu6")
-    drop6 = mx.symbol.Dropout(data=relu6, p=0.5, name="drop6")
+    flatten    = mx.symbol.Flatten(data=pool5, name="flatten")
+    fc6        = mx.symbol.FullyConnected(data=flatten, num_hidden=4096, name="fc6")
+    relu6      = mx.symbol.Activation(data=fc6, act_type="relu", name="relu6")
+    drop6      = mx.symbol.Dropout(data=relu6, p=0.5, name="drop6")
     # group 7
-    fc7 = mx.symbol.FullyConnected(data=drop6, num_hidden=4096, name="fc7")
-    relu7 = mx.symbol.Activation(data=fc7, act_type="relu", name="relu7")
-    drop7 = mx.symbol.Dropout(data=relu7, p=0.5, name="drop7")
+    fc7        = mx.symbol.FullyConnected(data=drop6, num_hidden=4096, name="fc7")
+    relu7      = mx.symbol.Activation(data=fc7, act_type="relu", name="relu7")
+    drop7      = mx.symbol.Dropout(data=relu7, p=0.5, name="drop7")
     # classification
-    cls_score = mx.symbol.FullyConnected(name='cls_score', data=drop7, num_hidden=num_classes)
-    cls_prob = mx.symbol.SoftmaxOutput(name='cls_prob', data=cls_score, label=label, normalization='batch')
+    cls_score  = mx.symbol.FullyConnected(name='cls_score', data=drop7, num_hidden=num_classes)
+    cls_prob   = mx.symbol.SoftmaxOutput(name='cls_prob', data=cls_score, label=label, normalization='batch')
     # bounding box regression
-    bbox_pred = mx.symbol.FullyConnected(name='bbox_pred', data=drop7, num_hidden=num_classes * 4)
+    bbox_pred  = mx.symbol.FullyConnected(name='bbox_pred', data=drop7, num_hidden=num_classes * 4)
     bbox_loss_ = bbox_weight * mx.symbol.smooth_l1(name='bbox_loss_', scalar=1.0, data=(bbox_pred - bbox_target))
-    bbox_loss = mx.sym.MakeLoss(name='bbox_loss', data=bbox_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
+    bbox_loss  = mx.sym.MakeLoss(name='bbox_loss', data=bbox_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
+
+    ##############################################################################################################
+    #Extract weighted ROI from drop7    
+    dropExt    = mx.symbol.Custom(data=drop7, score = cls_prob, name='drop_extract', op_type='dropExtract')
 
     #dim branch
-    fc8_dim = mx.symbol.FullyConnected(data=drop7, num_hidden=512, name="fc8_dim")
-    relu8_dim = mx.symbol.Activation(data=fc8_dim, act_type="relu", name="relu8_dim")
-    drop8_dim = mx.symbol.Dropout(data=relu8_dim, p=0.5, name="drop8_dim")
+    fc8_dim    = mx.symbol.FullyConnected(data=dropExt, num_hidden=512, name="fc8_dim")
+    relu8_dim  = mx.symbol.Activation(data=fc8_dim, act_type="relu", name="relu8_dim")
+    drop8_dim  = mx.symbol.Dropout(data=relu8_dim, p=0.5, name="drop8_dim")
     
     fc9_dim = mx.symbol.FullyConnected(data=drop8_dim, num_hidden=512, name="fc9_dim")
-    relu9_dim = mx.symbol.Activation(data=fc9_dim, act_type="relu", name="relu9_dim")
-    drop9_dim = mx.symbol.Dropout(data=relu9_dim, p=0.5, name="drop9_dim")
+    relu9_dim  = mx.symbol.Activation(data=fc9_dim, act_type="relu", name="relu9_dim")
+    drop9_dim  = mx.symbol.Dropout(data=relu9_dim, p=0.5, name="drop9_dim")
     
-    fc10_dim = mx.symbol.FullyConnected(data=drop9_dim, num_hidden=num_classes * config.NUM_BIN * 3, name="fc10_dim")
-    fc10_dim_reshape = mx.symbol.Reshape(data=fc10_dim, shape=(-1, num_classes, config.NUM_BIN * 3), name='fc10_dim_reshape')
-    dim_loss_ = mx.symbol.smooth_l1(name='dim_loss_', scalar=1.0, data=(fc10_dim_reshape - dim_label))
-    dim_loss = mx.sym.MakeLoss(name='dim_loss', data=dim_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
+    fc10_dim   = mx.symbol.FullyConnected(data=drop9_dim, num_hidden=num_classes * config.NUM_BIN * 3, name="fc10_dim")
+    dim_pred   = mx.symbol.Reshape(data=fc10_dim, shape=(-1, num_classes, config.NUM_BIN * 3), name='dim_pred')
+    dim_loss   = mx.symbol.LinearRegressionOutput(data = dim_pred, label=dim_label, name='dim_loss')
 
     #angle branch
-    fc8_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_angle")
+    fc8_angle = mx.symbol.FullyConnected(data=dropExt, num_hidden=256, name="fc8_angle")
     relu8_angle = mx.symbol.Activation(data=fc8_angle, act_type="relu", name="relu8_angle")
     drop8_angle = mx.symbol.Dropout(data=relu8_angle, p=0.5, name="drop8_angle")
 
@@ -407,7 +441,7 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     angle_loss = mx.symbol.Custom(data=angle_flatten, label=angle_label, name='angle_loss', op_type='angle')
 
     #conf branch
-    fc8_conf = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_conf")
+    fc8_conf = mx.symbol.FullyConnected(data=dropExt, num_hidden=256, name="fc8_conf")
     relu8_conf = mx.symbol.Activation(data=fc8_conf, act_type="relu", name="relu8_conf")
     drop8_conf = mx.symbol.Dropout(data=relu8_conf, p=0.5, name="drop8_conf")
 
@@ -427,8 +461,6 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     angle_loss  = mx.symbol.Reshape	(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes, config.NUM_BIN * 2),   name='angle_loss_reshape')
     conf_prob   = mx.symbol.Reshape	(data=conf_prob,  shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes, config.NUM_BIN * 1),   name='conf_prob_reshape')
 
-    #group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label)])
-    #group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, conf_prob, mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label)])
     group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, conf_prob, 
                              mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label), angle_loss, mx.symbol.BlockGrad(angle_label)])
     return group

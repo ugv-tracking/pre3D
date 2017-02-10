@@ -136,29 +136,39 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
         super(RCNNDimLossMetric, self).__init__('RCNNDimLoss')
 
     def update(self, labels, preds):
-        cls_prob   = preds[2][0]       
-        dim        = preds[5][0]
-        conf       = preds[6][0]
+        cls_prob   = preds[2][0].asnumpy()
+        dim_loss   = preds[5][0].asnumpy()
+        conf       = preds[6][0].asnumpy()
+        #dim_pred   = preds[11].asnumpy()
+        #dim_label  = preds[12].asnumpy()
 
-        NUM_CLASSES = 21
-        CONF_THRESH = 0.99
+        score      = cls_prob[:,1:]
+        score      = score.max(1)
+        keep       = score>config.THRESH_3DBOX
+        
+        print '3dbox dim is ', dim_loss[keep].shape
 
-        scores      = cls_prob.asnumpy()
-        dim         = dim.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN, 3)
-        conf        = conf.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN * 1)
+
+        NUM_CLASSES = config.NUM_CLASSES
+        CONF_THRESH = config.THRESH_3DBOX
+
+        scores      = cls_prob
+        dim_loss         = dim_loss.reshape(-1, NUM_CLASSES, config.NUM_BIN, 3)
+        conf        = conf.reshape(-1, NUM_CLASSES, config.NUM_BIN * 1)
 
         final_dims  = np.array([[0,0,0]])
         for cls in CLASSES:        
 
             cls_ind = CLASSES.index(cls)
-            if cls != 'car':
+            if cls == 0:
                 continue
+
             score_cls  = scores[:, cls_ind]
             keep = np.where(score_cls >= CONF_THRESH)[0]
             if keep.shape[0] == 0:
                 continue 
-            dim_loss   = dim[keep, cls_ind].reshape(-1, config.NUM_BIN, 3)
-            conf_loss  = conf[keep, cls_ind].reshape(-1, config.NUM_BIN)
+            dim_loss_tmp   = dim_loss[keep, cls_ind].reshape(-1, config.NUM_BIN, 3)
+            conf_loss      = conf[keep, cls_ind].reshape(-1, config.NUM_BIN)
             #print dim_loss.shape
             for i in range(keep.shape[0]):
                 best_angle = np.where(conf_loss[i] == np.max(conf_loss[i]))
@@ -167,7 +177,7 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
                 #print best_angle.shape
                 if best_angle.shape[0] != 1:
                     continue
-                best_dim   = dim_loss[i, best_angle]            
+                best_dim   = dim_loss_tmp[i, best_angle]            
                 #print 'shape ', best_dim.shape                
                 final_dims = np.append(final_dims, best_dim.reshape(1, 3), axis = 0)
 				
@@ -180,7 +190,7 @@ class RCNNAngleLossMetric(mx.metric.EvalMetric):
         super(RCNNAngleLossMetric, self).__init__('RCNNAngleLoss')
 
     def update(self, labels, preds):
-        pred = preds[6]
+        pred = preds[9]
 
         
         angle_loss = pred.asnumpy()
