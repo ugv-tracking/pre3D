@@ -42,7 +42,7 @@ class Proposal3DboxTargetOperator(mx.operator.CustomOp):
         # Sanity check: single batch only
         assert np.all(all_rois[:, 0] == 0), 'Only single item batches are supported'
 
-        rois, labels, bbox_targets, bbox_weights, dim_label, angle_label = \
+        rois, labels, bbox_targets, bbox_weights, dim_label, angle_label, conf_label = \
             sample_rois(all_rois, fg_rois_per_image, rois_per_image, self._num_classes, gt_boxes=gt_boxes, gt_dims=gt_dims, gt_angles=gt_angles)
 
         if DEBUG:
@@ -59,7 +59,7 @@ class Proposal3DboxTargetOperator(mx.operator.CustomOp):
 
 
         if config.TRAIN.BBOX_3D:
-            output = [rois, labels, bbox_targets, bbox_weights, dim_label, angle_label]
+            output = [rois, labels, bbox_targets, bbox_weights, dim_label, angle_label, conf_label]
         else:
             output = [rois, labels, bbox_targets, bbox_weights]            
 
@@ -88,7 +88,7 @@ class Proposal3DboxTargetProp(mx.operator.CustomOpProp):
         return ['rois', 'gt_boxes', 'gt_dims', 'gt_angles', 'im_info']
     
     def list_outputs(self):
-        return ['rois_output', 'label', 'bbox_target', 'bbox_weight', 'dim_label', 'angle_label']
+        return ['rois_output', 'label', 'bbox_target', 'bbox_weight', 'dim_label', 'angle_label', 'conf_label']
 
     def infer_shape(self, in_shape):
         rpn_rois_shape = in_shape[0]
@@ -103,12 +103,13 @@ class Proposal3DboxTargetProp(mx.operator.CustomOpProp):
         bbox_target_shape = (self._batch_rois, self._num_classes * 4)
         bbox_weight_shape = (self._batch_rois, self._num_classes * 4)
         if config.TRAIN.BBOX_3D:
-            dim_label_shape   = (self._batch_rois, self._num_classes * 3)
-            angle_label_shape = (self._batch_rois, self._num_classes * 1)
+            dim_label_shape   = (self._batch_rois, self._num_classes, config.NUM_BIN * 3)
+            angle_label_shape = (self._batch_rois, self._num_classes, config.NUM_BIN * 2)
+            conf_label_shape  = (self._batch_rois, self._num_classes, config.NUM_BIN * 1)
 
         if config.TRAIN.BBOX_3D:
             return [rpn_rois_shape, gt_boxes_shape, gt_dims_shape, gt_angles_shape, im_info_shape], \
-                   [output_rois_shape, label_shape, bbox_target_shape, bbox_weight_shape, dim_label_shape, angle_label_shape]
+                   [output_rois_shape, label_shape, bbox_target_shape, bbox_weight_shape, dim_label_shape, angle_label_shape, conf_label_shape]
         else:
             return [rpn_rois_shape, gt_boxes_shape], \
                    [output_rois_shape, label_shape, bbox_target_shape, bbox_weight_shape]

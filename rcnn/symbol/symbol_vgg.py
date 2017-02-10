@@ -13,29 +13,34 @@ class AngleOutput(mx.operator.CustomOp):
         self.assign(out_data[0], req[0], in_data[0])
         
     def backward(self, req, out_grad, in_data, out_data, in_grad, aux):
+        
         num_bin = config.NUM_BIN
         overlap = 2*math.pi/num_bin
         
-        lbl = in_data[1].asnumpy()
-        y = np.zeros_like(in_data[0].asnumpy())
+        # The out is with the same shape as data (128, 21, 8*2)
+        # The label has shape (128, 21, 8*2) too
+        out     = np.zeros_like(in_data[0].asnumpy())
+        label   = in_data[1].asnumpy()
 
         bins_angle = np.linspace(0, 2*math.pi, num = num_bin, endpoint = False)
         bins_angle = np.vstack((bins_angle,bins_angle)).reshape(-1, order='F')
 
-        dist = np.abs(lbl - bins_angle)
+        print 'angle is ', label
+
+        dist = np.abs(label - bins_angle)
 
         cover_bins = np.zeros_like(dist)
         cover_bins[dist < overlap] = 1
         
         for i in xrange(2*num_bin):
             if i%2 == 0:
-                y[:,i] = -np.cos(lbl[:,0] - bins_angle[i])
+                out[:,:,i] = -np.cos(label[:,:,i] - bins_angle[i])
             else:
-                y[:,i] = -np.sin(lbl[:,0] - bins_angle[i])
+                out[:,:,i] = -np.sin(label[:,:,i] - bins_angle[i])
 
-        y *= cover_bins/cover_bins.sum(axis=1)[:, np.newaxis]
-        
-        self.assign(in_grad[0], req[0], mx.nd.array(y))
+        #print out[:, 10:100, :]
+        out *= cover_bins/cover_bins.sum(axis=2)[:, :, np.newaxis]
+        self.assign(in_grad[0], req[0], mx.nd.array(out))
 
         
 @mx.operator.register("angle")
@@ -51,7 +56,8 @@ class AngleProp(mx.operator.CustomOpProp):
 
     def infer_shape(self, in_shape):
         data_shape = in_shape[0]
-        label_shape = (in_shape[0][0],1)
+        label_shape = in_shape[1]
+        #label_shape = (in_shape[0][0], congif.NUM_CLASSES, config.NUM_BIN * 2)
         output_shape = in_shape[0]
         return [data_shape, label_shape], [output_shape], []
 
@@ -330,8 +336,8 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
         threshold=config.TRAIN.RPN_NMS_THRESH, rpn_min_size=config.TRAIN.RPN_MIN_SIZE)
 
     # ROI proposal target
-    gt_boxes_reshape  = mx.symbol.Reshape(data=gt_boxes, shape=(-1, 5), name='gt_boxes_reshape')
-    gt_dims_reshape   = mx.symbol.Reshape(data=gt_dims, shape=(-1, 3), name='gt_dims_reshape')
+    gt_boxes_reshape  = mx.symbol.Reshape(data=gt_boxes,  shape=(-1, 5), name='gt_boxes_reshape')
+    gt_dims_reshape   = mx.symbol.Reshape(data=gt_dims,   shape=(-1, 3), name='gt_dims_reshape')
     gt_angles_reshape = mx.symbol.Reshape(data=gt_angles, shape=(-1, 1), name='gt_angles_reshape')
 
     group             = mx.symbol.Custom(rois=rois, gt_boxes=gt_boxes_reshape, gt_dims=gt_dims_reshape, gt_angles=gt_angles_reshape, im_info=im_info,\
@@ -345,6 +351,7 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     bbox_weight = group[3]
     dim_label   = group[4]
     angle_label = group[5]
+    conf_label  = group[6]
 
     #TODO for test
     angle_label1 = mx.symbol.Dropout(data=angle_label, p=0.5, name="drop_angle")
@@ -378,12 +385,12 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     relu9_dim = mx.symbol.Activation(data=fc9_dim, act_type="relu", name="relu9_dim")
     drop9_dim = mx.symbol.Dropout(data=relu9_dim, p=0.5, name="drop9_dim")
     
-    fc10_dim = mx.symbol.FullyConnected(data=drop9_dim, num_hidden=num_classes * 3, name="fc10_dim")
-    dim_loss_ = mx.symbol.smooth_l1(name='dim_loss_', scalar=1.0, data=(fc10_dim - dim_label))
+    fc10_dim = mx.symbol.FullyConnected(data=drop9_dim, num_hidden=num_classes * config.NUM_BIN * 3, name="fc10_dim")
+    fc10_dim_reshape = mx.symbol.Reshape(data=fc10_dim, shape=(-1, num_classes, config.NUM_BIN * 3), name='fc10_dim_reshape')
+    dim_loss_ = mx.symbol.smooth_l1(name='dim_loss_', scalar=1.0, data=(fc10_dim_reshape - dim_label))
     dim_loss = mx.sym.MakeLoss(name='dim_loss', data=dim_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
 
     #angle branch
-    num_bin = config.NUM_BIN
     fc8_angle = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_angle")
     relu8_angle = mx.symbol.Activation(data=fc8_angle, act_type="relu", name="relu8_angle")
     drop8_angle = mx.symbol.Dropout(data=relu8_angle, p=0.5, name="drop8_angle")
@@ -392,27 +399,38 @@ def get_vgg_3dbox_train(num_classes=21, num_anchors=9):
     relu9_angle = mx.symbol.Activation(data=fc9_angle, act_type="relu", name="relu9_angle")
     drop9_angle = mx.symbol.Dropout(data=relu9_angle, p=0.5, name="drop9_angle")
 
-    fc10_angle = mx.symbol.FullyConnected(data=drop9_angle, num_hidden=num_bin*2, name="fc10_angle")
+    fc10_angle = mx.symbol.FullyConnected(data=drop9_angle, num_hidden=num_classes * config.NUM_BIN * 2, name="fc10_angle")
     
-    fc10_angle_reshape = mx.symbol.Reshape(data=fc10_angle, shape=(-1, num_bin, 2), name='fc10_angle_reshape')
+    fc10_angle_reshape = mx.symbol.Reshape(data=fc10_angle, shape=(-1, num_classes, config.NUM_BIN, 2), name='fc10_angle_reshape')
     L2_norm = mx.symbol.L2Normalization(data=fc10_angle_reshape, mode='spatial', name='L2_norm')
-    angle_flatten = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_bin*2), name='angle_flatten')
+    angle_flatten = mx.symbol.Reshape(data=L2_norm, shape=(-1, num_classes, config.NUM_BIN * 2), name='angle_flatten')
+    angle_loss = mx.symbol.Custom(data=angle_flatten, label=angle_label, name='angle_loss', op_type='angle')
 
-    #angle_loss_ = mx.symbol.smooth_l1(name='angle_loss_', scalar=1.0, data=(angle_flatten - angle_label))
-    #angle_loss = mx.sym.MakeLoss(name='angle_loss', data=angle_loss_, grad_scale=1.0 / config.TRAIN.BATCH_ROIS)
-    #angle_loss = mx.symbol.Custom(data=angle_flatten, label=angle_label, name='angle_loss', op_type='angle')
+    #conf branch
+    fc8_conf = mx.symbol.FullyConnected(data=drop7, num_hidden=256, name="fc8_conf")
+    relu8_conf = mx.symbol.Activation(data=fc8_conf, act_type="relu", name="relu8_conf")
+    drop8_conf = mx.symbol.Dropout(data=relu8_conf, p=0.5, name="drop8_conf")
 
+    fc9_conf = mx.symbol.FullyConnected(data=drop8_conf, num_hidden=256, name="fc9_conf")
+    relu9_conf = mx.symbol.Activation(data=fc9_conf, act_type="relu", name="relu9_conf")
+    drop9_conf = mx.symbol.Dropout(data=relu9_conf, p=0.5, name="drop9_conf")
+
+    conf_score = mx.symbol.FullyConnected(name='conf_score', data=drop9_conf, num_hidden=num_classes * config.NUM_BIN)
+    conf_score = mx.symbol.Reshape(data=conf_score, shape=(-1, num_classes, config.NUM_BIN), name="conf_score_reshape")
+    conf_prob = mx.symbol.SoftmaxOutput(name='conf_prob', data=conf_score, label=conf_label, normalization='batch')
 
     # reshape output
-    label       = mx.symbol.Reshape	(data=label,      shape=(config.TRAIN.BATCH_IMAGES, -1),                  name='label_reshape'     )
-    cls_prob    = mx.symbol.Reshape	(data=cls_prob,   shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes),     name='cls_prob_reshape'  )
-    bbox_loss   = mx.symbol.Reshape	(data=bbox_loss,  shape=(config.TRAIN.BATCH_IMAGES, -1, 4 * num_classes), name='bbox_loss_reshape' )
-    dim_loss    = mx.symbol.Reshape	(data=dim_loss,   shape=(config.TRAIN.BATCH_IMAGES, -1, 3 * num_classes), name='dim_loss_reshape'  )
-    #angle_loss  = mx.symbol.Reshape	(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_bin*2),       name='angle_loss_reshape')
+    label       = mx.symbol.Reshape	(data=label,      shape=(config.TRAIN.BATCH_IMAGES, -1),                  					name='label_reshape'     )
+    cls_prob    = mx.symbol.Reshape	(data=cls_prob,   shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes),     					name='cls_prob_reshape'  )
+    bbox_loss   = mx.symbol.Reshape	(data=bbox_loss,  shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes * 4), 					name='bbox_loss_reshape' )
+    dim_loss    = mx.symbol.Reshape	(data=dim_loss,   shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes, config.NUM_BIN * 3),   name='dim_loss_reshape'  )
+    angle_loss  = mx.symbol.Reshape	(data=angle_loss, shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes, config.NUM_BIN * 2),   name='angle_loss_reshape')
+    conf_prob   = mx.symbol.Reshape	(data=conf_prob,  shape=(config.TRAIN.BATCH_IMAGES, -1, num_classes, config.NUM_BIN * 1),   name='conf_prob_reshape')
 
-
-    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, mx.symbol.BlockGrad(dim_label)])
-    #group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, angle_loss, mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(angle_label)])
+    #group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label)])
+    #group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, conf_prob, mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label)])
+    group = mx.symbol.Group([rpn_cls_prob, rpn_bbox_loss, cls_prob, bbox_loss, mx.symbol.BlockGrad(label), dim_loss, conf_prob, 
+                             mx.symbol.BlockGrad(dim_label), mx.symbol.BlockGrad(conf_label), angle_loss, mx.symbol.BlockGrad(angle_label)])
     return group
 
 def get_vgg_3dbox_test(num_classes=21, num_anchors=9):

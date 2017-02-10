@@ -10,9 +10,9 @@ config.PIXEL_MEANS = np.array([[[123.68, 116.779, 103.939]]])
 config.IMAGE_STRIDE = 0
 
 # symbol
-config.NUM_CLASSES = 4
+config.NUM_CLASSES = 21
 config.RPN_FEAT_STRIDE = 16
-config.NUM_BIN = 8
+config.NUM_BIN = 4
 
 #(375, 1242)
 
