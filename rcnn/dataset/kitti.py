@@ -59,7 +59,7 @@ class Kitti(IMDB):
     def gt_roidb(self):
         """
         return ground truth image regions database
-        :return: imdb[image_index]['boxes', 'gt_classes', 'gt_overlaps', 'flipped']
+        :return: imdb[image_index]['boxes', 'gt_classes', 'gt_angles', 'gt_dims', 'gt_overlaps', 'flipped']
         """
         cache_file = os.path.join(self.cache_path, self.name + '_gt_roidb.pkl')
         if os.path.exists(cache_file):
@@ -77,7 +77,7 @@ class Kitti(IMDB):
     def load_kitti_annotations(self):
         """
         for a given index, load image and bounding boxes info from a single image list
-        :return: list of record['boxes', 'gt_classes', 'gt_overlaps', 'flipped']
+        :return: list of record['boxes', 'gt_classes', 'gt_ry', 'gt_alpha', 'gt_dims', 'gt_poses', 'gt_overlaps','max_classes', 'max_overlaps', 'flipped']
         """
         annotation_file = os.path.join(self.data_path, 'imglists', self.image_set + '.lst')
         assert os.path.exists(annotation_file), 'Path does not exist: {}'.format(annotation_file)
@@ -87,7 +87,7 @@ class Kitti(IMDB):
                 box_list = []
                 label = line.strip().split(':')
                 bbox = label[1:]
-                for i in range(self.num_classes - 1):
+                for i in range(self.num_classes):
                     if len(bbox[i]) == 0:
                         box_list.append([])
                         continue
@@ -101,63 +101,60 @@ class Kitti(IMDB):
         
 
         roidb = []
-        obj_box_dim = 12 if config.TRAIN.BBOX_3D else 4
+        obj_box_dim = 12
         for im in range(self.num_images):
             print 'load', im, ' / ', self.num_images
             roi_rec = dict()
             roi_rec['image'] = self.image_path_at(im)
             size = cv2.imread(roi_rec['image']).shape
             print 'size: ', size
-
+            
+            # pause
             roi_rec['height'] = size[0]
             roi_rec['width'] = size[1]
             box_list = total_box_list[im]
-            boxes = np.concatenate([np.array(box_list[i], dtype=np.float32) for i in range(self.num_classes - 1)], axis=0)
-
+            boxes = np.concatenate([np.array(box_list[i], dtype=np.float32) for i in range(self.num_classes)], axis=0)
             boxes = boxes.reshape(-1, obj_box_dim)
-            num_objs_list = [len(box_list[i]) / obj_box_dim for i in range(self.num_classes - 1)]
+            num_objs_list = [len(box_list[i]) / obj_box_dim for i in range(self.num_classes)]
             total_num_objs = np.sum(num_objs_list)
 
-            orientation_ry    = np.zeros((total_num_objs, 1), dtype=np.int32)
-            orientation_alpha = np.zeros((total_num_objs, 1), dtype=np.int32)
+            '''
+            gt_ry             = np.zeros((total_num_objs, 1), dtype=np.int32)
+            gt_alpha          = np.zeros((total_num_objs, 1), dtype=np.int32)
             gt_boxes          = np.zeros((total_num_objs, 4), dtype=np.int32)
             gt_dims           = np.zeros((total_num_objs, 3), dtype=np.int32)
-            gt_angles         = np.zeros((total_num_objs, 1), dtype=np.int32)
-            gt_position       = np.zeros((total_num_objs, 1), dtype=np.int32)
-            gt_confs          = np.ones ((total_num_objs, 1), dtype=np.int32)
+            gt_locs           = np.zeros((total_num_objs, 3), dtype=np.int32)
+            '''
 
-
-            if config.TRAIN.BBOX_3D:
-                orientation_ry    = boxes[:, 0]
-                orientation_alpha = boxes[:, 1]
-                gt_boxes          = boxes[:, 2:6]
-                gt_dims           = boxes[:, 6:9]
-                gt_angles         = boxes[:, 0]
-                gt_position       = boxes[:, 9:12]
+            # TODO need add config.TRAIN.BBOX_3D ?
+            gt_ry             = boxes[:, 0]
+            gt_alpha          = boxes[:, 1]
+            gt_boxes          = boxes[:, 2:6]
+            gt_dims           = boxes[:, 6:9]
+            gt_locs           = boxes[:, 9:12]
                 
-
+            
             gt_classes = np.zeros((total_num_objs, ), dtype=np.int32)
             overlaps = np.zeros((total_num_objs, self.num_classes), dtype=np.float32)
             for ix in range(total_num_objs):
-                for j in range(self.num_classes - 1):
+                for j in range(self.num_classes):
                     if ix < np.sum(num_objs_list[:j+1]):
-                        gt_classes[ix] = j + 1
-                        overlaps[ix, j+1] = 1
+                        gt_classes[ix] = j
+                        overlaps[ix, j] = 1
                         break
 
             roi_rec.update({'boxes':             gt_boxes,
                             'gt_classes':        gt_classes,
-                            'orientation_ry':    orientation_ry,
-                            'orientation_alpha': orientation_alpha,
+                            'gt_ry':             gt_ry,
+                            'gt_alpha':          gt_alpha,
                             'gt_dims':           gt_dims,
-                            'gt_angles':         gt_angles,
-                            'gt_position':       gt_position,
-                            'gt_confs':          gt_confs,
+                            'gt_locs':           gt_locs,
 
                             'gt_overlaps':       overlaps,
                             'max_classes':       overlaps.argmax(axis=1),
                             'max_overlaps':      overlaps.max(axis=1),
                             'flipped': False})
+
             roidb.append(roi_rec)
 
         return roidb

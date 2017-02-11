@@ -21,12 +21,12 @@ logger.setLevel(logging.INFO)
 config.TRAIN.BATCH_IMAGES = 1
 config.TRAIN.BATCH_ROIS = 128
 config.TRAIN.END2END = True
-config.TRAIN.BBOX_3D = True
+config.TRAIN.BBOX_3D = False
 config.TRAIN.BBOX_NORMALIZATION_PRECOMPUTED = True
 config.TRAIN.BG_THRESH_LO = 0.0
 
 # load symbol
-sym = eval('get_vgg_3dbox_train')()
+sym = eval('get_vgg_train')(num_classes=4)
 feat_sym = sym.get_internals()['rpn_cls_score_output']
 
 ctx=[mx.gpu(4)]
@@ -47,29 +47,39 @@ max_data_shape.append(('gt_angles', (input_batch_size, 100, 1)))
 max_data_shape.append(('gt_confs', (input_batch_size, 100, 1)))
 
 
-arg_params, aux_params = load_param('model/3dbox/3dbox', 6, convert=True)
+arg_params, aux_params = load_param('/data01/hustxly/model/faster_rcnn/kitti_ry_cls_input_up_2/ry_alpha_car_only_reg', 18, convert=True)
 # infer shape
 data_shape_dict = dict(train_data.provide_data + train_data.provide_label)
-print data_shape_dict
+sym.list_outputs()
 arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
-arg_name = sym.list_arguments()
-out_name = sym.list_outputs()
-print {'input' : dict(zip(arg_name, arg_shape))}
-print {'output' : dict(zip(out_name, out_shape))}
+arg_shape, out_shape, aux_shape = sym.infer_shape(**data_shape_dict)
+arg_shape_dict = dict(zip(sym.list_arguments(), arg_shape))
+out_shape_dict = dict(zip(sym.list_outputs(), out_shape))
+aux_shape_dict = dict(zip(sym.list_auxiliary_states(), aux_shape))
 
 
-'''
-ctx=[mx.gpu(4)]
-batch_size = len(ctx)
-input_batch_size = config.TRAIN.BATCH_IMAGES * batch_size
-#arg_shape, out_shape, _= feat_sym.infer_shape(bbox_target=(1,36,47,155), im_info=(1,3), gt_dims=(1,2,3), label=(1,65565), gt_boxes=(1,2,5), bbox_weight=(1,36,47,155), data=(1,3,752,2491), gt_angles=(1, 2))
-arg_shape, out_shape, _= sym.infer_shape(bbox_target=(1,36,47,155), im_info=(1,3), gt_dims=(1,2,3), label=(1,65565), gt_boxes=(1,2,5), bbox_weight=(1,36,47,155), data=(1,3,752,2491), gt_angles=(1, 2))
+arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
+arg_params['fc6_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_bias'])
+arg_params['fc7_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_weight'])
+arg_params['fc7_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc7_bias'])
+arg_params['rpn_conv_3x3_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_conv_3x3_weight'])
+arg_params['rpn_conv_3x3_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_conv_3x3_bias'])
+arg_params['rpn_cls_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_cls_score_weight'])
+arg_params['rpn_cls_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_cls_score_bias'])
+arg_params['rpn_bbox_pred_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['rpn_bbox_pred_weight'])
+arg_params['rpn_bbox_pred_bias'] = mx.nd.zeros(shape=arg_shape_dict['rpn_bbox_pred_bias'])
+arg_params['cls_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['cls_score_weight'])
+arg_params['cls_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['cls_score_bias'])
+arg_params['bbox_pred_weight'] = mx.random.normal(0, 0.001, shape=arg_shape_dict['bbox_pred_weight'])
+arg_params['bbox_pred_bias'] = mx.nd.zeros(shape=arg_shape_dict['bbox_pred_bias'])
 
-arg_name = sym.list_arguments()
-out_name = sym.list_outputs()
+pprint.pprint(out_shape_dict)
 
-print {'input' : dict(zip(arg_name, arg_shape))}
+fixed_param_prefix = ['conv1', 'conv2']
+data_names = [k[0] for k in train_data.provide_data]
+label_names = [k[0] for k in train_data.provide_label]
+mod = MutableModule(sym, data_names=data_names, label_names=label_names,
+                    logger=logger, context=ctx, work_load_list=None,
+                    max_data_shapes=max_data_shape, max_label_shapes=max_label_shape,
+                    fixed_param_prefix=fixed_param_prefix)
 
-print "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-print {'output' : dict(zip(out_name, out_shape))}
-'''

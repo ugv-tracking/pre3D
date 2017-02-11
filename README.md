@@ -44,3 +44,13 @@ Value | Name      | Description
 
 ## Training step
 Firstly, train the 3dbox net with the initialization from vgg nets
+
+## IMDB data
+* Data classes ('__background__', 'car', 'pedestrian', 'cyclist')
+* roidb list ['boxes', 'gt_classes', 'gt_ry', 'gt_alpha', 'gt_dims', 'gt_poses', 'gt_overlaps','max_classes', 'max_overlaps', 'flipped']
+* Note: in the AnchorLoader step, the generated gt_boxes is in 5-dims, (x1, y1, x2, y2, cls)
+* The coordinate in imdb is follows as ,
+    0 --- x (width, second dim of im)
+    |
+    y (height, first dim of im)
+

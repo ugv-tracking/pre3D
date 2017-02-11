@@ -61,7 +61,9 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     max_data_shape.append(('gt_boxes',  (input_batch_size, 100, 5)))
     if config.TRAIN.BBOX_3D:
         max_data_shape.append(('gt_dims',   (input_batch_size, 100, 3)))
-        max_data_shape.append(('gt_angles', (input_batch_size, 100, 1)))
+        max_data_shape.append(('gt_locs',   (input_batch_size, 100, 1)))
+        max_data_shape.append(('gt_ry',     (input_batch_size, 100, 1)))
+        max_data_shape.append(('gt_alpha',  (input_batch_size, 100, 1)))
     print 'providing maximum shape', max_data_shape, max_label_shape
 
     # load pretrained
@@ -137,7 +139,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     if config.TRAIN.BBOX_3D:
         fixed_param_prefix = ['conv1', 'conv2', 'conv3', 'conv4', 'conv5', 'rpn', 'fc6', 'fc7', 'cls', 'bbox']
     else:
-        fixed_param_prefix = ['conv1', 'conv2', 'conv3', 'conv4', 'conv5', 'rpn']
+        fixed_param_prefix = ['conv1', 'conv2'] # , 'conv3', 'conv4', 'conv5', 'rpn'
     print 'fixed_param'
     pprint.pprint(fixed_param_prefix)
 

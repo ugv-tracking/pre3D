@@ -78,16 +78,25 @@ class RCNNLogLossMetric(mx.metric.EvalMetric):
         if config.TRAIN.END2END:
             pred  = preds[2]
             label = preds[4]
-            rpn_label  = preds[5]
         else:
-            pred = preds[0]
+            pred  = preds[0]
             label = labels[0]
+
+        rpn_label  = preds[5].asnumpy()
+        gt_boxes   = preds[6].asnumpy()
+
+        rpn_label = rpn_label[rpn_label>-1]
 
         #score = label[0].asnumpy()[:,1:]
         #score = score.transpose()
         #print score==np.max(score, axis=0)
-        print 'rpn data ', rpn_label.asnumpy(), label.asnumpy()
+        #print 'rpn data ', label.asnumpy()
         #print 'bbox data ',  bbox.asnumpy()
+        p0 = label.asnumpy()
+        p1 = pred.asnumpy()[p0>0]
+        p0 = p0[p0>0].reshape(-1,1)
+        p1 = np.hstack((p1, p0))
+        print 'bbox output ', p1
 
         last_dim = pred.shape[-1]
         pred = pred.asnumpy().reshape(-1, last_dim)

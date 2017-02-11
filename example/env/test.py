@@ -59,10 +59,12 @@ def demo_net(detector, image_name):
         scores, boxes = detector.im_detect(im_array, im_info)
     
     all_boxes = [[] for _ in CLASSES]
-    CONF_THRESH = 0.1
+    CONF_THRESH = 0.90
     NMS_THRESH = 0.3
     for cls in CLASSES:
         cls_ind = CLASSES.index(cls)
+        if cls_ind == 0:
+            continue
         cls_boxes  = boxes[:, 4 * cls_ind:4 * (cls_ind + 1)]
         cls_scores = scores[:, cls_ind]
         keep = np.where(cls_scores >= CONF_THRESH)[0]
