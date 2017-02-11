@@ -12,12 +12,21 @@ config.IMAGE_STRIDE = 0
 # symbol
 config.RPN_FEAT_STRIDE = 16
 config.NUM_BIN = 2
-config.CONF_THRESH = 0.99
+config.CONF_THRESH = 0.1
 
 # Classes
+config.NUM_CLASSES = 21
+config.CLASSES = ('__background__',
+           'aeroplane', 'bicycle', 'bird', 'boat',
+           'bottle', 'bus', 'car', 'cat', 'chair',
+           'cow', 'diningtable', 'dog', 'horse',
+           'motorbike', 'person', 'pottedplant',
+           'sheep', 'sofa', 'train', 'tvmonitor')
+
+'''
 config.NUM_CLASSES = 4
 config.CLASSES = ('__background__', 'car', 'pedestrian', 'cyclist')
-
+'''
 #(375, 1242)
 
 #config.SCALES = [(376, 1242)]  # first is scale (the shorter side); second is max size

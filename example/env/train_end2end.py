@@ -33,6 +33,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     else:
         config.TRAIN.BBOX_3D = False
 
+
     # load symbol
     if args.bbox:
         sym = eval('get_vgg_3dbox_train')(num_classes=config.NUM_CLASSES)
@@ -108,6 +109,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
             arg_params['conf_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['conf_score_bias'])
             
         else:
+            
             arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
             arg_params['fc6_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc6_bias'])
             arg_params['fc7_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc7_weight'])
@@ -122,7 +124,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
             arg_params['cls_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['cls_score_bias'])
             arg_params['bbox_pred_weight'] = mx.random.normal(0, 0.001, shape=arg_shape_dict['bbox_pred_weight'])
             arg_params['bbox_pred_bias'] = mx.nd.zeros(shape=arg_shape_dict['bbox_pred_bias'])
-
+            
     # check parameter shapes
     for k in sym.list_arguments():
         if k in data_shape_dict:
@@ -139,7 +141,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     if config.TRAIN.BBOX_3D:
         fixed_param_prefix = ['conv1', 'conv2', 'conv3', 'conv4', 'conv5', 'rpn', 'fc6', 'fc7', 'cls', 'bbox']
     else:
-        fixed_param_prefix = ['conv1', 'conv2'] # , 'conv3', 'conv4', 'conv5', 'rpn'
+        fixed_param_prefix = ['conv1', 'conv2'] 
     print 'fixed_param'
     pprint.pprint(fixed_param_prefix)
 
@@ -222,6 +224,7 @@ def parse_args():
                         default='data', type=str)
     parser.add_argument('--dataset_path', help='dataset path',
                         default=os.path.join('data', 'VOCdevkit'), type=str)
+    parser.add_argument('--num_class', help='number of class', default=21, type=int)
 
     # training
     parser.add_argument('--bbox', help='continue training', action='store_true', default=False)
@@ -254,7 +257,11 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    print 'enter main'
+    # setup num of class
+    if args.num_class == 4:
+        config.NUM_CLASSES = 4
+        config.CLASSES = ('__background__', 'car', 'pedestrian', 'cyclist')
+
     ctx = [mx.gpu(int(i)) for i in args.gpus.split(',')]
     train_net(args, ctx, args.pretrained, args.epoch, args.prefix, args.begin_epoch, args.end_epoch,
               lr=args.lr, lr_step=args.lr_step)

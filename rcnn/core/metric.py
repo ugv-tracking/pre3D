@@ -96,7 +96,7 @@ class RCNNLogLossMetric(mx.metric.EvalMetric):
         p1 = pred.asnumpy()[p0>0]
         p0 = p0[p0>0].reshape(-1,1)
         p1 = np.hstack((p1, p0))
-        print 'bbox output ', p1
+        #print 'bbox output ', p1
 
         last_dim = pred.shape[-1]
         pred = pred.asnumpy().reshape(-1, last_dim)

@@ -20,15 +20,11 @@ def get_net(arguments, ctx):
     else:
         sym = eval('get_vgg_test')(num_classes=config.NUM_CLASSES)
 
-    a = mx.viz.plot_network(sym, shape={"data":(1,  3, 800, 2500),  "im_info":(3)}, node_attrs={"shape":'rect',"fixedsize":'false'})
-    a.view()
+    #a = mx.viz.plot_network(sym, shape={"data":(1,  3, 800, 2500),  "im_info":(3)}, node_attrs={"shape":'rect',"fixedsize":'false'})
+    #a.view()
 
     detector = Detector(sym, ctx, args, auxs)
     return detector
-
-
-
-CLASSES = config.CLASSES
 
 
 def demo_net(detector, image_name):
@@ -40,7 +36,7 @@ def demo_net(detector, image_name):
     """
 
     config.TEST.HAS_RPN = True
-
+    CLASSES = config.CLASSES
     if args.bbox:
         config.TEST.BBOX_3D = True
     else:
@@ -59,7 +55,7 @@ def demo_net(detector, image_name):
         scores, boxes = detector.im_detect(im_array, im_info)
     
     all_boxes = [[] for _ in CLASSES]
-    CONF_THRESH = 0.90
+    CONF_THRESH = config.CONF_THRESH
     NMS_THRESH = 0.3
     for cls in CLASSES:
         cls_ind = CLASSES.index(cls)
@@ -70,7 +66,6 @@ def demo_net(detector, image_name):
         keep = np.where(cls_scores >= CONF_THRESH)[0]
         cls_boxes  = cls_boxes[keep, :]
         cls_scores = cls_scores[keep]
-        print cls, keep, cls_scores
         if config.TEST.BBOX_3D:
             cls_dims   = dims[:, 3 * cls_ind:3*(cls_ind + 1)]
             cls_dims   = cls_dims[keep, :]
@@ -79,6 +74,7 @@ def demo_net(detector, image_name):
             dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis])).astype(np.float32)
         keep = nms(dets.astype(np.float32), NMS_THRESH)
         all_boxes[cls_ind] = dets[keep, :]
+        print cls, dets[keep, :]
 
     boxes_this_image = [[]] + [all_boxes[j] for j in range(1, len(CLASSES))]
     if config.TEST.BBOX_3D:
@@ -93,12 +89,19 @@ def parse_args():
     parser.add_argument('--prefix', dest='prefix', help='saved model prefix', type=str)
     parser.add_argument('--epoch', dest='epoch', help='epoch of pretrained model', type=int)
     parser.add_argument('--gpu', dest='gpu_id', help='GPU device to test with', default=0, type=int)
+    parser.add_argument('--num_class', help='number of class', default=21, type=int)
     args = parser.parse_args()
     return args
 
 if __name__ == '__main__':
     args = parse_args()
     ctx = mx.gpu(args.gpu_id)
+
+    # setup num of class
+    if args.num_class == 4:
+        config.NUM_CLASSES = 4
+        config.CLASSES = ('__background__', 'car', 'pedestrian', 'cyclist')
+
     detector = get_net(args, ctx)
 
     demo_net(detector, args.image)

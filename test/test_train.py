@@ -26,7 +26,7 @@ config.TRAIN.BBOX_NORMALIZATION_PRECOMPUTED = True
 config.TRAIN.BG_THRESH_LO = 0.0
 
 # load symbol
-sym = eval('get_vgg_train')(num_classes=4)
+sym = eval('get_vgg_train')(num_classes=config.NUM_CLASSES)
 feat_sym = sym.get_internals()['rpn_cls_score_output']
 
 ctx=[mx.gpu(4)]
