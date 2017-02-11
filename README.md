@@ -54,3 +54,9 @@ Firstly, train the 3dbox net with the initialization from vgg nets
     |
     y (height, first dim of im)
 
+## Mean value for car, people, bicycle
+car mean is      [1.63512059e+00   1.67750928e+00   4.17339054e+00]
+people mean is   [1.72657895e+00   6.49309211e-01   8.21940789e-01]
+bicycle mean is  [1.74532787e+00   6.06147541e-01   1.76270492e+00]
+
+

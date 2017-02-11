@@ -82,11 +82,10 @@ class RCNNLogLossMetric(mx.metric.EvalMetric):
             pred  = preds[0]
             label = labels[0]
 
+        '''
         rpn_label  = preds[5].asnumpy()
         gt_boxes   = preds[6].asnumpy()
-
         rpn_label = rpn_label[rpn_label>-1]
-
         #score = label[0].asnumpy()[:,1:]
         #score = score.transpose()
         #print score==np.max(score, axis=0)
@@ -97,7 +96,7 @@ class RCNNLogLossMetric(mx.metric.EvalMetric):
         p0 = p0[p0>0].reshape(-1,1)
         p1 = np.hstack((p1, p0))
         #print 'bbox output ', p1
-
+        '''
         last_dim = pred.shape[-1]
         pred = pred.asnumpy().reshape(-1, last_dim)
         label = label.asnumpy().reshape(-1,).astype('int32')
@@ -147,39 +146,22 @@ class RCNNDimLossMetric(mx.metric.EvalMetric):
         super(RCNNDimLossMetric, self).__init__('RCNNDimLoss')
 
     def update(self, labels, preds):
-        cls_prob   = preds[2][0]       
-        conf       = preds[6][0]
-        dim        = preds[5][0]
 
-        NUM_CLASSES = config.NUM_CLASSES
+        cls_prob   = preds[2].asnumpy()
+        dim_loss   = preds[5].asnumpy()
 
-        scores      = cls_prob.asnumpy()
-        dim         = dim.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN, 3)
-        conf        = conf.asnumpy().reshape(-1, NUM_CLASSES, config.NUM_BIN * 1)
+        score      = cls_prob[0][:,1:]
+        score      = score.max(1)
+        keep       = score>config.CONF_THRESH
 
-        final_dims  = np.array([[0,0,0]])
-        for cls in CLASSES:        
+        dim_loss   = dim_loss[0][keep]
+        #print 'dim loss output is ', dim_loss.shape, dim_loss
 
-            cls_ind = CLASSES.index(cls)
-            if cls != 'car':
-                continue
-            score_cls  = scores[:, cls_ind]
-            keep = np.where(score_cls >= config.CONF_THRESH)[0]
-            if keep.shape[0] == 0:
-                continue 
-            dim_loss   = dim[keep, cls_ind].reshape(-1, config.NUM_BIN, 3)
-            conf_loss  = conf[keep, cls_ind].reshape(-1, config.NUM_BIN)
-            for i in range(keep.shape[0]):
-                best_angle = np.where(conf_loss[i] == np.max(conf_loss[i]))
-                best_angle = np.asarray(best_angle).reshape(-1, 1)
-                if best_angle.shape[0] != 1:
-                    continue
-                best_dim   = dim_loss[i, best_angle]                           
-                final_dims = np.append(final_dims, best_dim.reshape(1, 3), axis = 0)
-				
-
-        self.sum_metric += np.sum(final_dims)
-        self.num_inst += final_dims.shape[0]-1
+        if dim_loss.shape[0] != 0:
+            loss = np.sum(dim_loss)/dim_loss.shape[0]
+            print 'dim loss is ', loss
+            self.sum_metric += np.sum(dim_loss)/dim_loss.shape[0]
+            self.num_inst += dim_loss.shape[0]
 
 class RCNNAngleLossMetric(mx.metric.EvalMetric):
     def __init__(self):
@@ -200,6 +182,22 @@ class RCNNConfLossMetric(mx.metric.EvalMetric):
         super(RCNNConfLossMetric, self).__init__('RCNNConfLogLoss')
 
     def update(self, labels, preds):
+        pred  = preds[2]
+        label = preds[4]
+
+        last_dim = pred.shape[-1]
+        pred = pred.asnumpy().reshape(-1, last_dim)
+        label = label.asnumpy().reshape(-1,).astype('int32')
+        cls = pred[np.arange(label.shape[0]), label]
+
+        cls += 1e-14
+        cls_loss = -1 * np.log(cls)
+        cls_loss = np.sum(cls_loss)
+        self.sum_metric += cls_loss
+        self.num_inst += label.shape[0]
+
+
+        '''
         cls_prob   = preds[2][0]       
         conf       = preds[6][0]
         gt_conf    = preds[8]
@@ -235,4 +233,5 @@ class RCNNConfLossMetric(mx.metric.EvalMetric):
         final_cls_loss = np.sum(final_cls_loss)
         self.sum_metric += final_cls_loss
         self.num_inst += final_cls.shape[0]-1
+        '''
 

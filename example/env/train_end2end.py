@@ -78,8 +78,6 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
     aux_shape_dict = dict(zip(sym.list_auxiliary_states(), aux_shape))
     print "============================================================================================================================="
     print {'output' : out_shape_dict}    
-    #print 'arg_shape'
-    #pprint.pprint(arg_shape_dict)
 
 
     # initialize params
@@ -93,7 +91,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
             arg_params['fc10_dim_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc10_dim_weight'])
             arg_params['fc10_dim_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc10_dim_bias'])
             
-            
+            '''
             arg_params['fc8_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc8_angle_weight'])
             arg_params['fc8_angle_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc8_angle_bias'])
             arg_params['fc9_angle_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc9_angle_weight'])
@@ -107,7 +105,7 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
             arg_params['fc9_conf_bias'] = mx.nd.zeros(shape=arg_shape_dict['fc9_conf_bias'])
             arg_params['conf_score_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['conf_score_weight'])
             arg_params['conf_score_bias'] = mx.nd.zeros(shape=arg_shape_dict['conf_score_bias'])
-            
+            '''
         else:
             
             arg_params['fc6_weight'] = mx.random.normal(0, 0.01, shape=arg_shape_dict['fc6_weight'])
@@ -165,10 +163,10 @@ def train_net(args, ctx, pretrained, epoch, prefix, begin_epoch, end_epoch,
 
     if config.TRAIN.BBOX_3D: 
         dim_metric   = metric.RCNNDimLossMetric()
-        conf_metric  = metric.RCNNConfLossMetric()
-        angle_metric = metric.RCNNAngleLossMetric()
-        for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric, dim_metric, conf_metric, angle_metric]:
-            eval_metrics.add(child_metric)
+        #conf_metric  = metric.RCNNConfLossMetric()
+        #angle_metric = metric.RCNNAngleLossMetric()
+        for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric, dim_metric]:
+            eval_metrics.add(child_metric) # , conf_metric, angle_metric
     else:
         for child_metric in [rpn_eval_metric, rpn_cls_metric, rpn_bbox_metric, eval_metric, cls_metric, bbox_metric]:
             eval_metrics.add(child_metric)

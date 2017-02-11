@@ -71,9 +71,9 @@ def get_image(roidb):
         new_rec['im_info'] = im_info
         if config.TRAIN.BBOX_3D:
             new_rec['gt_dims']  = roi_rec['gt_dims']
-            new_rec['gt_locs']  = roi_rec['gt_locs']
+            #new_rec['gt_locs']  = roi_rec['gt_locs']
             new_rec['gt_ry']    = roi_rec['gt_ry']
-            new_rec['gt_alpha'] = roi_rec['gt_alpha']
+            #new_rec['gt_alpha'] = roi_rec['gt_alpha']
 
         processed_roidb.append(new_rec)
     return processed_ims, processed_roidb
@@ -144,9 +144,9 @@ def get_rpn_batch(roidb):
     # generate the dims, locs and angles groundtruth
     if config.TRAIN.BBOX_3D:
         gt_dims  = np.array([roidb[0]['gt_dims']], dtype=np.float32)
-        gt_locs  = np.array([roidb[0]['gt_locs']], dtype=np.float32)
+        #gt_locs  = np.array([roidb[0]['gt_locs']], dtype=np.float32)
         gt_ry    = np.array([roidb[0]['gt_ry']], dtype=np.float32)
-        gt_alpha = np.array([roidb[0]['gt_alpha']], dtype=np.float32)
+        #gt_alpha = np.array([roidb[0]['gt_alpha']], dtype=np.float32)
 
     data = {'data': im_array,
             'im_info': im_info}
@@ -154,9 +154,9 @@ def get_rpn_batch(roidb):
     if config.TRAIN.BBOX_3D:
         label = {'gt_boxes':  gt_boxes,
                  'gt_dims':   gt_dims,
-                 'gt_locs':   gt_locs,
-                 'gt_ry':     gt_ry,
-                 'gt_alpha':  gt_alpha}
+                 'gt_ry':     gt_ry}
+                 #'gt_locs':   gt_locs,
+                 #'gt_alpha':  gt_alpha
 
     else:
         label = {'gt_boxes':  gt_boxes}

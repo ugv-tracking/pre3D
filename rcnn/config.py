@@ -11,8 +11,8 @@ config.IMAGE_STRIDE = 0
 
 # symbol
 config.RPN_FEAT_STRIDE = 16
-config.NUM_BIN = 2
-config.CONF_THRESH = 0.1
+config.NUM_BIN = 1
+config.CONF_THRESH = 0.99
 
 # Classes
 config.NUM_CLASSES = 21
