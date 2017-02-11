@@ -86,7 +86,7 @@ class RCNNLogLossMetric(mx.metric.EvalMetric):
         #score = label[0].asnumpy()[:,1:]
         #score = score.transpose()
         #print score==np.max(score, axis=0)
-        print 'rpn data ', rpn_label.asnumpy(), label.asnumpy()
+        print 'rpn data ', rpn_label.asnumpy(), label
         #print 'bbox data ',  bbox.asnumpy()
 
         last_dim = pred.shape[-1]

@@ -15,7 +15,7 @@ config.NUM_BIN = 2
 config.CONF_THRESH = 0.99
 
 # Classes
-config.NUM_CLASSES = 21
+config.NUM_CLASSES = 4
 config.CLASSES = ('__background__', 'car', 'pedestrian', 'cyclist')
 
 #(375, 1242)

@@ -43,8 +43,10 @@ def show_gt(list_path, image_path, num_classes = 4) :
                                      edgecolor=color, linewidth=3.5)  
                     plt.gca().add_patch(rect)                        
                     plt.gca().text(bbox[0], bbox[3] - 2,
-                               '{:s} {:.3f} {:s} {:.3f} {:.3f} {:.3f} {:s} {:.3f} {:.3f} {:.3f}'.format('rot', rot, 'dims', dims[0], dims[1], dims[2], 'locs', locs[0], locs[1], locs[2]),
+                               '{:s} {:.3f}'.format('rot', rot),
                                bbox=dict(facecolor=color, alpha=0.5), fontsize=12, color='white')
+                               #'{:s} {:.3f} {:.3f} {:.3f}'.format('dims', dims[0], dims[1], dims[2]),
+                               #'{:s} {:.3f} {:.3f} {:.3f}'.format('locs', locs[0], locs[1], locs[2]),
 
                 plt.imshow(im)
                 plt.show()
